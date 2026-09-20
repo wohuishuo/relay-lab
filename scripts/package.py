@@ -8,7 +8,7 @@ import sys
 import zipfile
 
 ROOT = Path(__file__).resolve().parent.parent
-ALLOWED_DIRS = {'jp', 'scripts', 'tests', 'templates', 'docs', 'reports', 'lab', '.github'}
+ALLOWED_DIRS = {'jp', 'scripts', 'tests', 'templates', 'docs', 'reports', 'lab', 'ci'}
 ALLOWED_EXT = {'.py', '.sh', '.md', '.json', '.yaml', '.yml', '.service', '.timer', '.svg', '.css', '.js'}
 ROOT_FILES = {'README.md', 'LICENSE', 'SECURITY.md', 'THIRD_PARTY.md', '.gitignore', '.gitattributes',
               'install.sh', 'requirements-docs.txt', 'compose.local.yaml', 'compose.prod.yaml',

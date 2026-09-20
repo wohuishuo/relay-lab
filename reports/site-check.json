@@ -19,5 +19,6 @@
     "no horizontal document overflow",
     "no JavaScript errors"
   ],
-  "visual_review": "desktop and mobile screenshots inspected"
+  "visual_review": "desktop and mobile screenshots inspected",
+  "static_relative_links_checked": 981
 }

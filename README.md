@@ -53,6 +53,8 @@ Windows 虚拟环境解释器为 `.venv/Scripts/python.exe`。浏览本机 `http
 
 本轮不连接、修改或压测正在使用的生产服务器。单台 VPS 不承诺 99.9999% 可用性。没有商业用户系统、收费面板或公开核心管理 API。
 
+GitHub Actions [模板](ci/README.md)已提供，但当前登录缺少 workflow 权限，尚未启用云端 CI；本地验证报告与云端执行状态分别记录。
+
 ## 项目地图
 
 ```text

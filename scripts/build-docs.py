@@ -24,7 +24,7 @@ def title(path):
 
 
 def main():
-    pages = sorted((ROOT / 'docs').rglob('*.md')) + [ROOT / p for p in ('README.md', 'SECURITY.md', 'THIRD_PARTY.md')]
+    pages = sorted((ROOT / 'docs').rglob('*.md')) + [ROOT / p for p in ('README.md', 'SECURITY.md', 'THIRD_PARTY.md', 'ci/README.md')]
     pages = [p for p in pages if 'plans' not in p.parts]
     lessons = sorted((ROOT / 'docs/training').glob('[0-9]*.md'))
     navigation = [ROOT / 'docs/training/README.md'] + lessons + [ROOT / ('docs/' + name + '.md') for name in ('quickstart','evidence','ports','server-setup','references','glossary')]
