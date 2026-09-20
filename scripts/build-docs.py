@@ -27,7 +27,7 @@ def main():
     pages = sorted((ROOT / 'docs').rglob('*.md')) + [ROOT / p for p in ('README.md', 'SECURITY.md', 'THIRD_PARTY.md', 'ci/README.md')]
     pages = [p for p in pages if 'plans' not in p.parts]
     lessons = sorted((ROOT / 'docs/training').glob('[0-9]*.md'))
-    navigation = [ROOT / 'docs/training/README.md'] + lessons + [ROOT / ('docs/' + name + '.md') for name in ('quickstart','evidence','ports','server-setup','references','glossary')]
+    navigation = [ROOT / 'docs/training/README.md'] + lessons + [ROOT / ('docs/' + name + '.md') for name in ('quickstart','evidence','campus-network','ports','server-setup','references','glossary')]
     for p in navigation:
         if not p.exists():
             raise ValueError('Missing navigation source: ' + p.name)

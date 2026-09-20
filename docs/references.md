@@ -16,6 +16,8 @@
 | Trojan | [协议文档](https://trojan-gfw.github.io/trojan/protocol) | TLS 内代理请求 |
 | XHTTP | [Project X 文档](https://xtls.github.io/config/transports/xhttp.html) | 模式概念，不作为 Mihomo 字段表 |
 | SS | [AEAD](https://shadowsocks.org/doc/aead.html)、[入站](https://wiki.metacubex.one/config/inbound/listeners/ss/) | 普通配置与可选插件 |
+| SS 代际与算法 | [SIP022](https://shadowsocks.org/doc/sip022.html)、[RFC 8439](https://www.rfc-editor.org/rfc/rfc8439.html)、[H.265](https://www.itu.int/rec/T-REC-H.265) | SS 2022、ChaCha 与名称辨析 |
+| 校园接入专题 | [Cisco 双向限速](https://www.cisco.com/c/en/us/support/docs/wireless/5500-series-wireless-controllers/113682-bdr-limit-guide-00.html)、[整形与监管](https://www.cisco.com/c/en/us/td/docs/routers/ios-xe/quality-of-service/quality-of-service/m_qos-plcshp-oview-0.html) | 设备能力示例，不代表当前校园配置 |
 | DNS | [Cloudflare proxy status](https://developers.cloudflare.com/dns/proxy-status/)、[Mihomo DNS](https://wiki.metacubex.one/config/dns/) | 解析和接管边界 |
 | DNS API | [lego Cloudflare](https://go-acme.github.io/lego/dns/cloudflare/) | token 权限与变量名 |
 | ACME | [Let's Encrypt challenges](https://letsencrypt.org/docs/challenge-types/) | DNS-01 与 staging |

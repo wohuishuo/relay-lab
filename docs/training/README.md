@@ -36,3 +36,5 @@ RelayLab 是个人节点的工程实验室。这套课程带你沿着一次请�
 在全新的本地状态目录完成 SS 正负认证测试；解释为什么错误密码与 SYN 超时属于不同层；用下载限速实验复现不对称；给出一个不会影响现有用户的改进试验。提交脱敏报告，注明没做的测试。
 
 [实验报告](../evidence.md) · [官方资料索引](../references.md) · [术语速查](../glossary.md)
+
+专题补充：[校园 Wi-Fi 与 SIM 对照](../campus-network.md)；加密方法比较与 SS 2022 密钥要求见 [08 Shadowsocks](08-shadowsocks.md)。
