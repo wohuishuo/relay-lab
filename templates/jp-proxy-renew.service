@@ -1,0 +1,10 @@
+[Unit]
+Description=Renew and load JP proxy certificate
+After=docker.service network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+UMask=0077
+# Replace domain/email/provider/path locally; credentials remain in the private JSON file.
+ExecStart=/usr/bin/python3 /opt/relay-lab/scripts/manage.py acme --state /var/lib/relay-lab --domain node.example.com --email owner@example.com --provider YOUR_PROVIDER --credentials /var/lib/relay-lab/dns-credentials.json --lego /opt/relay-lab-tools/lego

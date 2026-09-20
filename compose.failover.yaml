@@ -1,0 +1,9 @@
+services:
+  target:
+    command: [python, /lab/failover_target.py]
+    volumes:
+      - ./lab:/lab:ro
+  probe:
+    volumes:
+      - ./lab:/lab:ro
+      - ${JP_LAB_DIR}/client:/private:ro

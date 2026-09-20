@@ -1,0 +1,43 @@
+{
+  "scope": "local Docker only; no live profile updated",
+  "checks": [
+    {
+      "check": "manual-authenticated-forwarding",
+      "passed": true
+    },
+    {
+      "check": "fallback-authenticated-forwarding",
+      "passed": true
+    },
+    {
+      "check": "fallback-primary-loss-selects-backup",
+      "passed": true
+    },
+    {
+      "check": "fallback-all-down-no-direct-bypass",
+      "passed": true
+    },
+    {
+      "check": "fallback-recovery",
+      "passed": true
+    },
+    {
+      "check": "url-test-authenticated-forwarding",
+      "passed": true
+    },
+    {
+      "check": "url-test-primary-loss-selects-backup",
+      "passed": true
+    },
+    {
+      "check": "url-test-all-down-no-direct-bypass",
+      "passed": true
+    },
+    {
+      "check": "url-test-recovery",
+      "passed": true
+    }
+  ],
+  "status": "passed",
+  "at_utc": "2026-09-20T15:54:11.078067+00:00"
+}

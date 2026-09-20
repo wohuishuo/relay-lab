@@ -1,0 +1,22 @@
+{
+  "mixed-port": 17890,
+  "allow-lan": false,
+  "bind-address": "127.0.0.1",
+  "mode": "rule",
+  "log-level": "silent",
+  "ipv6": false,
+  "proxies": [
+    {
+      "name": "node",
+      "type": "ss",
+      "server": "node.example.com",
+      "port": 8388,
+      "udp": true,
+      "cipher": "chacha20-ietf-poly1305",
+      "password": "REPLACE_WITH_UNIQUE_GENERATED_PASSWORD"
+    }
+  ],
+  "rules": [
+    "MATCH,node"
+  ]
+}

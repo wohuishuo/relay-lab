@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="420" viewBox="0 0 1440 420" role="img" aria-labelledby="title desc">
+<title id="title">RelayLab 代理工程实验室</title><desc id="desc">让每一次连接，都有据可查。协议、实验与可靠性。</desc>
+<rect width="1440" height="420" rx="28" fill="#102c2b"/>
+<g fill="none" stroke="#315b53" stroke-width="1"><path d="M800 0v420M920 0v420M1040 0v420M1160 0v420M1280 0v420M1400 0v420M750 90h690M750 210h690M750 330h690"/></g>
+<circle cx="1110" cy="210" r="130" fill="none" stroke="#5ea894" stroke-width="2"/>
+<circle cx="1110" cy="210" r="88" fill="none" stroke="#5ea894" stroke-width="2" stroke-dasharray="5 12"/>
+<path d="M915 210h135m-18-18 18 18-18 18m137-18h135m-18-18 18 18-18 18" fill="none" stroke="#cdf38e" stroke-width="4"/>
+<circle cx="1110" cy="210" r="29" fill="#cdf38e"/><circle cx="915" cy="210" r="8" fill="#cdf38e"/><circle cx="1304" cy="210" r="8" fill="#cdf38e"/>
+<text x="72" y="86" font-family="Arial,sans-serif" font-size="22" letter-spacing="5" fill="#cdf38e">RELAYLAB / ENGINEERING NOTES</text>
+<text x="72" y="189" font-family="Microsoft YaHei,Arial,sans-serif" font-size="53" font-weight="700" fill="#fcfaf4">让每一次连接，</text>
+<text x="72" y="265" font-family="Microsoft YaHei,Arial,sans-serif" font-size="53" font-weight="700" fill="#fcfaf4">都有据可查。</text>
+<text x="74" y="345" font-family="Microsoft YaHei,Arial,sans-serif" font-size="21" fill="#b0ccc1">理解协议 · 设计实验 · 构建可靠的个人节点</text>
+</svg>

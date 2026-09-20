@@ -1,0 +1,44 @@
+services:
+  subscription:
+    image: ${JP_SUB_IMAGE:?Locked Caddy image required}
+    platform: linux/amd64
+    user: "10001:10001"
+    command: ["caddy", "run", "--config", "/config/Caddyfile", "--adapter", "caddyfile"]
+    read_only: true
+    cap_drop: [ALL]
+    # Upstream Caddy binary carries this file capability; excluding it causes exec EPERM.
+    cap_add: [NET_BIND_SERVICE]
+    security_opt: ["no-new-privileges:true"]
+    init: true
+    restart: unless-stopped
+    mem_limit: 96m
+    cpus: 0.25
+    pids_limit: 64
+    environment:
+      XDG_DATA_HOME: /tmp/data
+      XDG_CONFIG_HOME: /tmp/config
+    tmpfs: ["/tmp:rw,noexec,nosuid,size=8m,mode=1777"]
+    ports: ["${JP_SUB_BIND:-127.0.0.1}:${JP_SUB_PORT:-2087}:2087/tcp"]
+    volumes:
+      - type: bind
+        source: ${JP_SUB_STATE:?Private state required}/subscription/runtime
+        target: /config
+        read_only: true
+        bind: {create_host_path: false}
+      - type: bind
+        source: ${JP_SUB_STATE}/subscription/www
+        target: /srv
+        read_only: true
+        bind: {create_host_path: false}
+      - type: bind
+        source: ${JP_SUB_STATE}/certs/live
+        target: /certs
+        read_only: true
+        bind: {create_host_path: false}
+    logging: {driver: none}
+    healthcheck:
+      test: ["CMD", "nc", "-z", "-w", "2", "127.0.0.1", "2087"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 5s

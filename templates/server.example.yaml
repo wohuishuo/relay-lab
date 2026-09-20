@@ -1,0 +1,165 @@
+{
+  "mode": "rule",
+  "log-level": "silent",
+  "ipv6": false,
+  "allow-lan": false,
+  "listeners": [
+    {
+      "name": "reality",
+      "type": "vless",
+      "listen": "0.0.0.0",
+      "port": 14443,
+      "users": [
+        {
+          "username": "owner",
+          "uuid": "00000000-0000-4000-8000-000000000001",
+          "flow": "xtls-rprx-vision"
+        }
+      ],
+      "reality-config": {
+        "dest": "www.example.org:443",
+        "server-names": [
+          "www.example.org"
+        ],
+        "private-key": "REPLACE_WITH_GENERATED_PRIVATE_KEY",
+        "short-id": [
+          "REPLACE_WITH_SHORT_ID"
+        ]
+      }
+    },
+    {
+      "name": "hy2",
+      "type": "hysteria2",
+      "listen": "0.0.0.0",
+      "port": 14443,
+      "certificate": "/certs/server.crt",
+      "private-key": "/certs/server.key",
+      "users": {
+        "owner": "REPLACE_WITH_UNIQUE_GENERATED_PASSWORD"
+      },
+      "alpn": [
+        "h3"
+      ],
+      "ignore-client-bandwidth": true
+    },
+    {
+      "name": "anytls",
+      "type": "anytls",
+      "listen": "0.0.0.0",
+      "port": 18443,
+      "certificate": "/certs/server.crt",
+      "private-key": "/certs/server.key",
+      "users": {
+        "owner": "REPLACE_WITH_UNIQUE_GENERATED_PASSWORD"
+      }
+    },
+    {
+      "name": "tuic",
+      "type": "tuic",
+      "listen": "0.0.0.0",
+      "port": 18443,
+      "certificate": "/certs/server.crt",
+      "private-key": "/certs/server.key",
+      "users": {
+        "00000000-0000-4000-8000-000000000001": "REPLACE_WITH_UNIQUE_GENERATED_PASSWORD"
+      },
+      "alpn": [
+        "h3"
+      ],
+      "congestion-controller": "bbr"
+    },
+    {
+      "name": "trojan",
+      "type": "trojan",
+      "listen": "0.0.0.0",
+      "port": 19443,
+      "certificate": "/certs/server.crt",
+      "private-key": "/certs/server.key",
+      "users": [
+        {
+          "username": "owner",
+          "password": "REPLACE_WITH_UNIQUE_GENERATED_PASSWORD"
+        }
+      ]
+    },
+    {
+      "name": "ss",
+      "type": "shadowsocks",
+      "listen": "0.0.0.0",
+      "port": 18388,
+      "cipher": "chacha20-ietf-poly1305",
+      "password": "REPLACE_WITH_UNIQUE_GENERATED_PASSWORD",
+      "udp": true
+    },
+    {
+      "name": "xhttp",
+      "type": "vless",
+      "listen": "0.0.0.0",
+      "port": 20443,
+      "users": [
+        {
+          "username": "owner",
+          "uuid": "00000000-0000-4000-8000-000000000001"
+        }
+      ],
+      "certificate": "/certs/server.crt",
+      "private-key": "/certs/server.key",
+      "xhttp-config": {
+        "path": "/proxy-xhttp",
+        "mode": "packet-up"
+      }
+    },
+    {
+      "name": "ws",
+      "type": "vless",
+      "listen": "0.0.0.0",
+      "port": 21443,
+      "users": [
+        {
+          "username": "owner",
+          "uuid": "00000000-0000-4000-8000-000000000001"
+        }
+      ],
+      "certificate": "/certs/server.crt",
+      "private-key": "/certs/server.key",
+      "ws-path": "/proxy-ws"
+    },
+    {
+      "name": "grpc",
+      "type": "vless",
+      "listen": "0.0.0.0",
+      "port": 22443,
+      "users": [
+        {
+          "username": "owner",
+          "uuid": "00000000-0000-4000-8000-000000000001"
+        }
+      ],
+      "certificate": "/certs/server.crt",
+      "private-key": "/certs/server.key",
+      "grpc-service-name": "proxygrpc"
+    }
+  ],
+  "rules": [
+    "IP-CIDR,0.0.0.0/8,REJECT",
+    "IP-CIDR,10.0.0.0/8,REJECT",
+    "IP-CIDR,100.64.0.0/10,REJECT",
+    "IP-CIDR,127.0.0.0/8,REJECT",
+    "IP-CIDR,169.254.0.0/16,REJECT",
+    "IP-CIDR,172.16.0.0/12,REJECT",
+    "IP-CIDR,192.168.0.0/16,REJECT",
+    "IP-CIDR,224.0.0.0/4,REJECT",
+    "IP-CIDR,240.0.0.0/4,REJECT",
+    "IP-CIDR6,::/128,REJECT",
+    "IP-CIDR6,::1/128,REJECT",
+    "IP-CIDR6,::ffff:0:0/96,REJECT",
+    "IP-CIDR6,fc00::/7,REJECT",
+    "IP-CIDR6,fe80::/10,REJECT",
+    "IP-CIDR6,ff00::/8,REJECT",
+    "MATCH,DIRECT"
+  ],
+  "profile": {
+    "store-selected": false,
+    "store-fake-ip": false
+  }
+}

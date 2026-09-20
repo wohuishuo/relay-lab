@@ -1,0 +1,31 @@
+{
+  "mixed-port": 17890,
+  "allow-lan": false,
+  "bind-address": "127.0.0.1",
+  "mode": "rule",
+  "log-level": "silent",
+  "ipv6": false,
+  "proxies": [
+    {
+      "name": "node",
+      "type": "vless",
+      "server": "node.example.com",
+      "port": 443,
+      "udp": true,
+      "uuid": "00000000-0000-4000-8000-000000000001",
+      "tls": true,
+      "network": "tcp",
+      "servername": "www.example.org",
+      "client-fingerprint": "chrome",
+      "flow": "xtls-rprx-vision",
+      "reality-opts": {
+        "public-key": "REPLACE_WITH_GENERATED_PUBLIC_KEY",
+        "short-id": "REPLACE_WITH_SHORT_ID"
+      },
+      "skip-cert-verify": false
+    }
+  ],
+  "rules": [
+    "MATCH,node"
+  ]
+}

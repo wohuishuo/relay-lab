@@ -1,0 +1,29 @@
+{
+  "mixed-port": 17890,
+  "allow-lan": false,
+  "bind-address": "127.0.0.1",
+  "mode": "rule",
+  "log-level": "silent",
+  "ipv6": false,
+  "proxies": [
+    {
+      "name": "node",
+      "type": "tuic",
+      "server": "node.example.com",
+      "port": 8443,
+      "udp": true,
+      "uuid": "00000000-0000-4000-8000-000000000001",
+      "password": "REPLACE_WITH_UNIQUE_GENERATED_PASSWORD",
+      "sni": "node.example.com",
+      "alpn": [
+        "h3"
+      ],
+      "congestion-controller": "bbr",
+      "udp-relay-mode": "native",
+      "skip-cert-verify": false
+    }
+  ],
+  "rules": [
+    "MATCH,node"
+  ]
+}

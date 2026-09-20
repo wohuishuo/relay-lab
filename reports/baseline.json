@@ -1,0 +1,887 @@
+{
+  "started_utc": "2026-09-20T15:31:16.168901+00:00",
+  "scope": "local Docker only; no WAN or production traffic",
+  "server_image": "docker.io/metacubex/mihomo@sha256:739edd73a352d6beb82fad6790ef9d417a4d6f061584cc3cab1bd4536d1c60e5",
+  "payload_mib_per_transfer": 2,
+  "repeats": 3,
+  "application": "HTTP/1.1, one connection, no content compression, SHA256 payload verification",
+  "measurement": "goodput includes request setup; first_chunk_ms is first 64KiB, not pure TLS handshake or TTFB",
+  "status": "passed",
+  "results": [
+    {
+      "scenario": "baseline",
+      "protocol": "reality",
+      "samples": {
+        "readiness": [
+          {
+            "ok": true,
+            "request_ms": 12.226
+          }
+        ],
+        "latency": [
+          {
+            "ok": true,
+            "request_ms": 3.58
+          },
+          {
+            "ok": true,
+            "request_ms": 3.583
+          },
+          {
+            "ok": true,
+            "request_ms": 3.829
+          }
+        ],
+        "transfers": [
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.007325,
+            "mbps": 2290.4105424906625,
+            "first_chunk_ms": 4.931
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.005854,
+            "mbps": 2865.949364764557,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.006562,
+            "mbps": 2556.8667294144384,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.006837,
+            "mbps": 2453.730222906042,
+            "first_chunk_ms": 5.049
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.007214,
+            "mbps": 2325.598442396605,
+            "first_chunk_ms": 4.827
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.006462,
+            "mbps": 2596.1454308544835,
+            "first_chunk_ms": null
+          }
+        ]
+      },
+      "summary": {
+        "download": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 2325.598442396605,
+          "min_mbps": 2290.4105424906625,
+          "max_mbps": 2453.730222906042
+        },
+        "upload": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 2596.1454308544835,
+          "min_mbps": 2556.8667294144384,
+          "max_mbps": 2865.949364764557
+        }
+      },
+      "passed": true
+    },
+    {
+      "scenario": "baseline",
+      "protocol": "hy2",
+      "samples": {
+        "readiness": [
+          {
+            "ok": true,
+            "request_ms": 13.402
+          }
+        ],
+        "latency": [
+          {
+            "ok": true,
+            "request_ms": 1.971
+          },
+          {
+            "ok": true,
+            "request_ms": 1.906
+          },
+          {
+            "ok": true,
+            "request_ms": 2.216
+          }
+        ],
+        "transfers": [
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.008111,
+            "mbps": 2068.541230382769,
+            "first_chunk_ms": 2.811
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.007954,
+            "mbps": 2109.232100132147,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.005958,
+            "mbps": 2816.0109563885294,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.00757,
+            "mbps": 2216.4165428156266,
+            "first_chunk_ms": 3.842
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.007022,
+            "mbps": 2389.2238663313324,
+            "first_chunk_ms": 3.461
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.005619,
+            "mbps": 2985.772868874887,
+            "first_chunk_ms": null
+          }
+        ]
+      },
+      "summary": {
+        "download": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 2216.4165428156266,
+          "min_mbps": 2068.541230382769,
+          "max_mbps": 2389.2238663313324
+        },
+        "upload": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 2816.0109563885294,
+          "min_mbps": 2109.232100132147,
+          "max_mbps": 2985.772868874887
+        }
+      },
+      "passed": true
+    },
+    {
+      "scenario": "baseline",
+      "protocol": "anytls",
+      "samples": {
+        "readiness": [
+          {
+            "ok": true,
+            "request_ms": 12.631
+          }
+        ],
+        "latency": [
+          {
+            "ok": true,
+            "request_ms": 2.268
+          },
+          {
+            "ok": true,
+            "request_ms": 1.687
+          },
+          {
+            "ok": true,
+            "request_ms": 2.149
+          }
+        ],
+        "transfers": [
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.004301,
+            "mbps": 3900.3810369519556,
+            "first_chunk_ms": 2.578
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.003669,
+            "mbps": 4572.465158975388,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.003862,
+            "mbps": 4344.452624829295,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.004065,
+            "mbps": 4127.231332250551,
+            "first_chunk_ms": 2.741
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.004014,
+            "mbps": 4179.253463561383,
+            "first_chunk_ms": 2.855
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.003409,
+            "mbps": 4921.992252132276,
+            "first_chunk_ms": null
+          }
+        ]
+      },
+      "summary": {
+        "download": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 4127.231332250551,
+          "min_mbps": 3900.3810369519556,
+          "max_mbps": 4179.253463561383
+        },
+        "upload": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 4572.465158975388,
+          "min_mbps": 4344.452624829295,
+          "max_mbps": 4921.992252132276
+        }
+      },
+      "passed": true
+    },
+    {
+      "scenario": "baseline",
+      "protocol": "tuic",
+      "samples": {
+        "readiness": [
+          {
+            "ok": true,
+            "request_ms": 11.133
+          }
+        ],
+        "latency": [
+          {
+            "ok": true,
+            "request_ms": 2.232
+          },
+          {
+            "ok": true,
+            "request_ms": 2.181
+          },
+          {
+            "ok": true,
+            "request_ms": 1.706
+          }
+        ],
+        "transfers": [
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.007571,
+            "mbps": 2215.979466445011,
+            "first_chunk_ms": 3.006
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.008506,
+            "mbps": 1972.5038133228486,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.004516,
+            "mbps": 3715.228945019391,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.006236,
+            "mbps": 2690.278768705702,
+            "first_chunk_ms": 3.458
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.006455,
+            "mbps": 2599.2718665535335,
+            "first_chunk_ms": 3.061
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.005089,
+            "mbps": 3296.851553073851,
+            "first_chunk_ms": null
+          }
+        ]
+      },
+      "summary": {
+        "download": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 2599.2718665535335,
+          "min_mbps": 2215.979466445011,
+          "max_mbps": 2690.278768705702
+        },
+        "upload": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 3296.851553073851,
+          "min_mbps": 1972.5038133228486,
+          "max_mbps": 3715.228945019391
+        }
+      },
+      "passed": true
+    },
+    {
+      "scenario": "baseline",
+      "protocol": "trojan",
+      "samples": {
+        "readiness": [
+          {
+            "ok": true,
+            "request_ms": 11.899
+          }
+        ],
+        "latency": [
+          {
+            "ok": true,
+            "request_ms": 5.731
+          },
+          {
+            "ok": true,
+            "request_ms": 4.498
+          },
+          {
+            "ok": true,
+            "request_ms": 3.896
+          }
+        ],
+        "transfers": [
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.007308,
+            "mbps": 2295.8478759244294,
+            "first_chunk_ms": 4.649
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.005933,
+            "mbps": 2827.55220868073,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.006114,
+            "mbps": 2743.9218097611233,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.008742,
+            "mbps": 1919.1665731015732,
+            "first_chunk_ms": 5.384
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.00778,
+            "mbps": 2156.3724566643846,
+            "first_chunk_ms": 5.953
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.006651,
+            "mbps": 2522.4405153289385,
+            "first_chunk_ms": null
+          }
+        ]
+      },
+      "summary": {
+        "download": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 2156.3724566643846,
+          "min_mbps": 1919.1665731015732,
+          "max_mbps": 2295.8478759244294
+        },
+        "upload": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 2743.9218097611233,
+          "min_mbps": 2522.4405153289385,
+          "max_mbps": 2827.55220868073
+        }
+      },
+      "passed": true
+    },
+    {
+      "scenario": "baseline",
+      "protocol": "ss",
+      "samples": {
+        "readiness": [
+          {
+            "ok": true,
+            "request_ms": 7.802
+          }
+        ],
+        "latency": [
+          {
+            "ok": true,
+            "request_ms": 1.83
+          },
+          {
+            "ok": true,
+            "request_ms": 1.751
+          },
+          {
+            "ok": true,
+            "request_ms": 2.141
+          }
+        ],
+        "transfers": [
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.004361,
+            "mbps": 3847.326157883575,
+            "first_chunk_ms": 2.13
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.004116,
+            "mbps": 4076.086287096689,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.003587,
+            "mbps": 4677.325566108204,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.005005,
+            "mbps": 3352.003372335812,
+            "first_chunk_ms": 2.397
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.005019,
+            "mbps": 3342.772087372381,
+            "first_chunk_ms": 2.809
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.004924,
+            "mbps": 3407.0511660436823,
+            "first_chunk_ms": null
+          }
+        ]
+      },
+      "summary": {
+        "download": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 3352.003372335812,
+          "min_mbps": 3342.772087372381,
+          "max_mbps": 3847.326157883575
+        },
+        "upload": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 4076.086287096689,
+          "min_mbps": 3407.0511660436823,
+          "max_mbps": 4677.325566108204
+        }
+      },
+      "passed": true
+    },
+    {
+      "scenario": "baseline",
+      "protocol": "xhttp",
+      "samples": {
+        "readiness": [
+          {
+            "ok": true,
+            "request_ms": 40.931
+          }
+        ],
+        "latency": [
+          {
+            "ok": true,
+            "request_ms": 34.829
+          },
+          {
+            "ok": true,
+            "request_ms": 34.505
+          },
+          {
+            "ok": true,
+            "request_ms": 34.329
+          }
+        ],
+        "transfers": [
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.038022,
+            "mbps": 441.2462082411211,
+            "first_chunk_ms": 36.148
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.103942,
+            "mbps": 161.40938586448038,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.102665,
+            "mbps": 163.41706736971355,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.037386,
+            "mbps": 448.7581952980459,
+            "first_chunk_ms": 35.939
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.037031,
+            "mbps": 453.0617636912982,
+            "first_chunk_ms": 35.374
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.09916,
+            "mbps": 169.19288620033728,
+            "first_chunk_ms": null
+          }
+        ]
+      },
+      "summary": {
+        "download": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 448.7581952980459,
+          "min_mbps": 441.2462082411211,
+          "max_mbps": 453.0617636912982
+        },
+        "upload": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 163.41706736971355,
+          "min_mbps": 161.40938586448038,
+          "max_mbps": 169.19288620033728
+        }
+      },
+      "passed": true
+    },
+    {
+      "scenario": "baseline",
+      "protocol": "ws",
+      "samples": {
+        "readiness": [
+          {
+            "ok": true,
+            "request_ms": 11.223
+          }
+        ],
+        "latency": [
+          {
+            "ok": true,
+            "request_ms": 5.137
+          },
+          {
+            "ok": true,
+            "request_ms": 3.821
+          },
+          {
+            "ok": true,
+            "request_ms": 3.765
+          }
+        ],
+        "transfers": [
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.008231,
+            "mbps": 2038.2186898761538,
+            "first_chunk_ms": 5.205
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.00597,
+            "mbps": 2810.1998042319974,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.006037,
+            "mbps": 2779.176965195583,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.00646,
+            "mbps": 2597.1320612319937,
+            "first_chunk_ms": 4.391
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.006278,
+            "mbps": 2672.366962240718,
+            "first_chunk_ms": 4.605
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.005652,
+            "mbps": 2968.160050489361,
+            "first_chunk_ms": null
+          }
+        ]
+      },
+      "summary": {
+        "download": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 2597.1320612319937,
+          "min_mbps": 2038.2186898761538,
+          "max_mbps": 2672.366962240718
+        },
+        "upload": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 2810.1998042319974,
+          "min_mbps": 2779.176965195583,
+          "max_mbps": 2968.160050489361
+        }
+      },
+      "passed": true
+    },
+    {
+      "scenario": "baseline",
+      "protocol": "grpc",
+      "samples": {
+        "readiness": [
+          {
+            "ok": true,
+            "request_ms": 10.462
+          }
+        ],
+        "latency": [
+          {
+            "ok": true,
+            "request_ms": 1.599
+          },
+          {
+            "ok": true,
+            "request_ms": 2.406
+          },
+          {
+            "ok": true,
+            "request_ms": 2.265
+          }
+        ],
+        "transfers": [
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.005729,
+            "mbps": 2928.357998340985,
+            "first_chunk_ms": 2.639
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.003767,
+            "mbps": 4453.484552652182,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.003507,
+            "mbps": 4783.67418842602,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.004795,
+            "mbps": 3498.9301261879755,
+            "first_chunk_ms": 2.934
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.004256,
+            "mbps": 3941.6362478916935,
+            "first_chunk_ms": 2.649
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.00388,
+            "mbps": 4324.201946830488,
+            "first_chunk_ms": null
+          }
+        ]
+      },
+      "summary": {
+        "download": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 3498.9301261879755,
+          "min_mbps": 2928.357998340985,
+          "max_mbps": 3941.6362478916935
+        },
+        "upload": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 4453.484552652182,
+          "min_mbps": 4324.201946830488,
+          "max_mbps": 4783.67418842602
+        }
+      },
+      "passed": true
+    }
+  ],
+  "direct_target_isolation": true,
+  "finished_utc": "2026-09-20T15:31:36.828508+00:00"
+}

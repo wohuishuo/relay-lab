@@ -1,0 +1,63 @@
+name: jp-proxy-lab
+x-core: &core
+  image: ${JP_MIHOMO_IMAGE:?Set locked image}
+  platform: linux/amd64
+  user: "10001:10001"
+  environment:
+    SAFE_PATHS: /certs
+  read_only: true
+  cap_drop: [ALL]
+  security_opt: ["no-new-privileges:true"]
+  mem_limit: 512m
+  cpus: 1.0
+  pids_limit: 128
+  tmpfs: ["/tmp:rw,noexec,nosuid,size=32m,mode=1777"]
+  logging: {driver: none}
+services:
+  server:
+    <<: *core
+    command: ["-d", "/tmp/mihomo", "-f", "/config/server.yaml"]
+    volumes:
+      - ${JP_LAB_DIR:?Set external lab directory}/server:/config:ro
+      - ${JP_LAB_DIR}/certs:/certs:ro
+    networks: [front, back]
+  client:
+    <<: *core
+    environment:
+      SSL_CERT_FILE: /config/ca.crt
+    command: ["-d", "/tmp/mihomo", "-f", "/config/client.yaml"]
+    volumes:
+      - ${JP_LAB_DIR}/client:/config:ro
+    networks: [front]
+  target:
+    image: ${JP_PYTHON_IMAGE:?Set locked Python image}
+    platform: linux/amd64
+    user: "10001:10001"
+    command: ["python", "/tests/fixture.py"]
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    volumes:
+      - ./tests:/tests:ro
+      - ${JP_LAB_DIR}/certs:/certs:ro
+    networks:
+      back:
+        aliases: [reality.test]
+    logging: {driver: none}
+  probe:
+    image: ${JP_PYTHON_IMAGE}
+    platform: linux/amd64
+    user: "10001:10001"
+    entrypoint: ["python", "/tests/probe.py"]
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    profiles: [test]
+    volumes:
+      - ./tests:/tests:ro
+      - ${JP_LAB_DIR}/client/ca.crt:/ca.crt:ro
+    networks: [front]
+    logging: {driver: none}
+networks:
+  front: {internal: true}
+  back: {internal: true}

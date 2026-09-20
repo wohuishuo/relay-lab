@@ -1,0 +1,9 @@
+services:
+  target:
+    command: ["python", "/lab/perf_target.py"]
+    volumes:
+      - ./lab:/lab:ro
+  probe:
+    entrypoint: ["python", "/lab/perf_probe.py"]
+    volumes:
+      - ./lab:/lab:ro

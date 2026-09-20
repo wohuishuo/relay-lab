@@ -1,0 +1,42 @@
+name: jp-proxy
+services:
+  mihomo:
+    image: ${JP_MIHOMO_IMAGE:?Set the locked upstream image digest}
+    platform: linux/amd64
+    user: "10001:10001"
+    environment:
+      SAFE_PATHS: /certs
+    command: ["-d", "/tmp/mihomo", "-f", "/config/server.yaml"]
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    init: true
+    restart: unless-stopped
+    mem_limit: 512m
+    cpus: 1.0
+    pids_limit: 128
+    tmpfs: ["/tmp:rw,noexec,nosuid,size=32m,mode=1777"]
+    volumes:
+      - type: bind
+        source: ${JP_RELEASE_DIR:?Set a prepared release directory}/runtime
+        target: /config
+        read_only: true
+        bind: {create_host_path: false}
+      - type: bind
+        source: ${JP_STATE_DIR:?Set external state directory}/certs/live
+        target: /certs
+        read_only: true
+        bind: {create_host_path: false}
+    networks: [egress]
+    logging:
+      driver: json-file
+      options: {max-size: "10m", max-file: "3"}
+    healthcheck:
+      test: ["CMD", "/bin/sh", "/config/healthcheck.sh"]
+      interval: 15s
+      timeout: 15s
+      retries: 3
+      start_period: 10s
+networks:
+  egress:
+    driver: bridge

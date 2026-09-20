@@ -1,0 +1,1598 @@
+{
+  "started_utc": "2026-09-20T15:32:45.330836+00:00",
+  "scope": "local Docker only; no WAN or production traffic",
+  "server_image": "docker.io/metacubex/mihomo@sha256:739edd73a352d6beb82fad6790ef9d417a4d6f061584cc3cab1bd4536d1c60e5",
+  "payload_mib_per_transfer": 2,
+  "repeats": 3,
+  "application": "HTTP/1.1, one connection, no content compression, SHA256 payload verification",
+  "measurement": "goodput includes request setup; first_chunk_ms is first 64KiB, not pure TLS handshake or TTFB",
+  "status": "passed",
+  "results": [
+    {
+      "scenario": "rtt80",
+      "protocol": "reality",
+      "qdisc_client": "qdisc netem 8002: root refcnt 15 limit 10000 delay 40ms\n Sent 42 bytes 1 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0",
+      "qdisc_server": "qdisc netem 8003: root refcnt 15 limit 10000 delay 40ms\n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0",
+      "samples": {
+        "readiness": [
+          {
+            "ok": true,
+            "request_ms": 498.579
+          }
+        ],
+        "latency": [
+          {
+            "ok": true,
+            "request_ms": 367.662
+          },
+          {
+            "ok": true,
+            "request_ms": 443.527
+          },
+          {
+            "ok": true,
+            "request_ms": 368.787
+          }
+        ],
+        "transfers": [
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 1.139748,
+            "mbps": 14.72011579382047,
+            "first_chunk_ms": 497.146
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 1.53302,
+            "mbps": 10.943896293602968,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 1.049188,
+            "mbps": 15.990662526397909,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 1.264008,
+            "mbps": 13.273028216437606,
+            "first_chunk_ms": 540.599
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 2.09647,
+            "mbps": 8.002601286541058,
+            "first_chunk_ms": 488.777
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 1.572245,
+            "mbps": 10.670864742955303,
+            "first_chunk_ms": null
+          }
+        ]
+      },
+      "summary": {
+        "download": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 13.273028216437606,
+          "min_mbps": 8.002601286541058,
+          "max_mbps": 14.72011579382047
+        },
+        "upload": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 10.943896293602968,
+          "min_mbps": 10.670864742955303,
+          "max_mbps": 15.990662526397909
+        }
+      },
+      "passed": true
+    },
+    {
+      "scenario": "rtt80",
+      "protocol": "hy2",
+      "qdisc_client": "qdisc netem 8004: root refcnt 15 limit 10000 delay 40ms\n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0",
+      "qdisc_server": "qdisc netem 8003: root refcnt 15 limit 10000 delay 40ms\n Sent 6630123 bytes 4689 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0",
+      "samples": {
+        "readiness": [
+          {
+            "ok": true,
+            "request_ms": 494.049
+          }
+        ],
+        "latency": [
+          {
+            "ok": true,
+            "request_ms": 204.276
+          },
+          {
+            "ok": true,
+            "request_ms": 203.761
+          },
+          {
+            "ok": true,
+            "request_ms": 204.596
+          }
+        ],
+        "transfers": [
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.904279,
+            "mbps": 18.55314808456732,
+            "first_chunk_ms": 272.478
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.741366,
+            "mbps": 22.630130158635776,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.529701,
+            "mbps": 31.672987435859053,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.928886,
+            "mbps": 18.06165228653395,
+            "first_chunk_ms": 245.831
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 1.050068,
+            "mbps": 15.97726259773125,
+            "first_chunk_ms": 246.383
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 1.288017,
+            "mbps": 13.025612529115584,
+            "first_chunk_ms": null
+          }
+        ]
+      },
+      "summary": {
+        "download": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 18.06165228653395,
+          "min_mbps": 15.97726259773125,
+          "max_mbps": 18.55314808456732
+        },
+        "upload": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 22.630130158635776,
+          "min_mbps": 13.025612529115584,
+          "max_mbps": 31.672987435859053
+        }
+      },
+      "passed": true
+    },
+    {
+      "scenario": "rtt80",
+      "protocol": "tuic",
+      "qdisc_client": "qdisc netem 8005: root refcnt 15 limit 10000 delay 40ms\n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0",
+      "qdisc_server": "qdisc netem 8003: root refcnt 15 limit 10000 delay 40ms\n Sent 13280214 bytes 9797 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0",
+      "samples": {
+        "readiness": [
+          {
+            "ok": true,
+            "request_ms": 412.751
+          }
+        ],
+        "latency": [
+          {
+            "ok": true,
+            "request_ms": 203.239
+          },
+          {
+            "ok": true,
+            "request_ms": 203.413
+          },
+          {
+            "ok": true,
+            "request_ms": 203.568
+          }
+        ],
+        "transfers": [
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.886749,
+            "mbps": 18.919910743829767,
+            "first_chunk_ms": 272.799
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.741085,
+            "mbps": 22.63872645606468,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.809274,
+            "mbps": 20.731195123474894,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 1.169381,
+            "mbps": 14.347090134305853,
+            "first_chunk_ms": 244.604
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 1.329677,
+            "mbps": 12.617510437506798,
+            "first_chunk_ms": 244.054
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.533631,
+            "mbps": 31.439734761206143,
+            "first_chunk_ms": null
+          }
+        ]
+      },
+      "summary": {
+        "download": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 14.347090134305853,
+          "min_mbps": 12.617510437506798,
+          "max_mbps": 18.919910743829767
+        },
+        "upload": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 22.63872645606468,
+          "min_mbps": 20.731195123474894,
+          "max_mbps": 31.439734761206143
+        }
+      },
+      "passed": true
+    },
+    {
+      "scenario": "rtt80",
+      "protocol": "ss",
+      "qdisc_client": "qdisc netem 8006: root refcnt 15 limit 10000 delay 40ms\n Sent 42 bytes 1 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0",
+      "qdisc_server": "qdisc netem 8003: root refcnt 15 limit 10000 delay 40ms\n Sent 19929781 bytes 14971 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0",
+      "samples": {
+        "readiness": [
+          {
+            "ok": true,
+            "request_ms": 332.118
+          }
+        ],
+        "latency": [
+          {
+            "ok": true,
+            "request_ms": 284.316
+          },
+          {
+            "ok": true,
+            "request_ms": 343.198
+          },
+          {
+            "ok": true,
+            "request_ms": 286.575
+          }
+        ],
+        "transfers": [
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 1.048746,
+            "mbps": 15.99740627378489,
+            "first_chunk_ms": 405.336
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 1.951222,
+            "mbps": 8.598314361146743,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.8655,
+            "mbps": 19.3844269044876,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 1.143833,
+            "mbps": 14.667540741868876,
+            "first_chunk_ms": 424.215
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.96946,
+            "mbps": 17.30574124637071,
+            "first_chunk_ms": 405.624
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 1.099099,
+            "mbps": 15.26451572589884,
+            "first_chunk_ms": null
+          }
+        ]
+      },
+      "summary": {
+        "download": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 15.99740627378489,
+          "min_mbps": 14.667540741868876,
+          "max_mbps": 17.30574124637071
+        },
+        "upload": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 15.26451572589884,
+          "min_mbps": 8.598314361146743,
+          "max_mbps": 19.3844269044876
+        }
+      },
+      "passed": true
+    },
+    {
+      "scenario": "download-loss",
+      "protocol": "reality",
+      "qdisc_client": "qdisc netem 8007: root refcnt 15 limit 10000 delay 40ms\n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0",
+      "qdisc_server": "qdisc netem 8003: root refcnt 15 limit 10000 delay 40ms loss 1%\n Sent 26560322 bytes 19772 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0",
+      "samples": {
+        "readiness": [
+          {
+            "ok": true,
+            "request_ms": 550.894
+          }
+        ],
+        "latency": [
+          {
+            "ok": true,
+            "request_ms": 367.161
+          },
+          {
+            "ok": true,
+            "request_ms": 373.335
+          },
+          {
+            "ok": true,
+            "request_ms": 504.139
+          }
+        ],
+        "transfers": [
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 1.296349,
+            "mbps": 12.941899128275399,
+            "first_chunk_ms": 487.507
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 1.154797,
+            "mbps": 14.528277304006734,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 1.419517,
+            "mbps": 11.81896048186765,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 6.309447,
+            "mbps": 2.6590628838053365,
+            "first_chunk_ms": 678.485
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 1.641008,
+            "mbps": 10.223727848848226,
+            "first_chunk_ms": 502.252
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 1.342658,
+            "mbps": 12.495525814765632,
+            "first_chunk_ms": null
+          }
+        ]
+      },
+      "summary": {
+        "download": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 10.223727848848226,
+          "min_mbps": 2.6590628838053365,
+          "max_mbps": 12.941899128275399
+        },
+        "upload": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 12.495525814765632,
+          "min_mbps": 11.81896048186765,
+          "max_mbps": 14.528277304006734
+        }
+      },
+      "passed": true
+    },
+    {
+      "scenario": "download-loss",
+      "protocol": "hy2",
+      "qdisc_client": "qdisc netem 8008: root refcnt 15 limit 10000 delay 40ms\n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0",
+      "qdisc_server": "qdisc netem 8003: root refcnt 15 limit 10000 delay 40ms loss 1%\n Sent 33213032 bytes 24797 pkt (dropped 24, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0",
+      "samples": {
+        "readiness": [
+          {
+            "ok": true,
+            "request_ms": 661.85
+          }
+        ],
+        "latency": [
+          {
+            "ok": true,
+            "request_ms": 204.655
+          },
+          {
+            "ok": true,
+            "request_ms": 204.015
+          },
+          {
+            "ok": true,
+            "request_ms": 204.369
+          }
+        ],
+        "transfers": [
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.731141,
+            "mbps": 22.946630920040068,
+            "first_chunk_ms": 285.955
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.733453,
+            "mbps": 22.87428939956008,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.686165,
+            "mbps": 24.450712495678818,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.607509,
+            "mbps": 27.616429558193897,
+            "first_chunk_ms": 245.473
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.771867,
+            "mbps": 21.735881594004034,
+            "first_chunk_ms": 248.941
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.541014,
+            "mbps": 31.010711757199974,
+            "first_chunk_ms": null
+          }
+        ]
+      },
+      "summary": {
+        "download": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 22.946630920040068,
+          "min_mbps": 21.735881594004034,
+          "max_mbps": 27.616429558193897
+        },
+        "upload": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 24.450712495678818,
+          "min_mbps": 22.87428939956008,
+          "max_mbps": 31.010711757199974
+        }
+      },
+      "passed": true
+    },
+    {
+      "scenario": "download-loss",
+      "protocol": "tuic",
+      "qdisc_client": "qdisc netem 8009: root refcnt 15 limit 10000 delay 40ms\n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0",
+      "qdisc_server": "qdisc netem 8003: root refcnt 15 limit 10000 delay 40ms loss 1%\n Sent 39859015 bytes 29817 pkt (dropped 34, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0",
+      "samples": {
+        "readiness": [
+          {
+            "ok": true,
+            "request_ms": 342.227
+          }
+        ],
+        "latency": [
+          {
+            "ok": true,
+            "request_ms": 204.793
+          },
+          {
+            "ok": true,
+            "request_ms": 204.467
+          },
+          {
+            "ok": true,
+            "request_ms": 204.275
+          }
+        ],
+        "transfers": [
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.700382,
+            "mbps": 23.954395837936538,
+            "first_chunk_ms": 274.568
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.749352,
+            "mbps": 22.388975229279488,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.53681,
+            "mbps": 31.25352679279394,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.52753,
+            "mbps": 31.803314291455195,
+            "first_chunk_ms": 245.79
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 1.009906,
+            "mbps": 16.612651341620833,
+            "first_chunk_ms": 245.893
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.565975,
+            "mbps": 29.643027470278117,
+            "first_chunk_ms": null
+          }
+        ]
+      },
+      "summary": {
+        "download": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 23.954395837936538,
+          "min_mbps": 16.612651341620833,
+          "max_mbps": 31.803314291455195
+        },
+        "upload": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 29.643027470278117,
+          "min_mbps": 22.388975229279488,
+          "max_mbps": 31.25352679279394
+        }
+      },
+      "passed": true
+    },
+    {
+      "scenario": "download-loss",
+      "protocol": "ss",
+      "qdisc_client": "qdisc netem 800a: root refcnt 15 limit 10000 delay 40ms\n Sent 42 bytes 1 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0",
+      "qdisc_server": "qdisc netem 8003: root refcnt 15 limit 10000 delay 40ms loss 1%\n Sent 46504757 bytes 34934 pkt (dropped 45, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0",
+      "samples": {
+        "readiness": [
+          {
+            "ok": true,
+            "request_ms": 333.204
+          }
+        ],
+        "latency": [
+          {
+            "ok": true,
+            "request_ms": 285.236
+          },
+          {
+            "ok": true,
+            "request_ms": 283.869
+          },
+          {
+            "ok": true,
+            "request_ms": 283.571
+          }
+        ],
+        "transfers": [
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 1.691436,
+            "mbps": 9.918917145032314,
+            "first_chunk_ms": 406.079
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.925916,
+            "mbps": 18.11959613247996,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 2.050442,
+            "mbps": 8.182244499265927,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 1.127936,
+            "mbps": 14.874260114489326,
+            "first_chunk_ms": 404.684
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 9.081643,
+            "mbps": 1.8473767523654563,
+            "first_chunk_ms": 485.057
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 1.00666,
+            "mbps": 16.666227143699555,
+            "first_chunk_ms": null
+          }
+        ]
+      },
+      "summary": {
+        "download": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 9.918917145032314,
+          "min_mbps": 1.8473767523654563,
+          "max_mbps": 14.874260114489326
+        },
+        "upload": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 16.666227143699555,
+          "min_mbps": 8.182244499265927,
+          "max_mbps": 18.11959613247996
+        }
+      },
+      "passed": true
+    },
+    {
+      "scenario": "upload-loss",
+      "protocol": "reality",
+      "qdisc_client": "qdisc netem 800b: root refcnt 15 limit 10000 delay 40ms loss 1%\n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0",
+      "qdisc_server": "qdisc netem 8003: root refcnt 15 limit 10000 delay 40ms\n Sent 53137408 bytes 39763 pkt (dropped 79, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0",
+      "samples": {
+        "readiness": [
+          {
+            "ok": true,
+            "request_ms": 493.158
+          }
+        ],
+        "latency": [
+          {
+            "ok": true,
+            "request_ms": 365.764
+          },
+          {
+            "ok": true,
+            "request_ms": 365.841
+          },
+          {
+            "ok": true,
+            "request_ms": 367.081
+          }
+        ],
+        "transfers": [
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 2.176992,
+            "mbps": 7.706603042949797,
+            "first_chunk_ms": 486.611
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 3.416557,
+            "mbps": 4.910561802697559,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 4.863972,
+            "mbps": 3.4492829841806842,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 2.401168,
+            "mbps": 6.987107569844768,
+            "first_chunk_ms": 1597.324
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 1.29119,
+            "mbps": 12.993607920358977,
+            "first_chunk_ms": 487.541
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 8.917979,
+            "mbps": 1.8812800312575644,
+            "first_chunk_ms": null
+          }
+        ]
+      },
+      "summary": {
+        "download": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 7.706603042949797,
+          "min_mbps": 6.987107569844768,
+          "max_mbps": 12.993607920358977
+        },
+        "upload": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 3.4492829841806842,
+          "min_mbps": 1.8812800312575644,
+          "max_mbps": 4.910561802697559
+        }
+      },
+      "passed": true
+    },
+    {
+      "scenario": "upload-loss",
+      "protocol": "hy2",
+      "qdisc_client": "qdisc netem 800c: root refcnt 15 limit 10000 delay 40ms loss 1%\n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0",
+      "qdisc_server": "qdisc netem 8003: root refcnt 15 limit 10000 delay 40ms\n Sent 59802038 bytes 44955 pkt (dropped 79, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0",
+      "samples": {
+        "readiness": [
+          {
+            "ok": true,
+            "request_ms": 493.954
+          }
+        ],
+        "latency": [
+          {
+            "ok": true,
+            "request_ms": 203.596
+          },
+          {
+            "ok": true,
+            "request_ms": 204.076
+          },
+          {
+            "ok": true,
+            "request_ms": 203.743
+          }
+        ],
+        "transfers": [
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 3.746484,
+            "mbps": 4.478123161535004,
+            "first_chunk_ms": 289.196
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.747369,
+            "mbps": 22.44836435893215,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.530791,
+            "mbps": 31.60794829377569,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.647321,
+            "mbps": 25.91790704024082,
+            "first_chunk_ms": 244.26
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 0.72719,
+            "mbps": 23.07130416467608,
+            "first_chunk_ms": 244.819
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.886788,
+            "mbps": 18.91908148250865,
+            "first_chunk_ms": null
+          }
+        ]
+      },
+      "summary": {
+        "download": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 23.07130416467608,
+          "min_mbps": 4.478123161535004,
+          "max_mbps": 25.91790704024082
+        },
+        "upload": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 22.44836435893215,
+          "min_mbps": 18.91908148250865,
+          "max_mbps": 31.60794829377569
+        }
+      },
+      "passed": true
+    },
+    {
+      "scenario": "upload-loss",
+      "protocol": "tuic",
+      "qdisc_client": "qdisc netem 800d: root refcnt 15 limit 10000 delay 40ms loss 1%\n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0",
+      "qdisc_server": "qdisc netem 8003: root refcnt 15 limit 10000 delay 40ms\n Sent 66455566 bytes 50078 pkt (dropped 79, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0",
+      "samples": {
+        "readiness": [
+          {
+            "ok": true,
+            "request_ms": 413.852
+          }
+        ],
+        "latency": [
+          {
+            "ok": true,
+            "request_ms": 1205.435
+          },
+          {
+            "ok": true,
+            "request_ms": 203.575
+          },
+          {
+            "ok": true,
+            "request_ms": 204.507
+          }
+        ],
+        "transfers": [
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 1.911962,
+            "mbps": 8.774869617483338,
+            "first_chunk_ms": 269.972
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.775109,
+            "mbps": 21.644973731172083,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.72613,
+            "mbps": 23.104969392838935,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 4.185562,
+            "mbps": 4.00835407644078,
+            "first_chunk_ms": 244.026
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 1.291828,
+            "mbps": 12.98719054675287,
+            "first_chunk_ms": 244.982
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.687481,
+            "mbps": 24.40388521255697,
+            "first_chunk_ms": null
+          }
+        ]
+      },
+      "summary": {
+        "download": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 8.774869617483338,
+          "min_mbps": 4.00835407644078,
+          "max_mbps": 12.98719054675287
+        },
+        "upload": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 23.104969392838935,
+          "min_mbps": 21.644973731172083,
+          "max_mbps": 24.40388521255697
+        }
+      },
+      "passed": true
+    },
+    {
+      "scenario": "upload-loss",
+      "protocol": "ss",
+      "qdisc_client": "qdisc netem 800e: root refcnt 15 limit 10000 delay 40ms loss 1%\n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0",
+      "qdisc_server": "qdisc netem 8003: root refcnt 15 limit 10000 delay 40ms\n Sent 73101291 bytes 55187 pkt (dropped 79, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0",
+      "samples": {
+        "readiness": [
+          {
+            "ok": true,
+            "request_ms": 408.989
+          }
+        ],
+        "latency": [
+          {
+            "ok": true,
+            "request_ms": 283.673
+          },
+          {
+            "ok": true,
+            "request_ms": 283.54
+          },
+          {
+            "ok": true,
+            "request_ms": 286.531
+          }
+        ],
+        "transfers": [
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 1.207403,
+            "mbps": 13.895291773081002,
+            "first_chunk_ms": 404.321
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 4.94178,
+            "mbps": 3.3949739541994965,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 8.148967,
+            "mbps": 2.058814966833463,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 3.62356,
+            "mbps": 4.630036401661219,
+            "first_chunk_ms": 445.219
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 2.695496,
+            "mbps": 6.224165508039994,
+            "first_chunk_ms": 444.469
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 3.980101,
+            "mbps": 4.215273894817742,
+            "first_chunk_ms": null
+          }
+        ]
+      },
+      "summary": {
+        "download": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 6.224165508039994,
+          "min_mbps": 4.630036401661219,
+          "max_mbps": 13.895291773081002
+        },
+        "upload": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 3.3949739541994965,
+          "min_mbps": 2.058814966833463,
+          "max_mbps": 4.215273894817742
+        }
+      },
+      "passed": true
+    },
+    {
+      "scenario": "download-cap",
+      "protocol": "reality",
+      "qdisc_client": "qdisc netem 800f: root refcnt 15 limit 10000 delay 40ms\n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0",
+      "qdisc_server": "qdisc netem 8003: root refcnt 15 limit 10000 delay 40ms rate 2Mbit\n Sent 79767460 bytes 60493 pkt (dropped 79, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0",
+      "samples": {
+        "readiness": [
+          {
+            "ok": true,
+            "request_ms": 501.936
+          }
+        ],
+        "latency": [
+          {
+            "ok": true,
+            "request_ms": 374.609
+          },
+          {
+            "ok": true,
+            "request_ms": 376.313
+          },
+          {
+            "ok": true,
+            "request_ms": 806.641
+          }
+        ],
+        "transfers": [
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 9.165305,
+            "mbps": 1.830513657141863,
+            "first_chunk_ms": 671.134
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.943619,
+            "mbps": 17.77964338880235,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.989818,
+            "mbps": 16.9498044857388,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 9.191973,
+            "mbps": 1.8252028981232709,
+            "first_chunk_ms": 686.166
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 9.269128,
+            "mbps": 1.8100102245324026,
+            "first_chunk_ms": 1033.826
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 1.073347,
+            "mbps": 15.630746044287713,
+            "first_chunk_ms": null
+          }
+        ]
+      },
+      "summary": {
+        "download": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 1.8252028981232709,
+          "min_mbps": 1.8100102245324026,
+          "max_mbps": 1.830513657141863
+        },
+        "upload": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 16.9498044857388,
+          "min_mbps": 15.630746044287713,
+          "max_mbps": 17.77964338880235
+        }
+      },
+      "passed": true
+    },
+    {
+      "scenario": "download-cap",
+      "protocol": "hy2",
+      "qdisc_client": "qdisc netem 8010: root refcnt 15 limit 10000 delay 40ms\n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0",
+      "qdisc_server": "qdisc netem 8003: root refcnt 15 limit 10000 delay 40ms rate 2Mbit\n Sent 86431160 bytes 65687 pkt (dropped 79, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0",
+      "samples": {
+        "readiness": [
+          {
+            "ok": true,
+            "request_ms": 735.867
+          }
+        ],
+        "latency": [
+          {
+            "ok": true,
+            "request_ms": 207.372
+          },
+          {
+            "ok": true,
+            "request_ms": 208.066
+          },
+          {
+            "ok": true,
+            "request_ms": 209.627
+          }
+        ],
+        "transfers": [
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 9.075808,
+            "mbps": 1.8485643791416677,
+            "first_chunk_ms": 450.642
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.873972,
+            "mbps": 19.196517489714235,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.623501,
+            "mbps": 26.908067961044814,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 9.076465,
+            "mbps": 1.8484306300602416,
+            "first_chunk_ms": 549.007
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 8.969515,
+            "mbps": 1.8704707803373168,
+            "first_chunk_ms": 448.267
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.498521,
+            "mbps": 33.65395718399927,
+            "first_chunk_ms": null
+          }
+        ]
+      },
+      "summary": {
+        "download": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 1.8485643791416677,
+          "min_mbps": 1.8484306300602416,
+          "max_mbps": 1.8704707803373168
+        },
+        "upload": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 26.908067961044814,
+          "min_mbps": 19.196517489714235,
+          "max_mbps": 33.65395718399927
+        }
+      },
+      "passed": true
+    },
+    {
+      "scenario": "download-cap",
+      "protocol": "tuic",
+      "qdisc_client": "qdisc netem 8011: root refcnt 15 limit 10000 delay 40ms\n Sent 0 bytes 0 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0",
+      "qdisc_server": "qdisc netem 8003: root refcnt 15 limit 10000 delay 40ms rate 2Mbit\n Sent 93076651 bytes 70716 pkt (dropped 79, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0",
+      "samples": {
+        "readiness": [
+          {
+            "ok": true,
+            "request_ms": 429.954
+          }
+        ],
+        "latency": [
+          {
+            "ok": true,
+            "request_ms": 205.254
+          },
+          {
+            "ok": true,
+            "request_ms": 205.199
+          },
+          {
+            "ok": true,
+            "request_ms": 206.043
+          }
+        ],
+        "transfers": [
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 9.006167,
+            "mbps": 1.8628586321490936,
+            "first_chunk_ms": 452.363
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.721126,
+            "mbps": 23.265314893776022,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.495435,
+            "mbps": 33.86358964170226,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 8.978106,
+            "mbps": 1.8686810873047663,
+            "first_chunk_ms": 445.049
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 9.032474,
+            "mbps": 1.8574331260648578,
+            "first_chunk_ms": 510.16
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.690156,
+            "mbps": 24.309309849695364,
+            "first_chunk_ms": null
+          }
+        ]
+      },
+      "summary": {
+        "download": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 1.8628586321490936,
+          "min_mbps": 1.8574331260648578,
+          "max_mbps": 1.8686810873047663
+        },
+        "upload": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 24.309309849695364,
+          "min_mbps": 23.265314893776022,
+          "max_mbps": 33.86358964170226
+        }
+      },
+      "passed": true
+    },
+    {
+      "scenario": "download-cap",
+      "protocol": "ss",
+      "qdisc_client": "qdisc netem 8012: root refcnt 15 limit 10000 delay 40ms\n Sent 42 bytes 1 pkt (dropped 0, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0",
+      "qdisc_server": "qdisc netem 8003: root refcnt 15 limit 10000 delay 40ms rate 2Mbit\n Sent 99721354 bytes 75806 pkt (dropped 79, overlimits 0 requeues 0) \n backlog 0b 0p requeues 0",
+      "samples": {
+        "readiness": [
+          {
+            "ok": true,
+            "request_ms": 418.26
+          }
+        ],
+        "latency": [
+          {
+            "ok": true,
+            "request_ms": 287.435
+          },
+          {
+            "ok": true,
+            "request_ms": 286.243
+          },
+          {
+            "ok": true,
+            "request_ms": 286.488
+          }
+        ],
+        "transfers": [
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 9.082729,
+            "mbps": 1.8471558310011413,
+            "first_chunk_ms": 629.272
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.861138,
+            "mbps": 19.482612143435606,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.851853,
+            "mbps": 19.694955098890226,
+            "first_chunk_ms": null
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 9.081172,
+            "mbps": 1.8474726200693579,
+            "first_chunk_ms": 591.812
+          },
+          {
+            "ok": true,
+            "direction": "download",
+            "payload_bytes": 2097152,
+            "seconds": 9.082526,
+            "mbps": 1.8471970507768318,
+            "first_chunk_ms": 634.389
+          },
+          {
+            "ok": true,
+            "direction": "upload",
+            "payload_bytes": 2097152,
+            "seconds": 0.851888,
+            "mbps": 19.694165925144347,
+            "first_chunk_ms": null
+          }
+        ]
+      },
+      "summary": {
+        "download": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 1.8471970507768318,
+          "min_mbps": 1.8471558310011413,
+          "max_mbps": 1.8474726200693579
+        },
+        "upload": {
+          "attempts": 3,
+          "successes": 3,
+          "failures": 0,
+          "all_passed": true,
+          "median_mbps": 19.694165925144347,
+          "min_mbps": 19.482612143435606,
+          "max_mbps": 19.694955098890226
+        }
+      },
+      "passed": true
+    }
+  ],
+  "direct_target_isolation": true,
+  "finished_utc": "2026-09-20T15:39:32.449796+00:00"
+}

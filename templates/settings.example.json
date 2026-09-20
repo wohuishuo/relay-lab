@@ -1,0 +1,7 @@
+{
+  "server": "node.example.com",
+  "domain": "node.example.com",
+  "reality_sni": "www.example.org",
+  "reality_dest": "www.example.org:443",
+  "protocols": ["reality", "hy2"]
+}

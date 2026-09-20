@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "scope": "local headless Edge",
+  "viewports": [
+    [
+      1440,
+      1050
+    ],
+    [
+      390,
+      844
+    ]
+  ],
+  "checks": [
+    "chart values match experiment",
+    "full-text navigation filter",
+    "theme switch",
+    "mobile menu",
+    "no horizontal document overflow",
+    "no JavaScript errors"
+  ],
+  "visual_review": "desktop and mobile screenshots inspected"
+}

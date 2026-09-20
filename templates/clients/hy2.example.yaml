@@ -1,0 +1,26 @@
+{
+  "mixed-port": 17890,
+  "allow-lan": false,
+  "bind-address": "127.0.0.1",
+  "mode": "rule",
+  "log-level": "silent",
+  "ipv6": false,
+  "proxies": [
+    {
+      "name": "node",
+      "type": "hysteria2",
+      "server": "node.example.com",
+      "port": 443,
+      "udp": true,
+      "password": "REPLACE_WITH_UNIQUE_GENERATED_PASSWORD",
+      "sni": "node.example.com",
+      "alpn": [
+        "h3"
+      ],
+      "skip-cert-verify": false
+    }
+  ],
+  "rules": [
+    "MATCH,node"
+  ]
+}

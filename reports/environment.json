@@ -1,0 +1,13 @@
+{
+  "scope": "local Windows Docker Desktop Linux VM; no production connection",
+  "docker": "29.5.3",
+  "compose": "5.1.4",
+  "helper_image": "sha256:6a8ad74b387bddbbd5537e456111d0e0630107933b276666105312870d92bd0a",
+  "limitations": [
+    "2 MiB per transfer, 3 repetitions per direction: functional/causal lab, not WAN capacity ranking",
+    "qdisc counters in this run captured BEFORE transfers, not measured packet loss",
+    "netem random loss has no fixed seed; GSO/offload and VM scheduling may affect results",
+    "no independent cold TLS handshake or end-to-end WAN RTT measurement",
+    "TLS fixture uses isolated private CA; production certificate is not involved"
+  ]
+}

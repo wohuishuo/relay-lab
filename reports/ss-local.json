@@ -1,0 +1,85 @@
+{
+  "started_utc": "2026-09-20T16:05:35.796303+00:00",
+  "scope": "local Docker only; no VPS or device-app validation",
+  "server_image": "docker.io/metacubex/mihomo@sha256:739edd73a352d6beb82fad6790ef9d417a4d6f061584cc3cab1bd4536d1c60e5",
+  "client_image": "docker.io/metacubex/mihomo@sha256:739edd73a352d6beb82fad6790ef9d417a4d6f061584cc3cab1bd4536d1c60e5",
+  "protocols": {
+    "ss": {
+      "status": "passed",
+      "checks": [
+        {
+          "check": "server-and-client-parse",
+          "passed": true
+        },
+        {
+          "check": "isolation",
+          "negative": false,
+          "passed": true
+        },
+        {
+          "check": "tcp",
+          "negative": false,
+          "passed": true
+        },
+        {
+          "check": "udp",
+          "negative": false,
+          "passed": true
+        },
+        {
+          "check": "tcp",
+          "negative": true,
+          "passed": true
+        },
+        {
+          "check": "udp",
+          "negative": true,
+          "passed": true
+        },
+        {
+          "check": "wrong-cipher-tcp",
+          "negative": true,
+          "passed": true
+        },
+        {
+          "check": "wrong-cipher-udp",
+          "negative": true,
+          "passed": true
+        },
+        {
+          "check": "tcp",
+          "negative": false,
+          "passed": true
+        },
+        {
+          "check": "restart-tcp-recovery",
+          "negative": false,
+          "passed": true,
+          "elapsed_seconds": 0.94
+        },
+        {
+          "check": "udp",
+          "negative": false,
+          "passed": true
+        }
+      ]
+    }
+  },
+  "lifecycle": {
+    "all-listeners-coexist": "passed",
+    "downgrade-1.19.30": "passed",
+    "upgrade-1.19.31": "passed",
+    "certificate-replacement-and-restart": "passed"
+  },
+  "production": "pending",
+  "status": "passed",
+  "version_matrix": {
+    "downgrade-1.19.30": {
+      "ss": "passed"
+    },
+    "upgrade-1.19.31": {
+      "ss": "passed"
+    }
+  },
+  "finished_utc": "2026-09-20T16:06:14.731298+00:00"
+}

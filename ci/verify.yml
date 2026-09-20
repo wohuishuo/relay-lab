@@ -1,0 +1,55 @@
+name: Verify code, docs and isolated protocols
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: verify-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - name: Scan source and validate syntax
+        run: |
+          python scripts/scan-secrets.py
+          python -m compileall -q jp scripts tests lab
+          bash -n install.sh scripts/healthcheck.sh scripts/check-host.sh
+      - name: Install hash-verified upstream test tools
+        run: python scripts/manage.py install-tools --directory "$RUNNER_TEMP/relay-tools"
+      - name: Component tests including real Docker and encrypted backup
+        env:
+          JP_DOCKER_TEST: '1'
+          JP_AGE: ${{ runner.temp }}/relay-tools/age
+          JP_AGE_KEYGEN: ${{ runner.temp }}/relay-tools/age-keygen
+          JP_LEGO: ${{ runner.temp }}/relay-tools/lego
+        run: sudo -E "$(command -v python)" scripts/run-tests.py
+      - name: Nine isolated protocol acceptance tests
+        run: python scripts/manage.py local-test --state "$RUNNER_TEMP/relay-protocols"
+      - name: Client policy fault and recovery test
+        run: python scripts/test-failover-local.py --state "$RUNNER_TEMP/relay-policy"
+      - name: Build offline documentation
+        run: |
+          python -m pip install --require-hashes -r requirements-docs.txt
+          python scripts/build-docs.py
+      - name: Upload sanitized evidence and reading site
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: relay-lab-verification
+          retention-days: 14
+          path: |
+            reports/unit-tests.json
+            ${{ runner.temp }}/relay-protocols/report.json
+            ${{ runner.temp }}/relay-policy/report.json
+            site/

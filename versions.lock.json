@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "platform": "linux/amd64",
+  "images": {
+    "caddy": {
+      "repository": "library/caddy",
+      "tag": "2.11.4-alpine",
+      "digest": "sha256:de23def33b17fb5d1290b0f6c2add1d70780e52341896c00a4c8a2a2fe9d355e",
+      "amd64_digest": "sha256:040e9f7480b80b6d4a7e5013a21159b950a63dcbdb956e38abe2387fb28d9ec0"
+    },
+    "mihomo": {
+      "repository": "metacubex/mihomo",
+      "tag": "v1.19.31",
+      "digest": "sha256:739edd73a352d6beb82fad6790ef9d417a4d6f061584cc3cab1bd4536d1c60e5",
+      "amd64_digest": "sha256:ac14aad501b2a4bf4e27e9c262be3769a59f564fc990356af31e182555e463e6"
+    },
+    "mihomo_previous": {
+      "repository": "metacubex/mihomo",
+      "tag": "v1.19.30",
+      "digest": "sha256:baf38d282b785d7037337676714a69e3fdd1f2d9bf748dfd25fce681a624ea74",
+      "amd64_digest": "sha256:9d7964963f07e658d6fc9b8a52391b8fc9813d7525ded6e69ecbd38b0af61393"
+    },
+    "python": {
+      "repository": "library/python",
+      "tag": "3.12.10-slim-bookworm",
+      "digest": "sha256:fd95fa221297a88e1cf49c55ec1828edd7c5a428187e67b5d1805692d11588db",
+      "amd64_digest": "sha256:97983fa8cc88343512862c62307159a82261c3528dc025f79e5a3f7af43e50b4"
+    }
+  },
+  "utilities": {
+    "age": "1.3.2",
+    "lego": "5.4.1"
+  },
+  "tools": {
+    "age": {
+      "windows": {"url": "https://github.com/FiloSottile/age/releases/download/v1.3.2/age-v1.3.2-windows-amd64.zip", "sha256": "f48d8f8f9ebe903ab5027ed067652f2cc1db94bc206976430133b905dcd8e8c7"},
+      "linux": {"url": "https://github.com/FiloSottile/age/releases/download/v1.3.2/age-v1.3.2-linux-amd64.tar.gz", "sha256": "cbe24006683f8eb669266162894b9a522a1af52f2665fbc63a4bb032ed26ac10"}
+    },
+    "lego": {
+      "windows": {"url": "https://github.com/go-acme/lego/releases/download/v5.4.1/lego_v5.4.1_windows_amd64.zip", "sha256": "a89e70f788434f1db992fb0b2512931ef254c45507a78d187fa812e3536f7fab"},
+      "linux": {"url": "https://github.com/go-acme/lego/releases/download/v5.4.1/lego_v5.4.1_linux_amd64.tar.gz", "sha256": "ebb33f1bead5a7c99dd46f1c5734b44cf1eab5b5c12faf397cd14d50a5916419"}
+    }
+  }
+}
