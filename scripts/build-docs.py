@@ -8,6 +8,7 @@ import re
 import shutil
 from urllib.parse import urlsplit
 import markdown
+from markdown.extensions.toc import slugify_unicode
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / 'site'
@@ -24,7 +25,7 @@ def title(path):
 
 
 def main():
-    pages = sorted((ROOT / 'docs').rglob('*.md')) + [ROOT / p for p in ('README.md', 'SECURITY.md', 'THIRD_PARTY.md', 'ci/README.md')]
+    pages = sorted((ROOT / 'docs').rglob('*.md')) + [ROOT / p for p in ('README.md', 'README.zh-CN.md', 'README.ru.md', 'SECURITY.md', 'THIRD_PARTY.md', 'ci/README.md')]
     pages = [p for p in pages if 'plans' not in p.parts]
     lessons = sorted((ROOT / 'docs/training').glob('[0-9]*.md'))
     navigation = [ROOT / 'docs/training/README.md'] + lessons + [ROOT / ('docs/' + name + '.md') for name in ('quickstart','evidence','campus-network','ports','server-setup','references','glossary')]
@@ -39,6 +40,7 @@ def main():
     data = {str(i): p.read_text(encoding='utf-8') for i, p in enumerate(navigation)}
     search_json = json.dumps(data, ensure_ascii=False).replace('<', '\\u003c')
     def shell(output, heading, body, source=None):
+        language = {'README.md': 'en', 'README.zh-CN.md': 'zh-CN', 'README.ru.md': 'ru'}.get(source.name if source and source.parent == ROOT else '', 'zh-CN')
         css = relative(output, OUT / 'docs/assets/site.css')
         js = relative(output, OUT / 'docs/assets/site.js')
         home = relative(output, OUT / 'index.html')
@@ -52,12 +54,15 @@ def main():
             links.append(f'<a class="{cls}" data-page="{i}" href="{html.escape(href)}">{html.escape(text)}</a>')
         edit = (f'<a href="{REPO}/blob/main/{source.relative_to(ROOT).as_posix()}">查看源文档 ↗</a>' if source else '<span>独立项目 · 不隶属于协议维护方</span>')
         output.parent.mkdir(parents=True, exist_ok=True)
-        output.write_text(f'''<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="RelayLab 中文代理工程课程：协议、可重复实验与可靠性"><title>{html.escape(heading)} · RelayLab</title><link rel="stylesheet" href="{css}"></head><body>
+        output.write_text(f'''<!doctype html><html lang="{language}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="RelayLab 中文代理工程课程：协议、可重复实验与可靠性"><title>{html.escape(heading)} · RelayLab</title><link rel="stylesheet" href="{css}"></head><body>
 <a class="skip" href="#main">跳到正文</a><header><a class="brand" href="{home}"><span class="mark">R</span>RelayLab</a><span class="tagline">代理工程实验室</span><div class="tools"><a href="{REPO}">GitHub ↗</a><button class="icon" id="theme" aria-label="切换深浅主题">◐</button><button class="icon" id="menu" aria-label="打开目录" aria-expanded="false">目录</button></div></header>
 <div class="layout"><aside><label for="search">SEARCH THE HANDBOOK</label><input id="search" type="search" placeholder="搜索协议、DNS、性能…"><p class="empty" id="search-status" aria-live="polite"></p><nav aria-label="课程目录">{''.join(links)}</nav></aside><main id="main"><div class="crumb"><a href="{home}">实验室</a><span>/</span><span>{html.escape(heading)}</span></div>{body}<footer><span>RELAYLAB · 2026 / 本地证据，明确边界</span>{edit}</footer></main></div><script type="application/json" id="search-data">{search_json}</script><script src="{js}" defer></script></body></html>''', encoding='utf-8')
     for p in pages:
         output = OUT / p.relative_to(ROOT).with_suffix('.html')
-        renderer = markdown.Markdown(extensions=['extra', 'toc'], extension_configs={'toc': {'toc_depth': '2-3'}})
+        toc_options = {'toc_depth': '2-3'}
+        if p.parent == ROOT and p.name in ('README.md', 'README.zh-CN.md', 'README.ru.md'):
+            toc_options['slugify'] = slugify_unicode
+        renderer = markdown.Markdown(extensions=['extra', 'toc'], extension_configs={'toc': toc_options})
         content = renderer.convert(p.read_text(encoding='utf-8'))
         def rewrite(match):
             attr, url = match.groups()

@@ -27,7 +27,7 @@ sudo install -m 600 templates/cloudflare-credentials.example.json /var/lib/relay
 ## 3. 查看计划
 
 ```bash
-bash install.sh --settings /var/lib/relay-lab/settings.json
+sudo bash install.sh --settings /var/lib/relay-lab/settings.json
 ```
 
 此步骤不拉镜像、不申请证书、不创建状态文件、不连接服务器。它验证参数，列出将使用的端口与阶段。发现 existing release 会拒绝，避免当成更新工具使用。
