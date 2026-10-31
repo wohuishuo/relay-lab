@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <a href="versions.lock.json"><img src="https://img.shields.io/badge/Mihomo-v1.19.31-3979cc" alt="Pinned Mihomo v1.19.31"></a>
+  <a href="versions.lock.json"><img src="https://img.shields.io/badge/Mihomo-v1.19.33-3979cc" alt="Pinned Mihomo v1.19.33"></a>
   <a href="docs/ports.md"><img src="https://img.shields.io/badge/Configurable_entries-9-158a76" alt="Nine configurable protocol entries"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-64748b" alt="MIT license"></a>
 </p>
@@ -21,6 +21,8 @@ RelayLab combines a deployment toolkit, an isolated network lab, and an engineer
 The initial resource budget is **1 vCPU / 1 GB RAM**. The fresh-host installer targets **Ubuntu 24.04 amd64**. The project started with a Japanese VPS, but the design does not require a particular region or cloud provider.
 
 [Install on a new VPS](#install-on-a-new-vps) · [Try the local lab](#try-the-local-lab) · [Protocols and ports](#protocols-and-ports) · [Read the handbook](docs/training/README.md) · [Review the evidence](docs/evidence.md)
+
+[October stability maintenance](docs/stability-20261031.md): core upgrade, a 30-second client fallback policy, explicit DNS routing, bounded resource monitoring, and measured recovery limits.
 
 ## What you get
 
@@ -58,7 +60,7 @@ flowchart LR
 
 | Component | Role | Version or deployment choice |
 |---|---|---|
-| **Mihomo** | Authenticates incoming connections and forwards traffic | `v1.19.31`, upstream `metacubex/mihomo` image pinned by digest |
+| **Mihomo** | Authenticates incoming connections and forwards traffic | `v1.19.33`, upstream `metacubex/mihomo` image pinned by digest |
 | **Docker Compose** | Runs the core, separates environments, limits resources and logs | Linux containers; production IPv4 bridge/NAT |
 | **Python** | Generates configuration and coordinates validation, releases, tests, and recovery | Python 3.12+ |
 | **lego** | Issues and renews TLS certificates through ACME DNS-01 | `5.4.1`; Cloudflare provider in the fresh-host installer |
@@ -161,6 +163,8 @@ Securely transfer **`/var/lib/relay-lab/client.yaml`** to a compatible Mihomo cl
 **Validation boundary:** committed reports cover dated local component and container tests. The complete fresh-cloud-host installation, live DNS API/production ACME flow, and device-specific acceptance still require verification on the target deployment. A healthy container is only one check. See the [full installation guide](docs/quickstart.md).
 
 ## Client profiles and automatic selection
+
+The separate [compact stability profile](docs/stability-20261031.md#generate-the-compact-client-profile) uses `JP-STABLE → JP-AUTO`, 30-second probes and explicit DNS routing. Generate it with `scripts/export-stable.py`; the older bundle exporter below retains its 120-second defaults.
 
 Profiles can use `manual`, `fallback`, or `url-test` mode. To export a failover profile from an existing release, replace `RELEASE_ID` and choose a new output file outside the repository:
 

@@ -1,0 +1,433 @@
+{
+  "date": "2026-10-31",
+  "scope": "Existing deployment; isolated lab plus host and one external network. No phone-wide acceptance or throughput guarantee.",
+  "server_core": "v1.19.33",
+  "candidate_and_host_tests": {
+    "candidate-result.json": {
+      "status": "passed",
+      "tests": [
+        {
+          "name": "JP-REALITY",
+          "credential": "valid",
+          "curl_exit": 0,
+          "http": "204",
+          "pass": true
+        },
+        {
+          "name": "JP-REALITY",
+          "credential": "wrong",
+          "curl_exit": 35,
+          "http": "000",
+          "pass": true
+        },
+        {
+          "name": "JP-HY2",
+          "credential": "valid",
+          "curl_exit": 0,
+          "http": "204",
+          "pass": true
+        },
+        {
+          "name": "JP-HY2",
+          "credential": "wrong",
+          "curl_exit": 35,
+          "http": "000",
+          "pass": true
+        },
+        {
+          "name": "JP-ANYTLS",
+          "credential": "valid",
+          "curl_exit": 0,
+          "http": "204",
+          "pass": true
+        },
+        {
+          "name": "JP-ANYTLS",
+          "credential": "wrong",
+          "curl_exit": 35,
+          "http": "000",
+          "pass": true
+        },
+        {
+          "name": "JP-TUIC",
+          "credential": "valid",
+          "curl_exit": 0,
+          "http": "204",
+          "pass": true
+        },
+        {
+          "name": "JP-TUIC",
+          "credential": "wrong",
+          "curl_exit": 35,
+          "http": "000",
+          "pass": true
+        },
+        {
+          "name": "JP-TROJAN",
+          "credential": "valid",
+          "curl_exit": 0,
+          "http": "204",
+          "pass": true
+        },
+        {
+          "name": "JP-TROJAN",
+          "credential": "wrong",
+          "curl_exit": 35,
+          "http": "000",
+          "pass": true
+        },
+        {
+          "name": "JP-SS",
+          "credential": "valid",
+          "curl_exit": 0,
+          "http": "204",
+          "pass": true
+        },
+        {
+          "name": "JP-SS",
+          "credential": "wrong",
+          "curl_exit": 35,
+          "http": "000",
+          "pass": true
+        },
+        {
+          "name": "JP-XHTTP",
+          "credential": "valid",
+          "curl_exit": 0,
+          "http": "204",
+          "pass": true
+        },
+        {
+          "name": "JP-XHTTP",
+          "credential": "wrong",
+          "curl_exit": 35,
+          "http": "000",
+          "pass": true
+        },
+        {
+          "name": "JP-WS",
+          "credential": "valid",
+          "curl_exit": 0,
+          "http": "204",
+          "pass": true
+        },
+        {
+          "name": "JP-WS",
+          "credential": "wrong",
+          "curl_exit": 35,
+          "http": "000",
+          "pass": true
+        },
+        {
+          "name": "JP-GRPC",
+          "credential": "valid",
+          "curl_exit": 0,
+          "http": "204",
+          "pass": true
+        },
+        {
+          "name": "JP-GRPC",
+          "credential": "wrong",
+          "curl_exit": 35,
+          "http": "000",
+          "pass": true
+        },
+        {
+          "name": "JP-GRPC-DIRECT",
+          "credential": "valid",
+          "curl_exit": 0,
+          "http": "204",
+          "pass": true
+        },
+        {
+          "name": "JP-GRPC-DIRECT",
+          "credential": "wrong",
+          "curl_exit": 35,
+          "http": "000",
+          "pass": true
+        },
+        {
+          "name": "JP-HY2",
+          "credential": "valid",
+          "curl_exit": 0,
+          "http": "204",
+          "pass": true
+        }
+      ],
+      "test_keys": [
+        "name",
+        "credential",
+        "curl_exit",
+        "http",
+        "seconds",
+        "pass"
+      ],
+      "finished": "2026-10-31T09:55:45.174523+00:00"
+    },
+    "before-protocol-result.json": {
+      "status": "passed",
+      "tests": [
+        {
+          "node": "JP-REALITY",
+          "http": "204",
+          "udp_dns": true
+        },
+        {
+          "node": "JP-HY2",
+          "http": "204",
+          "udp_dns": true
+        },
+        {
+          "node": "JP-ANYTLS",
+          "http": "204",
+          "udp_dns": true
+        },
+        {
+          "node": "JP-TUIC",
+          "http": "204",
+          "udp_dns": true
+        },
+        {
+          "node": "JP-TROJAN",
+          "http": "204",
+          "udp_dns": true
+        },
+        {
+          "node": "JP-SS",
+          "http": "204",
+          "udp_dns": true
+        },
+        {
+          "node": "JP-XHTTP",
+          "http": "204",
+          "udp_dns": true
+        },
+        {
+          "node": "JP-WS",
+          "http": "204",
+          "udp_dns": true
+        },
+        {
+          "node": "JP-GRPC",
+          "http": "204",
+          "udp_dns": true
+        },
+        {
+          "node": "JP-GRPC-DIRECT",
+          "http": "204",
+          "udp_dns": true
+        }
+      ],
+      "test_keys": [
+        "node",
+        "tcp_https",
+        "http",
+        "seconds",
+        "udp_dns"
+      ],
+      "finished": "2026-10-31T10:01:47.067611+00:00"
+    },
+    "post-upgrade-result.json": {
+      "status": "passed",
+      "tests": [
+        {
+          "node": "JP-REALITY",
+          "http": "204",
+          "udp_dns": true
+        },
+        {
+          "node": "JP-HY2",
+          "http": "204",
+          "udp_dns": true
+        },
+        {
+          "node": "JP-ANYTLS",
+          "http": "204",
+          "udp_dns": true
+        },
+        {
+          "node": "JP-TUIC",
+          "http": "204",
+          "udp_dns": true
+        },
+        {
+          "node": "JP-TROJAN",
+          "http": "204",
+          "udp_dns": true
+        },
+        {
+          "node": "JP-SS",
+          "http": "204",
+          "udp_dns": true
+        },
+        {
+          "node": "JP-XHTTP",
+          "http": "204",
+          "udp_dns": true
+        },
+        {
+          "node": "JP-WS",
+          "http": "204",
+          "udp_dns": true
+        },
+        {
+          "node": "JP-GRPC",
+          "http": "204",
+          "udp_dns": true
+        },
+        {
+          "node": "JP-GRPC-DIRECT",
+          "http": "204",
+          "udp_dns": true
+        }
+      ],
+      "test_keys": [
+        "node",
+        "tcp_https",
+        "http",
+        "seconds",
+        "udp_dns"
+      ],
+      "finished": "2026-10-31T10:03:54.928686+00:00"
+    }
+  },
+  "external_client_tests": [
+    {
+      "node": "JP-HY2",
+      "client_core": "v1.19.31",
+      "curl_exit": 0,
+      "http": "204",
+      "seconds": "1.523155",
+      "pass": true
+    },
+    {
+      "node": "JP-TUIC",
+      "client_core": "v1.19.31",
+      "curl_exit": 0,
+      "http": "204",
+      "seconds": "1.361386",
+      "pass": true
+    },
+    {
+      "node": "JP-GRPC",
+      "client_core": "v1.19.31",
+      "curl_exit": 0,
+      "http": "204",
+      "seconds": "2.077486",
+      "pass": true
+    }
+  ],
+  "auto_accelerated": {
+    "probe_interval_seconds": 5,
+    "probe_timeout_ms": 2500,
+    "production_interval_seconds": 30,
+    "before": {
+      "selected": "JP-HY2",
+      "https": true
+    },
+    "proxied_txt_dns": {
+      "rcode": 0,
+      "answers": 2,
+      "bytes": 98
+    },
+    "direct_txt_dns": {
+      "rcode": 0,
+      "answers": 1,
+      "bytes": 83
+    },
+    "failure_samples": [
+      {
+        "after_s": 5.344,
+        "selected": "JP-HY2",
+        "https": false
+      },
+      {
+        "after_s": 7.609,
+        "selected": "JP-TUIC",
+        "https": true
+      }
+    ],
+    "switched": true,
+    "status": "passed",
+    "relay_packet_counts": {
+      "forwarded": 90,
+      "dropped": 26
+    }
+  },
+  "auto_published_policy": {
+    "client_core": "v1.19.31",
+    "probe_interval_seconds": 30,
+    "probe_timeout_ms": 6000,
+    "production_interval_seconds": 30,
+    "before": {
+      "selected": "JP-HY2",
+      "https": true
+    },
+    "proxied_txt_dns": {
+      "rcode": 0,
+      "answers": 2,
+      "bytes": 98
+    },
+    "direct_txt_dns": {
+      "rcode": 0,
+      "answers": 1,
+      "bytes": 83
+    },
+    "failure_samples": [
+      {
+        "after_s": 5.344,
+        "selected": "JP-HY2",
+        "https": false
+      },
+      {
+        "after_s": 11.219,
+        "selected": "JP-HY2",
+        "https": false
+      },
+      {
+        "after_s": 17.266,
+        "selected": "JP-HY2",
+        "https": false
+      },
+      {
+        "after_s": 23.266,
+        "selected": "JP-HY2",
+        "https": false
+      },
+      {
+        "after_s": 29.125,
+        "selected": "JP-HY2",
+        "https": false
+      },
+      {
+        "after_s": 30.875,
+        "selected": "JP-TUIC",
+        "https": true
+      }
+    ],
+    "switched": true,
+    "status": "passed",
+    "relay_packet_counts": {
+      "forwarded": 84,
+      "dropped": 38
+    }
+  },
+  "subscription_checks": [
+    {
+      "profile": "stable",
+      "https": 200,
+      "content_matches": true
+    },
+    {
+      "profile": "legacy",
+      "https": 200,
+      "content_matches": true
+    }
+  ],
+  "not_verified": [
+    "Phone OS DNS/IPv6/WebRTC capture",
+    "Direct TCP return-path repair",
+    "Throughput improvement",
+    "Multi-host availability SLA"
+  ]
+}

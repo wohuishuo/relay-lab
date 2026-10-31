@@ -131,18 +131,40 @@ def deploy(state, release, *, rollback=False):
     if release in revoked:
         raise ValueError('This release has revoked credentials and cannot be deployed')
     validate_release(state, release)
+    active_before = read_json(state / 'active.json') if (state / 'active.json').exists() else {}
+    restore_release = active_before.get('current')
     args, env = prod_context(state, release)
+
+    def start_checked(command, environment):
+        run(command + ['up', '-d', '--wait', '--wait-timeout', '75', '--remove-orphans'],
+            env=environment, timeout=120)
+        # Container health is not external TCP/UDP acceptance.
+        status = run(command + ['ps', '--format', 'json'], env=environment).stdout
+        if 'unhealthy' in status or 'running' not in status.lower():
+            raise RuntimeError('Container did not become healthy')
+
     def perform():
         try:
-            run(args + ['up', '-d', '--wait', '--wait-timeout', '75', '--remove-orphans'], env=env, timeout=120)
-            # --wait only establishes process/config health, not external protocol acceptance.
-            status = run(args + ['ps', '--format', 'json'], env=env).stdout
-            if 'unhealthy' in status or 'running' not in status.lower():
-                raise RuntimeError('Container did not become healthy')
+            start_checked(args, env)
         except Exception:
-            run(args + ['stop'], env=env, check=False)
-            write_private(state / 'failed-deployment.json', {'release': release, 'at': datetime.datetime.now(datetime.timezone.utc).isoformat()})
-            raise
+            failure = {'release': release, 'at': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                       'recovery': 'not_attempted'}
+            try:
+                if restore_release and restore_release != release and restore_release not in revoked:
+                    # active.previous is older than the deployment we are replacing.
+                    validate_release(state, restore_release)
+                    old_args, old_env = prod_context(state, restore_release)
+                    start_checked(old_args, old_env)
+                    failure.update(recovery='restored', restored_release=restore_release)
+                else:
+                    run(args + ['stop'], env=env)
+                    failure['recovery'] = 'stopped'
+            except Exception:
+                failure['recovery'] = 'failed'
+            write_private(state / 'failed-deployment.json', failure)
+            if failure['recovery'] == 'failed':
+                raise RuntimeError('Deployment and recovery failed; use the independent recovery channel') from None
+            raise RuntimeError('Deployment failed; recovery outcome recorded in failed-deployment.json') from None
     activate(state, release, perform)
     write_private(state / 'acceptance-pending.json', {'release': release, 'status': 'awaiting real client TCP/UDP, restart and firewall checks'})
 

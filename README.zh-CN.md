@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <a href="versions.lock.json"><img src="https://img.shields.io/badge/Mihomo-v1.19.31-3979cc" alt="固定 Mihomo v1.19.31"></a>
+  <a href="versions.lock.json"><img src="https://img.shields.io/badge/Mihomo-v1.19.33-3979cc" alt="固定 Mihomo v1.19.33"></a>
   <a href="docs/ports.md"><img src="https://img.shields.io/badge/Configurable_entries-9-158a76" alt="九种可配置协议入口"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-64748b" alt="MIT 许可"></a>
 </p>
@@ -21,6 +21,8 @@ RelayLab 把部署工具、隔离网络实验室和工程手册放在一个仓�
 初始资源预算为 **1 vCPU / 1 GB 内存**，新机安装向导面向 **Ubuntu 24.04 amd64**。项目起步于日本 VPS，但设计不依赖特定地区或云厂商。
 
 [安装到新 VPS](#安装到新-vps) · [先体验本地实验](#先体验本地实验) · [协议与端口](#协议与端口) · [阅读工程手册](docs/training/README.md) · [查看测试证据](docs/evidence.md)
+
+[10 月稳定性维护记录](docs/stability-20261031.md)：内核升级、30 秒客户端故障切换策略、明确的 DNS 分流、容量受限的资源监测，以及实际测得的恢复时间。
 
 ## 能得到什么
 
@@ -58,7 +60,7 @@ flowchart LR
 
 | 组件 | 职责 | 版本或部署方式 |
 |---|---|---|
-| **Mihomo** | 验证入口连接的身份并转发流量 | `v1.19.31`，上游 `metacubex/mihomo` 镜像固定摘要 |
+| **Mihomo** | 验证入口连接的身份并转发流量 | `v1.19.33`，上游 `metacubex/mihomo` 镜像固定摘要 |
 | **Docker Compose** | 运行核心、隔离环境、限制资源和日志 | Linux 容器；生产使用 IPv4 bridge/NAT |
 | **Python** | 生成配置，串联校验、发布、测试与恢复 | Python 3.12+ |
 | **lego** | 通过 ACME DNS-01 申请和续期 TLS 证书 | `5.4.1`；新机向导使用 Cloudflare provider |
@@ -161,6 +163,8 @@ sudo bash install.sh \
 **验证范围：**仓库报告记录了特定日期的本地组件与容器测试。全新云主机的完整安装、真实 DNS API/正式 ACME 流程和具体设备兼容性，仍需在目标部署中验证。容器健康只是其中一项检查。完整前提见[安装指南](docs/quickstart.md)。
 
 ## 客户端配置与自动选择
+
+新增的[精简稳定性配置](docs/stability-20261031.md#generate-the-compact-client-profile)使用 `JP-STABLE → JP-AUTO`、30 秒探测及明确的 DNS 分流。通过 `scripts/export-stable.py` 从已有配置生成；下方旧版 bundle 导出器仍保留 120 秒默认值。
 
 支持 `manual`、`fallback`、`url-test` 三种模式。从已有 release 导出故障回退配置时，替换 `RELEASE_ID`，并指定仓库外的新输出文件：
 

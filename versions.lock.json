@@ -10,15 +10,15 @@
     },
     "mihomo": {
       "repository": "metacubex/mihomo",
-      "tag": "v1.19.31",
-      "digest": "sha256:739edd73a352d6beb82fad6790ef9d417a4d6f061584cc3cab1bd4536d1c60e5",
-      "amd64_digest": "sha256:ac14aad501b2a4bf4e27e9c262be3769a59f564fc990356af31e182555e463e6"
+      "tag": "v1.19.33",
+      "digest": "sha256:9211361a3ed85305383288d38c05e85862d6d5a590c10007c37fc059cca82e9c",
+      "amd64_digest": "sha256:009fda4eea6278fdbbdacee7a328ee5138a3649349a362efdb6d73711f181318"
     },
     "mihomo_previous": {
       "repository": "metacubex/mihomo",
-      "tag": "v1.19.30",
-      "digest": "sha256:baf38d282b785d7037337676714a69e3fdd1f2d9bf748dfd25fce681a624ea74",
-      "amd64_digest": "sha256:9d7964963f07e658d6fc9b8a52391b8fc9813d7525ded6e69ecbd38b0af61393"
+      "tag": "v1.19.31",
+      "digest": "sha256:739edd73a352d6beb82fad6790ef9d417a4d6f061584cc3cab1bd4536d1c60e5",
+      "amd64_digest": "sha256:ac14aad501b2a4bf4e27e9c262be3769a59f564fc990356af31e182555e463e6"
     },
     "python": {
       "repository": "library/python",

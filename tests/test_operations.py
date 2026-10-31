@@ -3,6 +3,8 @@ import io
 import tarfile
 import tempfile
 import unittest
+from unittest.mock import patch
+from types import SimpleNamespace
 from pathlib import Path
 
 
@@ -62,6 +64,31 @@ class OperationsTests(unittest.TestCase):
             o.activate(state, 'new', lambda: None)
             result = __import__('json').loads((state / 'active.json').read_text())
             self.assertEqual((result['current'], result['previous']), ('new', 'old'))
+
+    def test_failed_update_restores_current_not_previous_release(self):
+        o = self.api()
+        with tempfile.TemporaryDirectory() as temp:
+            state = Path(temp)
+            (state / 'active.json').write_text('{"current":"old","previous":"older"}')
+            runtime = {'running': 'old'}
+            def command(args, **kwargs):
+                release = args[0]
+                if 'up' in args:
+                    if release == 'new':
+                        runtime['running'] = None
+                        raise RuntimeError('Injected failed update')
+                    runtime['running'] = release
+                if 'stop' in args:
+                    runtime['running'] = None
+                return SimpleNamespace(returncode=0, stdout='{"State":"running","Health":"healthy"}')
+            with patch.object(o, 'os', SimpleNamespace(name='posix')), \
+                    patch.object(o, 'validate_release'), \
+                    patch.object(o, 'prod_context', side_effect=lambda s, r: ([r], {})), \
+                    patch.object(o, 'run', side_effect=command):
+                with self.assertRaises(RuntimeError):
+                    o.deploy(state, 'new')
+            self.assertEqual(runtime['running'], 'old')
+            self.assertEqual(__import__('json').loads((state / 'active.json').read_text())['current'], 'old')
 
     def test_revoked_secret_reuse_is_rejected(self):
         o = self.api()
