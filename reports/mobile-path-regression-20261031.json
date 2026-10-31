@@ -111,5 +111,33 @@
       },
       "conntrack": "13"
     }
+  },
+  "later_recovery": {
+    "status": "passed",
+    "checks": [
+      {
+        "profile": "mobile",
+        "http": "200",
+        "curl_exit": 0,
+        "content_matches": true
+      },
+      {
+        "profile": "stable",
+        "http": "200",
+        "curl_exit": 0,
+        "content_matches": true
+      },
+      {
+        "profile": "legacy",
+        "http": "200",
+        "curl_exit": 0,
+        "content_matches": true
+      }
+    ],
+    "invalid_route_404": true,
+    "mobile_sha256": "208783521f9421f6b799590011be8ea217f8febb23fb86d8f07e8592361b432f",
+    "at_utc": "2026-10-31T13:22:05.047266+00:00",
+    "same_mobile_profile": true,
+    "proxy_core_restarted": false
   }
 }
