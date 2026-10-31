@@ -1,0 +1,605 @@
+{
+  "scope": "User-owned node, isolated native clients and live desktop; no handset test. Measurements of short requests are not bandwidth or availability guarantees.",
+  "first_hops": [
+    "JP-TUIC",
+    "JP-HY2"
+  ],
+  "public_native_tcp_repaired": false,
+  "active_core_versions": [
+    "1.19.31",
+    "1.19.32",
+    "1.19.33"
+  ],
+  "wire": {
+    "utc": "2026-10-31T17:04:22.200933+00:00",
+    "native_v4_source_filter_available": true,
+    "reference_source_filter_available": true,
+    "local": {
+      "native_v4": "TimeoutError",
+      "native_v6": "TimeoutError",
+      "ref_https_root": {
+        "code": 0,
+        "http": 404,
+        "s": 1.798326
+      }
+    },
+    "server": {
+      "armed_before_s": 7.71,
+      "header_caps": [
+        48,
+        68
+      ],
+      "ipv6_filter": true,
+      "flows": [
+        {
+          "path": "native-v4",
+          "first_s": 0.29,
+          "syn": 3,
+          "syn_ack": 7,
+          "ack": false,
+          "rst": 0
+        },
+        {
+          "path": "reference-v4",
+          "first_s": 8.83,
+          "syn": 1,
+          "syn_ack": 1,
+          "ack": true,
+          "rst": 0
+        }
+      ]
+    }
+  },
+  "v31_acceptance": {
+    "mode": "v31",
+    "utc": "2026-10-31T17:01:45.266994+00:00",
+    "rows": [
+      {
+        "node": "JP-TUIC",
+        "gstatic": {
+          "code": 0,
+          "http": 204,
+          "s": 0.934233
+        },
+        "udp_dns": true,
+        "apple": {
+          "code": 0,
+          "http": 200,
+          "s": 0.833506
+        },
+        "gateway": "JP-TUIC"
+      },
+      {
+        "node": "JP-HY2",
+        "gstatic": {
+          "code": 0,
+          "http": 204,
+          "s": 0.734171
+        },
+        "udp_dns": true,
+        "apple": {
+          "code": 0,
+          "http": 200,
+          "s": 0.7316
+        },
+        "gateway": "JP-TUIC"
+      },
+      {
+        "node": "JP-GRPC",
+        "gstatic": {
+          "code": 0,
+          "http": 204,
+          "s": 1.097676
+        },
+        "udp_dns": true,
+        "apple": {
+          "code": 0,
+          "http": 200,
+          "s": 0.753604
+        },
+        "gateway": "JP-TUIC"
+      },
+      {
+        "node": "JP-REALITY",
+        "gstatic": {
+          "code": 0,
+          "http": 204,
+          "s": 1.217394
+        },
+        "udp_dns": true,
+        "apple": {
+          "code": 0,
+          "http": 200,
+          "s": 1.068272
+        },
+        "gateway": "JP-TUIC"
+      },
+      {
+        "node": "JP-ANYTLS",
+        "gstatic": {
+          "code": 0,
+          "http": 204,
+          "s": 1.226205
+        },
+        "udp_dns": true,
+        "apple": {
+          "code": 0,
+          "http": 200,
+          "s": 1.990983
+        },
+        "gateway": "JP-TUIC"
+      },
+      {
+        "node": "JP-TROJAN",
+        "gstatic": {
+          "code": 0,
+          "http": 204,
+          "s": 1.150888
+        },
+        "udp_dns": true,
+        "apple": {
+          "code": 0,
+          "http": 200,
+          "s": 1.185534
+        },
+        "gateway": "JP-TUIC"
+      },
+      {
+        "node": "JP-SS",
+        "gstatic": {
+          "code": 0,
+          "http": 204,
+          "s": 1.102683
+        },
+        "udp_dns": true,
+        "apple": {
+          "code": 0,
+          "http": 200,
+          "s": 1.16058
+        },
+        "gateway": "JP-TUIC"
+      },
+      {
+        "node": "JP-XHTTP",
+        "gstatic": {
+          "code": 0,
+          "http": 204,
+          "s": 1.722931
+        },
+        "udp_dns": true,
+        "apple": {
+          "code": 0,
+          "http": 200,
+          "s": 1.201711
+        },
+        "gateway": "JP-TUIC"
+      },
+      {
+        "node": "JP-WS",
+        "gstatic": {
+          "code": 0,
+          "http": 204,
+          "s": 1.603711
+        },
+        "udp_dns": true,
+        "apple": {
+          "code": 0,
+          "http": 200,
+          "s": 1.639166
+        },
+        "gateway": "JP-TUIC"
+      },
+      {
+        "node": "JP-GRPC-RECOVERED",
+        "gstatic": {
+          "code": 0,
+          "http": 204,
+          "s": 2.081821
+        },
+        "udp_dns": true,
+        "apple": {
+          "code": 0,
+          "http": 200,
+          "s": 0.778946
+        },
+        "gateway": "JP-TUIC"
+      }
+    ],
+    "finished": true,
+    "passed": true
+  },
+  "invalid_target_authentication": {
+    "mode": "invalid",
+    "utc": "2026-10-31T17:03:20.530619+00:00",
+    "rows": [
+      {
+        "node": "JP-REALITY",
+        "gstatic": {
+          "code": 35,
+          "http": 0,
+          "s": 0.806767
+        },
+        "good_control": {
+          "code": 0,
+          "http": 204,
+          "s": 1.217657
+        },
+        "gateway": "JP-TUIC"
+      },
+      {
+        "node": "JP-ANYTLS",
+        "gstatic": {
+          "code": 35,
+          "http": 0,
+          "s": 0.75762
+        },
+        "good_control": {
+          "code": 0,
+          "http": 204,
+          "s": 1.121694
+        },
+        "gateway": "JP-TUIC"
+      },
+      {
+        "node": "JP-TROJAN",
+        "gstatic": {
+          "code": 35,
+          "http": 0,
+          "s": 0.854689
+        },
+        "good_control": {
+          "code": 0,
+          "http": 204,
+          "s": 1.029633
+        },
+        "gateway": "JP-TUIC"
+      },
+      {
+        "node": "JP-SS",
+        "gstatic": {
+          "code": 35,
+          "http": 0,
+          "s": 0.911678
+        },
+        "good_control": {
+          "code": 0,
+          "http": 204,
+          "s": 1.312708
+        },
+        "gateway": "JP-TUIC"
+      },
+      {
+        "node": "JP-XHTTP",
+        "gstatic": {
+          "code": 35,
+          "http": 0,
+          "s": 0.955138
+        },
+        "good_control": {
+          "code": 0,
+          "http": 204,
+          "s": 1.28235
+        },
+        "gateway": "JP-TUIC"
+      },
+      {
+        "node": "JP-WS",
+        "gstatic": {
+          "code": 35,
+          "http": 0,
+          "s": 1.19137
+        },
+        "good_control": {
+          "code": 0,
+          "http": 204,
+          "s": 1.650204
+        },
+        "gateway": "JP-TUIC"
+      },
+      {
+        "node": "JP-GRPC-RECOVERED",
+        "gstatic": {
+          "code": 35,
+          "http": 0,
+          "s": 0.712034
+        },
+        "good_control": {
+          "code": 0,
+          "http": 204,
+          "s": 1.219781
+        },
+        "gateway": "JP-TUIC"
+      }
+    ],
+    "finished": true,
+    "passed": true
+  },
+  "v33_acceptance": {
+    "mode": "v33",
+    "utc": "2026-10-31T17:05:25.151671+00:00",
+    "rows": [
+      {
+        "node": "JP-REALITY",
+        "gstatic": {
+          "code": 0,
+          "http": 204,
+          "s": 1.736618
+        },
+        "gateway": "JP-TUIC"
+      },
+      {
+        "node": "JP-ANYTLS",
+        "gstatic": {
+          "code": 0,
+          "http": 204,
+          "s": 1.188812
+        },
+        "gateway": "JP-TUIC"
+      },
+      {
+        "node": "JP-TROJAN",
+        "gstatic": {
+          "code": 0,
+          "http": 204,
+          "s": 1.265585
+        },
+        "gateway": "JP-TUIC"
+      },
+      {
+        "node": "JP-SS",
+        "gstatic": {
+          "code": 0,
+          "http": 204,
+          "s": 1.782936
+        },
+        "gateway": "JP-TUIC"
+      },
+      {
+        "node": "JP-XHTTP",
+        "gstatic": {
+          "code": 0,
+          "http": 204,
+          "s": 1.672663
+        },
+        "gateway": "JP-TUIC"
+      },
+      {
+        "node": "JP-WS",
+        "gstatic": {
+          "code": 0,
+          "http": 204,
+          "s": 1.808832
+        },
+        "gateway": "JP-TUIC"
+      },
+      {
+        "node": "JP-GRPC-RECOVERED",
+        "gstatic": {
+          "code": 0,
+          "http": 204,
+          "s": 1.533132
+        },
+        "gateway": "JP-TUIC"
+      }
+    ],
+    "finished": true,
+    "passed": true
+  },
+  "isolated_loss": {
+    "utc": "2026-10-31T17:05:24.848186+00:00",
+    "phase": "complete",
+    "samples": [
+      {
+        "s": 5.34,
+        "label": "JP-TUIC",
+        "http": 0
+      },
+      {
+        "s": 11.67,
+        "label": "JP-TUIC",
+        "http": 0
+      },
+      {
+        "s": 18.03,
+        "label": "JP-TUIC",
+        "http": 0
+      },
+      {
+        "s": 24.39,
+        "label": "JP-TUIC",
+        "http": 0
+      },
+      {
+        "s": 31.06,
+        "label": "JP-HY2",
+        "http": 0
+      },
+      {
+        "s": 33.7,
+        "label": "JP-HY2",
+        "http": 204
+      }
+    ],
+    "passed": true,
+    "via_hy2": {
+      "JP-REALITY": 204,
+      "JP-ANYTLS": 204,
+      "JP-TROJAN": 204,
+      "JP-SS": 204,
+      "JP-XHTTP": 204,
+      "JP-WS": 204,
+      "JP-GRPC-RECOVERED": 204
+    },
+    "both_lost": {
+      "code": 35,
+      "http": 0,
+      "s": 5.0021
+    },
+    "recovered_s": 1.41
+  },
+  "published": {
+    "utc": "2026-10-31T17:09:09.655878+00:00",
+    "passed": true,
+    "routes": {
+      "current": {
+        "code": 0,
+        "http": 200,
+        "s": 1.019747,
+        "matches": true
+      },
+      "legacy": {
+        "code": 0,
+        "http": 200,
+        "s": 0.808253,
+        "matches": true
+      },
+      "mobile": {
+        "code": 0,
+        "http": 200,
+        "s": 0.794345,
+        "matches": true
+      }
+    },
+    "nodes": {
+      "JP-HY2": {
+        "code": 0,
+        "http": 204,
+        "s": 0.996591
+      },
+      "JP-TUIC": {
+        "code": 0,
+        "http": 204,
+        "s": 0.71337
+      },
+      "JP-GRPC": {
+        "code": 0,
+        "http": 204,
+        "s": 1.031124
+      },
+      "JP-AUTO": {
+        "code": 0,
+        "http": 204,
+        "s": 0.870006
+      },
+      "JP-REALITY": {
+        "code": 0,
+        "http": 204,
+        "s": 1.133963
+      },
+      "JP-ANYTLS": {
+        "code": 0,
+        "http": 204,
+        "s": 1.037754
+      },
+      "JP-TROJAN": {
+        "code": 0,
+        "http": 204,
+        "s": 1.17998
+      },
+      "JP-SS": {
+        "code": 0,
+        "http": 204,
+        "s": 1.44553
+      },
+      "JP-XHTTP": {
+        "code": 0,
+        "http": 204,
+        "s": 1.257309
+      },
+      "JP-WS": {
+        "code": 0,
+        "http": 204,
+        "s": 1.398366
+      },
+      "JP-GRPC-RECOVERED": {
+        "code": 0,
+        "http": 204,
+        "s": 1.077142
+      }
+    },
+    "public_root_rejected": true,
+    "files": {
+      "JP-REALITY": {
+        "code": 0,
+        "http": 200,
+        "s": 1.373124,
+        "bytes": 31892,
+        "matches": true
+      },
+      "JP-ANYTLS": {
+        "code": 0,
+        "http": 200,
+        "s": 0.962034,
+        "bytes": 31892,
+        "matches": true
+      },
+      "JP-TROJAN": {
+        "code": 0,
+        "http": 200,
+        "s": 1.166078,
+        "bytes": 31892,
+        "matches": true
+      },
+      "JP-SS": {
+        "code": 0,
+        "http": 200,
+        "s": 1.271206,
+        "bytes": 31892,
+        "matches": true
+      },
+      "JP-XHTTP": {
+        "code": 0,
+        "http": 200,
+        "s": 1.425132,
+        "bytes": 31892,
+        "matches": true
+      },
+      "JP-WS": {
+        "code": 0,
+        "http": 200,
+        "s": 1.554122,
+        "bytes": 31892,
+        "matches": true
+      },
+      "JP-GRPC-RECOVERED": {
+        "code": 0,
+        "http": 200,
+        "s": 0.716654,
+        "bytes": 31892,
+        "matches": true
+      }
+    }
+  },
+  "desktop": {
+    "status": "committed",
+    "selection": {
+      "GLOBAL": "JP-AUTO",
+      "JP-STABLE": "JP-AUTO"
+    },
+    "same_tls_stream": true,
+    "delays_ms": {
+      "JP-REALITY": 371,
+      "JP-ANYTLS": 381,
+      "JP-TROJAN": 321,
+      "JP-SS": 403,
+      "JP-XHTTP": 389,
+      "JP-WS": 309,
+      "JP-GRPC-RECOVERED": 410,
+      "JP-GRPC": 424,
+      "JP-TUIC": 284,
+      "JP-HY2": 339
+    },
+    "user_route_https": {
+      "code": 0,
+      "http": 204,
+      "s": 0.732692
+    }
+  },
+  "backup": {
+    "server_age_roundtrip": true,
+    "desktop_age_roundtrip": true,
+    "current_private_copy": true
+  },
+  "live_core_restarted": false,
+  "external_subscription_in_published_profile": false
+}

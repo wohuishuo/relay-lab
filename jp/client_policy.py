@@ -2,6 +2,8 @@
 import copy
 import re
 
+from .recovery import native_nodes
+
 
 BALANCED_DOMAINS = (
     'qq.com', 'wechat.com', 'alipay.com', 'taobao.com', 'tmall.com',
@@ -13,7 +15,7 @@ DIRECT_DNS = ['https://223.5.5.5/dns-query#DIRECT', 'https://223.6.6.6/dns-query
 
 
 def stable_profile(source, *, direct_domains=()):
-    nodes = copy.deepcopy(source.get('proxies', []))
+    nodes = copy.deepcopy(native_nodes(source))
     names = [n.get('name') for n in nodes]
     if not nodes or any(not isinstance(n, str) or not n or ',' in n or '\n' in n for n in names):
         raise ValueError('Every node needs a unique, unambiguous name')

@@ -1,0 +1,30 @@
+{
+  "at_utc": "2026-10-31T17:15:10.564332+00:00",
+  "python": "3.12.10",
+  "tests": 43,
+  "failures": [],
+  "errors": [],
+  "skipped": [
+    {
+      "test": "setUpClass (test_backup.BackupTests)",
+      "reason": "Set JP_AGE and JP_AGE_KEYGEN to verified tools for real crypto round-trip"
+    },
+    {
+      "test": "test_certificates.CertificateTests.test_pinned_lego_accepts_real_command_flags_without_network",
+      "reason": "Set JP_LEGO for the pinned CLI syntax check"
+    },
+    {
+      "test": "test_healthcheck.ListenerHealthTests.test_live_listener_passes_and_missing_listener_fails",
+      "reason": "Docker regression is opt-in"
+    },
+    {
+      "test": "test_healthcheck.ListenerHealthTests.test_missing_listener_cannot_be_healthy",
+      "reason": "Docker regression is opt-in"
+    },
+    {
+      "test": "test_subscription.SubscriptionTests.test_real_https_authentication_restart_and_no_directory_disclosure",
+      "reason": "Docker regression is opt-in"
+    }
+  ],
+  "status": "partial"
+}
