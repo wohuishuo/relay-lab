@@ -1,0 +1,368 @@
+{
+  "utc": "2026-10-31T12:47:03.435001+00:00",
+  "client": "v1.19.33",
+  "scope": "Windows isolated client; not a phone test",
+  "direct_tcp": [
+    {
+      "node": "JP-REALITY",
+      "tcp": "TimeoutError",
+      "seconds": 4.063
+    },
+    {
+      "node": "JP-ANYTLS",
+      "tcp": "TimeoutError",
+      "seconds": 4.063
+    },
+    {
+      "node": "JP-TROJAN",
+      "tcp": "TimeoutError",
+      "seconds": 4.063
+    },
+    {
+      "node": "JP-SS",
+      "tcp": "TimeoutError",
+      "seconds": 4.0
+    },
+    {
+      "node": "JP-XHTTP",
+      "tcp": "TimeoutError",
+      "seconds": 5.343
+    },
+    {
+      "node": "JP-WS",
+      "tcp": "TimeoutError",
+      "seconds": 5.343
+    },
+    {
+      "node": "JP-GRPC-DIRECT",
+      "tcp": "TimeoutError",
+      "seconds": 4.109
+    }
+  ],
+  "requests": [
+    {
+      "node": "JP-TUIC",
+      "round": 0,
+      "target": "gstatic",
+      "curl_exit": 0,
+      "http": "204",
+      "timings": [
+        "0.000624",
+        "3.606521",
+        "6.650258",
+        "6.650280"
+      ],
+      "ok": true
+    },
+    {
+      "node": "JP-HY2",
+      "round": 0,
+      "target": "gstatic",
+      "curl_exit": 0,
+      "http": "204",
+      "timings": [
+        "0.000653",
+        "2.113332",
+        "2.685513",
+        "2.685529"
+      ],
+      "ok": true
+    },
+    {
+      "node": "JP-TUIC",
+      "round": 1,
+      "target": "gstatic",
+      "curl_exit": 0,
+      "http": "204",
+      "timings": [
+        "0.024849",
+        "0.762400",
+        "1.931081",
+        "1.931100"
+      ],
+      "ok": true
+    },
+    {
+      "node": "JP-HY2",
+      "round": 1,
+      "target": "gstatic",
+      "curl_exit": 0,
+      "http": "204",
+      "timings": [
+        "0.000652",
+        "0.951914",
+        "1.897673",
+        "1.897696"
+      ],
+      "ok": true
+    },
+    {
+      "node": "JP-TUIC",
+      "round": 2,
+      "target": "gstatic",
+      "curl_exit": 0,
+      "http": "204",
+      "timings": [
+        "0.000637",
+        "0.747882",
+        "1.384987",
+        "1.385012"
+      ],
+      "ok": true
+    },
+    {
+      "node": "JP-HY2",
+      "round": 2,
+      "target": "gstatic",
+      "curl_exit": 0,
+      "http": "204",
+      "timings": [
+        "0.000663",
+        "0.674284",
+        "1.357327",
+        "1.357344"
+      ],
+      "ok": true
+    },
+    {
+      "node": "JP-REALITY",
+      "round": 0,
+      "target": "gstatic",
+      "curl_exit": 35,
+      "http": "000",
+      "timings": [
+        "0.000628",
+        "0.000000",
+        "5.002759",
+        "5.002762"
+      ],
+      "ok": false
+    },
+    {
+      "node": "JP-ANYTLS",
+      "round": 0,
+      "target": "gstatic",
+      "curl_exit": 35,
+      "http": "000",
+      "timings": [
+        "0.000559",
+        "0.000000",
+        "5.002226",
+        "5.002230"
+      ],
+      "ok": false
+    },
+    {
+      "node": "JP-TROJAN",
+      "round": 0,
+      "target": "gstatic",
+      "curl_exit": 35,
+      "http": "000",
+      "timings": [
+        "0.000518",
+        "0.000000",
+        "5.001753",
+        "5.001756"
+      ],
+      "ok": false
+    },
+    {
+      "node": "JP-SS",
+      "round": 0,
+      "target": "gstatic",
+      "curl_exit": 35,
+      "http": "000",
+      "timings": [
+        "0.000662",
+        "0.000000",
+        "5.002264",
+        "5.002267"
+      ],
+      "ok": false
+    },
+    {
+      "node": "JP-XHTTP",
+      "round": 0,
+      "target": "gstatic",
+      "curl_exit": 35,
+      "http": "000",
+      "timings": [
+        "0.000801",
+        "0.000000",
+        "5.002387",
+        "5.002390"
+      ],
+      "ok": false
+    },
+    {
+      "node": "JP-WS",
+      "round": 0,
+      "target": "gstatic",
+      "curl_exit": 35,
+      "http": "000",
+      "timings": [
+        "0.000722",
+        "0.000000",
+        "5.002015",
+        "5.002018"
+      ],
+      "ok": false
+    },
+    {
+      "node": "JP-GRPC",
+      "round": 0,
+      "target": "gstatic",
+      "curl_exit": 0,
+      "http": "204",
+      "timings": [
+        "0.000679",
+        "0.882466",
+        "1.380438",
+        "1.380452"
+      ],
+      "ok": true
+    },
+    {
+      "node": "JP-GRPC-DIRECT",
+      "round": 0,
+      "target": "gstatic",
+      "curl_exit": 35,
+      "http": "000",
+      "timings": [
+        "0.000670",
+        "0.000000",
+        "5.002409",
+        "5.002413"
+      ],
+      "ok": false
+    },
+    {
+      "node": "LAB-VIA-TUIC-JP-REALITY",
+      "round": 0,
+      "target": "gstatic",
+      "curl_exit": 0,
+      "http": "204",
+      "timings": [
+        "0.000651",
+        "1.500064",
+        "1.993173",
+        "1.993189"
+      ],
+      "ok": true
+    },
+    {
+      "node": "LAB-VIA-TUIC-JP-ANYTLS",
+      "round": 0,
+      "target": "gstatic",
+      "curl_exit": 0,
+      "http": "204",
+      "timings": [
+        "0.000608",
+        "1.029981",
+        "1.466624",
+        "1.466641"
+      ],
+      "ok": true
+    },
+    {
+      "node": "LAB-VIA-TUIC-JP-TROJAN",
+      "round": 0,
+      "target": "gstatic",
+      "curl_exit": 0,
+      "http": "204",
+      "timings": [
+        "0.000671",
+        "0.991008",
+        "1.442654",
+        "1.442677"
+      ],
+      "ok": true
+    },
+    {
+      "node": "LAB-VIA-TUIC-JP-SS",
+      "round": 0,
+      "target": "gstatic",
+      "curl_exit": 0,
+      "http": "204",
+      "timings": [
+        "0.000648",
+        "1.441751",
+        "1.888414",
+        "1.888429"
+      ],
+      "ok": true
+    },
+    {
+      "node": "LAB-VIA-TUIC-JP-XHTTP",
+      "round": 0,
+      "target": "gstatic",
+      "curl_exit": 0,
+      "http": "204",
+      "timings": [
+        "0.000565",
+        "0.929541",
+        "1.391431",
+        "1.391446"
+      ],
+      "ok": true
+    },
+    {
+      "node": "LAB-VIA-TUIC-JP-WS",
+      "round": 0,
+      "target": "gstatic",
+      "curl_exit": 0,
+      "http": "204",
+      "timings": [
+        "0.000644",
+        "1.469848",
+        "1.918305",
+        "1.918318"
+      ],
+      "ok": true
+    },
+    {
+      "node": "LAB-VIA-TUIC-JP-GRPC-DIRECT",
+      "round": 0,
+      "target": "gstatic",
+      "curl_exit": 0,
+      "http": "204",
+      "timings": [
+        "0.000689",
+        "1.066677",
+        "1.504722",
+        "1.504745"
+      ],
+      "ok": true
+    },
+    {
+      "node": "JP-TUIC",
+      "round": 3,
+      "target": "apple",
+      "curl_exit": 0,
+      "http": "200",
+      "timings": [
+        "0.000667",
+        "0.469943",
+        "1.065156",
+        "1.065228"
+      ],
+      "ok": true
+    },
+    {
+      "node": "JP-HY2",
+      "round": 3,
+      "target": "apple",
+      "curl_exit": 0,
+      "http": "200",
+      "timings": [
+        "0.000667",
+        "1.489305",
+        "1.886731",
+        "1.886804"
+      ],
+      "ok": true
+    }
+  ],
+  "status": "finished",
+  "finished": "2026-10-31T12:48:28.506502+00:00"
+}

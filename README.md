@@ -24,6 +24,8 @@ The initial resource budget is **1 vCPU / 1 GB RAM**. The fresh-host installer t
 
 [October stability maintenance](docs/stability-20261031.md): core upgrade, a 30-second client fallback policy, explicit DNS routing, bounded resource monitoring, and measured recovery limits.
 
+[Mobile connectivity follow-up](docs/mobile-connectivity-20261031.md): a seven-entry direct-TCP versus TUIC-path comparison, a separate profile for tested paths, Clash Mi settings, and a real packet-loss failover trial. The failed direct TCP paths remain unresolved; the mobile OS has not been tested.
+
 ## What you get
 
 - **A reproducible deployment:** upstream images pinned by digest, separate lab and production Compose files, configuration validation, release-based updates, encrypted backups, and rollback tools.

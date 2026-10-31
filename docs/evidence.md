@@ -2,11 +2,13 @@
 
 实验执行于 2026-09-20 UTC（北京时间跨至 09-21），Windows Docker Desktop 的 Linux 容器环境。原始报告仅含实验数据，不包含真实服务器身份。当前 GitHub 项目是部署项目的脱敏副本，不包含生产状态。
 
+**2026-10-31 补充：**后续生产升级、外部连接和客户端切换证据见[稳定性维护](stability-20261031.md)与[手机连接跟进](mobile-connectivity-20261031.md)。下方容器实验与“本轮未执行”清单描述的是 9 月的范围。最新单元报告已更新为 41 项执行、无失败/错误，并记录 5 个跳过条目（含一个类级跳过）；不能把历史 Docker 验证当作本次重跑结果。
+
 ## 本地已验证
 
 | 验证 | 结果 | 证据 |
 | --- | --- | --- |
-| 单元与真实组件回归 | 31 项通过，0 跳过 | [unit-tests.json](../reports/unit-tests.json) |
+| 最新单元回归（10 月） | 41 项执行，无失败/错误；5 个跳过条目 | [unit-tests.json](../reports/unit-tests.json) |
 | 九协议 TCP/UDP 正确凭据 | 每入口通过 | [all-protocols-local.json](../reports/all-protocols-local.json) |
 | 九协议错误凭据 | TCP/UDP 均拒绝 | 同上 |
 | TLS 负例 / REALITY 错误公钥 | 按入口类型拒绝 | 同上 |
@@ -17,8 +19,8 @@
 | 九协议短流基线 | 54 次传输与哈希校验通过 | [baseline.json](../reports/baseline.json) |
 | 四协议方向性实验 | 96 次传输与哈希校验通过 | [directional.json](../reports/directional.json) |
 | 客户端策略 | manual/fallback/url-test 转发、自动备用、全部故障不直连、恢复通过 | [client-policy-local.json](../reports/client-policy-local.json) |
-| HTTPS 订阅 | 真实本机 TLS、错误 CA/域名/路径拒绝、重启、链接轮换 | 单元报告中的 test_subscription |
-| age 备份 | 加密解密往返、错误身份拒绝 | 单元报告中的 test_backup |
+| HTTPS 订阅（9 月） | 真实本机 TLS、错误 CA/域名/路径拒绝、重启、链接轮换 | 9 月执行记录；10 月该 Docker 单元项未重跑 |
+| age 备份（9 月） | 加密解密往返、错误身份拒绝 | 9 月执行记录；10 月该单元类未重跑 |
 
 策略实验使用两个本地 SS 入口，以 2 秒健康检查周期缩短实验；生产生成配置默认 120 秒。实验有随机密码的内部管理 API 用于观测选择，未发布宿主端口；生产与导出配置不启用此 API。该实验验证客户端机制，不是跨地域高可用测试。
 

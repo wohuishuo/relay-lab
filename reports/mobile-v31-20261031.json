@@ -1,0 +1,74 @@
+{
+  "scope": "isolated native client on maintenance computer; not a phone test",
+  "utc": "2026-10-31T12:51:47.349531+00:00",
+  "interval_seconds": 30,
+  "timeout_ms": 8000,
+  "status": "passed",
+  "core_version": "Mihomo Meta v1.19.31 windows amd64 with go1.26.8 Mon Sep 14 13:24:27 UTC 2026",
+  "parse": true,
+  "before": {
+    "selected": "JP-TUIC",
+    "https": true
+  },
+  "proxied_txt_dns": {
+    "rcode": 0,
+    "answers": 2
+  },
+  "direct_txt_dns": {
+    "rcode": 0,
+    "answers": 1
+  },
+  "direct_a_dns": {
+    "rcode": 0,
+    "answers": 1
+  },
+  "primary_drop": {
+    "node": "JP-TUIC",
+    "samples": [
+      {
+        "seconds": 8.047,
+        "selected": "JP-TUIC",
+        "https": false
+      },
+      {
+        "seconds": 14.75,
+        "selected": "JP-TUIC",
+        "https": false
+      },
+      {
+        "seconds": 20.281,
+        "selected": "JP-TUIC",
+        "https": false
+      },
+      {
+        "seconds": 26.328,
+        "selected": "JP-TUIC",
+        "https": false
+      },
+      {
+        "seconds": 27.828,
+        "selected": "JP-HY2",
+        "https": true
+      }
+    ]
+  },
+  "all_down_https": [
+    false,
+    false
+  ],
+  "recovery": {
+    "https": true,
+    "seconds": 1.0
+  },
+  "relay_packet_counts": {
+    "JP-TUIC": {
+      "forwarded": 90,
+      "dropped": 61
+    },
+    "JP-HY2": {
+      "forwarded": 130,
+      "dropped": 24
+    }
+  },
+  "finished": "2026-10-31T12:52:45.251165+00:00"
+}

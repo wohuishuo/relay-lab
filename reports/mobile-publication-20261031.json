@@ -1,0 +1,32 @@
+{
+  "status": "passed",
+  "checks": [
+    {
+      "profile": "mobile",
+      "http": "200",
+      "curl_exit": 0,
+      "content_matches": true
+    },
+    {
+      "profile": "stable",
+      "http": "200",
+      "curl_exit": 0,
+      "content_matches": true
+    },
+    {
+      "profile": "legacy",
+      "http": "200",
+      "curl_exit": 0,
+      "content_matches": true
+    }
+  ],
+  "invalid_route_404": true,
+  "mobile_sha256": "208783521f9421f6b799590011be8ea217f8febb23fb86d8f07e8592361b432f",
+  "scope": "separate mobile subscription; existing profiles retained",
+  "publication": "committed",
+  "staged_reload_rollback_reapply": true,
+  "production_containers_not_restarted": true,
+  "rollback_timer": "inactive",
+  "cloudflare_changed": false,
+  "phone_verified": false
+}

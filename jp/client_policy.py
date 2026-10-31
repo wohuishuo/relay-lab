@@ -8,7 +8,7 @@ BALANCED_DOMAINS = (
     'jd.com', 'baidu.com', 'bilibili.com', 'douyin.com', 'amap.com',
     '163.com', '126.com',
 )
-RESERVED = {'DIRECT', 'REJECT', 'JP-STABLE', 'JP-AUTO'}
+RESERVED = {'DIRECT', 'REJECT', 'GLOBAL', 'JP-STABLE', 'JP-AUTO', 'JP-MOBILE', 'JP-MOBILE-AUTO'}
 DIRECT_DNS = ['https://223.5.5.5/dns-query#DIRECT', 'https://223.6.6.6/dns-query#DIRECT']
 
 
@@ -75,3 +75,36 @@ def stable_profile(source, *, direct_domains=()):
         },
         'rules': rules,
     }
+
+
+def mobile_profile(source, *, candidates, direct_domains=()):
+    """Keep explicitly accepted paths only; the caller must test them externally.
+
+    This generates a separate profile and never edits the original. A successful
+    parse is not evidence that a candidate works from the eventual phone.
+    """
+    result = stable_profile(source, direct_domains=direct_domains)
+    by_name = {node['name']: node for node in result['proxies']}
+    names = list(candidates)
+    if not names or len(set(names)) != len(names) or any(name not in by_name for name in names):
+        raise ValueError('Supply unique names of externally tested candidates')
+    if any(by_name[name].get('dialer-proxy') for name in names):
+        raise ValueError('Dependent chains are not independent mobile candidates')
+    result['proxies'] = [by_name[name] for name in names]
+    result['proxy-groups'] = [
+        {'name': 'JP-MOBILE', 'type': 'select', 'proxies': ['JP-MOBILE-AUTO'] + names},
+        {'name': 'JP-MOBILE-AUTO', 'type': 'url-test', 'proxies': names,
+         'url': 'https://www.gstatic.com/generate_204', 'expected-status': '204',
+         'interval': 30, 'timeout': 8000, 'tolerance': 150,
+         'lazy': False, 'max-failed-times': 2},
+        # Accidental global mode must not silently start on DIRECT. Rule mode
+        # remains necessary for the explicit domestic/LAN direct policy.
+        {'name': 'GLOBAL', 'type': 'select', 'proxies': ['JP-MOBILE']},
+    ]
+    result['rules'][-1] = 'MATCH,JP-MOBILE'
+    dns = result['dns']
+    dns['nameserver'] = [resolver.replace('#JP-AUTO', '#JP-MOBILE-AUTO') for resolver in dns['nameserver']]
+    # Explicit direct domains receive real answers, avoiding synthetic addresses
+    # in applications that embed resolved addresses in their own messages.
+    dns['fake-ip-filter'] += [key for key in dns['nameserver-policy'] if key.startswith('+.') and key not in ('+.lan', '+.local')]
+    return result

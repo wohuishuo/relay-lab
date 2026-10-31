@@ -3,9 +3,31 @@ import os
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from jp.certificates import generate_test_certs
 from jp.subscription import prepare, fetch, deploy, check, rotate, stop
+
+
+class SubscriptionRouteTests(unittest.TestCase):
+    def test_rotation_revokes_all_profiles_sharing_secret_parent(self):
+        from jp import subscription
+        with tempfile.TemporaryDirectory() as temp:
+            state = Path(temp)
+            dest = state / 'subscription'
+            (dest / 'runtime').mkdir(parents=True)
+            (dest / 'url.txt').write_text('https://node.test:2087/sub/test-old/config.yaml\n')
+            config = '\n'.join('path /sub/test-old/' + name for name in ('config.yaml', 'legacy.yaml', 'mobile.yaml'))
+            (dest / 'runtime/Caddyfile').write_text(config + '\nrewrite * /mobile.yaml\n')
+            with patch.object(subscription, 'stop'), patch.object(subscription, 'deploy'), \
+                    patch.object(subscription, 'runtime_permissions'), \
+                    patch.object(subscription.secrets, 'token_urlsafe', return_value='test-new'):
+                rotate(state)
+            actual = (dest / 'runtime/Caddyfile').read_text()
+            self.assertNotIn('/sub/test-old/', actual)
+            for name in ('config.yaml', 'legacy.yaml', 'mobile.yaml'):
+                self.assertIn('/sub/test-new/' + name, actual)
+            self.assertIn('rewrite * /mobile.yaml', actual)
 
 
 @unittest.skipUnless(os.environ.get('JP_DOCKER_TEST') == '1', 'Docker regression is opt-in')

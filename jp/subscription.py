@@ -186,8 +186,12 @@ def rotate(state, *, ca=None):
     content = file.read_text(encoding='utf-8')
     if content.count(old_path) != 1:
         raise ValueError('Subscription route does not match private URL')
+    old_parent = old_path.rsplit('/', 1)[0] + '/'
+    new_parent = new_path.rsplit('/', 1)[0] + '/'
     stop(state)
-    write_private(file, content.replace(old_path, new_path))
+    # Companion profiles share the credential in the parent path. Leaving their
+    # old routes would keep a revoked subscription credential usable.
+    write_private(file, content.replace(old_parent, new_parent))
     parsed = urlsplit(old_url)
     write_private(dest / 'url.txt', f'https://{parsed.netloc}{new_path}\n')
     runtime_permissions(state)

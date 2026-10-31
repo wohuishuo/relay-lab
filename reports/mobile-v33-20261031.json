@@ -1,0 +1,36 @@
+{
+  "scope": "isolated native client on maintenance computer; not a phone test",
+  "utc": "2026-10-31T12:53:30.150380+00:00",
+  "interval_seconds": 30,
+  "timeout_ms": 8000,
+  "status": "passed",
+  "core_version": "Mihomo Meta v1.19.33 windows amd64 with go1.26.10 Wed Oct 21 16:44:15 UTC 2026",
+  "parse": true,
+  "before": {
+    "selected": "JP-TUIC",
+    "https": true
+  },
+  "proxied_txt_dns": {
+    "rcode": 0,
+    "answers": 2
+  },
+  "direct_txt_dns": {
+    "rcode": 0,
+    "answers": 1
+  },
+  "direct_a_dns": {
+    "rcode": 0,
+    "answers": 1
+  },
+  "relay_packet_counts": {
+    "JP-TUIC": {
+      "forwarded": 106,
+      "dropped": 0
+    },
+    "JP-HY2": {
+      "forwarded": 41,
+      "dropped": 0
+    }
+  },
+  "finished": "2026-10-31T12:53:42.483955+00:00"
+}

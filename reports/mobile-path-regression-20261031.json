@@ -1,0 +1,115 @@
+{
+  "scope": "maintenance computer to production; failure samples retained",
+  "initial_v33_failure": {
+    "scope": "isolated native client on maintenance computer; not a phone test",
+    "utc": "2026-10-31T13:05:10.641833+00:00",
+    "interval_seconds": 30,
+    "timeout_ms": 8000,
+    "status": "failed",
+    "core_version": "Mihomo Meta v1.19.33 windows amd64 with go1.26.10 Wed Oct 21 16:44:15 UTC 2026",
+    "parse": true,
+    "before": {
+      "selected": "JP-TUIC",
+      "https": false
+    },
+    "error": "AssertionError",
+    "relay_packet_counts": {
+      "JP-TUIC": {
+        "forwarded": 20,
+        "dropped": 0
+      },
+      "JP-HY2": {
+        "forwarded": 10,
+        "dropped": 0
+      }
+    },
+    "finished": "2026-10-31T13:05:26.038518+00:00"
+  },
+  "direct_recheck": {
+    "utc": "2026-10-31T13:11:29.028311+00:00",
+    "normalized_test_configs_equal": true,
+    "tests": [
+      {
+        "node": "JP-TUIC",
+        "target": "gstatic",
+        "curl_exit": 35,
+        "http_and_seconds": "000 5.001948"
+      },
+      {
+        "node": "JP-TUIC",
+        "target": "apple",
+        "curl_exit": 35,
+        "http_and_seconds": "000 5.001701"
+      },
+      {
+        "node": "JP-HY2",
+        "target": "gstatic",
+        "curl_exit": 35,
+        "http_and_seconds": "000 5.020793"
+      },
+      {
+        "node": "JP-HY2",
+        "target": "apple",
+        "curl_exit": 35,
+        "http_and_seconds": "000 5.001743"
+      }
+    ]
+  },
+  "literal_ip_recheck": {
+    "utc": "2026-10-31T13:13:03.601651+00:00",
+    "normalized_test_configs_equal": true,
+    "tests": [
+      {
+        "node": "JP-TUIC",
+        "target": "gstatic",
+        "curl_exit": 35,
+        "http_and_seconds": "000 5.001306"
+      },
+      {
+        "node": "JP-TUIC",
+        "target": "apple",
+        "curl_exit": 35,
+        "http_and_seconds": "000 5.022626"
+      },
+      {
+        "node": "JP-HY2",
+        "target": "gstatic",
+        "curl_exit": 35,
+        "http_and_seconds": "000 5.001884"
+      },
+      {
+        "node": "JP-HY2",
+        "target": "apple",
+        "curl_exit": 35,
+        "http_and_seconds": "000 5.002105"
+      }
+    ],
+    "literal_mode": true,
+    "node_dns_matches_expected": true
+  },
+  "ingress_comparison": {
+    "before_utc": "2026-10-31T13:11:08.899755+00:00",
+    "after_utc": "2026-10-31T13:11:58.394818+00:00",
+    "core_udp_deltas": {
+      "InDatagrams": 0,
+      "NoPorts": 0,
+      "InErrors": 0,
+      "OutDatagrams": 0,
+      "RcvbufErrors": 0,
+      "SndbufErrors": 0,
+      "InCsumErrors": 0,
+      "IgnoredMulti": 0,
+      "MemErrors": 0
+    },
+    "udp_firewall_counters_unchanged": true,
+    "host_forward": {
+      "utc": "2026-10-31T13:09:35.574107+00:00",
+      "listeners": 5,
+      "host_forward": {
+        "exit": 0,
+        "result": "204 0.044629"
+      },
+      "conntrack": "13"
+    }
+  }
+}
