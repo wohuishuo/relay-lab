@@ -135,6 +135,12 @@ def main():
         c = Client(enforce_csrf_checks=True, HTTP_HOST="127.0.0.1")
         assert c.get("/owner/").status_code == 302
         assert c.post("/apply/").status_code == 403
+        login_path = "/admin/login/?next=/owner/"
+        assert c.get(login_path)["Referrer-Policy"] == "same-origin"
+        form = {"csrfmiddlewaretoken": c.cookies["csrftoken"].value, "username": "missing", "password": "invalid"}
+        assert c.post(login_path, form, HTTP_ORIGIN="http://127.0.0.1").status_code == 200
+        assert c.post(login_path, form, HTTP_ORIGIN="null").status_code == 403
+        assert c.post(login_path, form, HTTP_ORIGIN="https://other.invalid").status_code == 403
         c.get("/register/")
         passwd = secrets.token_urlsafe(18)
         assert (
@@ -173,7 +179,9 @@ def main():
             71.99 < (grant.expires - timezone.now()).total_seconds() / 3600 <= 72
             and grant.limit == TRIAL_BYTES
         )
-        profile = json.loads(c.get(route).content)
+        subscription = c.get(route)
+        assert subscription["Referrer-Policy"] == "no-referrer"
+        profile = json.loads(subscription.content)
         assert profile["proxies"][0]["tls"]
         # The misspelled key is the actual v1.19.33 config tag. Trust only this lab CA.
         profile["tls"] = {"custom-certifactes": [cert.read_text()]}

@@ -81,6 +81,7 @@ def subscribe(request, token):
         f"upload={grant.uploaded}; download={grant.used - grant.uploaded}; total={grant.limit}; expire={int(grant.expires.timestamp())}"
     )
     response["X-Content-Type-Options"] = "nosniff"
+    response["Referrer-Policy"] = "no-referrer"
     return response
 
 
