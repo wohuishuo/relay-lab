@@ -1,11 +1,59 @@
-{% extends "portal/base.html" %}{% block content %}<p class="eyebrow">所有者工作台</p><h1>节点运维</h1><section><h2>日本个人节点</h2>
-<p>{{ result|default:"点击检查会通过当前代理下载订阅并校验 HTTPS，仅显示结果。" }}</p>
-{% if probe %}<form method="post">{% csrf_token %}<button name="action" value="probe">检查订阅是否在线</button></form>{% endif %}
-{% if console %}<p><a href="{{ console }}" target="_blank" rel="noreferrer">打开 Linode 控制台 · 状态、主机关机与重启 ↗</a></p>{% endif %}
-<p>关闭网页或结束维护会话后，Docker 服务仍由服务器运行。重启主机会中断现有连接。</p>
-</section><section><h2>核心维护</h2>
-{% if private_admin %}<form method="post">{% csrf_token %}<button name="action" value="status">读取服务器状态</button></form>
-<form method="post">{% csrf_token %}<p><label><input style="width:auto" type="checkbox" name="confirm" value="yes" required> 我确认此操作可能中断当前连接。</label></p><button name="action" value="update">应用已验证更新</button> <button name="action" value="restart">重启日本代理核心</button></form>
-{% else %}<p>本实例未连接私有维护通道。</p>{% endif %}<p>更新使用事先准备并带回滚的版本。重启只针对个人代理核心。</p><a href="https://github.com/wohuishuo/relay-lab">打开 GitHub 版本与部署手册 ↗</a></section>
-<section><h2>直接签发</h2><p>为熟人新建一张独立通行证，签发即开始计时。</p><form method="post">{% csrf_token %}<input type="hidden" name="issue_key" value="{{ issue_key }}"><select name="plan" required>{% for plan in plans %}<option value="{{ plan.pk }}">{{ plan.name }} · {{ plan.hours }} 小时 / {{ plan.gb }} GB</option>{% endfor %}</select> <button name="action" value="issue">生成临时链接</button></form><p><a href="/admin/portal/plan/">管理套餐与展示价格</a></p></section>
-<section><h2>访客入口</h2><p>{{ guest_status }}</p><form method="post">{% csrf_token %}<button name="action" value="check">检查访客内核</button></form></section><a href="/">返回</a>{% endblock %}
+{% extends "admin/base_site.html" %}{% load static %}
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" href="{% static 'owner.css' %}">{% endblock %}
+{% block extrahead %}{{ block.super }}<script src="{% static 'owner.js' %}" defer></script>{% endblock %}
+{% block content %}
+<div class="owner-desk">
+  <p class="desk-intro">从这里检查日本节点和本机访客入口，或签发一张临时通行证。</p>
+  {% if public_guest %}<section class="module" id="public_admin"><h2>公网访客网站 · 日本</h2><div class="desk-body">
+    <p>分享给朋友：<a href="{{ public_guest.origin }}/" target="_blank" rel="noreferrer">{{ public_guest.origin }}/</a>。访客可以在手机或电脑上注册、申请和留言。</p>
+    <form method="post" action="{% url 'owner' %}#public_admin" data-opening>{% csrf_token %}
+      <button class="button" name="action" value="public_admin">打开线上访客后台</button>
+      <span role="status" data-opening-status>{{ feedback.public_admin.summary }} {{ feedback.public_admin.detail }}</span>
+    </form><p>在私有通道中审批、回复留言和签发公网链接。请使用线上访客管理员账号。</p>
+  </div></section>{% endif %}
+  <div class="desk-grid">
+    <section class="module" id="probe"><h2>日本订阅</h2><div class="desk-body">
+      <p>从这台电脑下载订阅，校验证书并统计配置中的节点。</p>
+      {% if probe %}
+      <form method="post" action="{% url 'owner' %}#probe" data-panel="probe" data-pending="正在下载并校验日本订阅…">
+        {% csrf_token %}<button class="button" name="action" value="probe">检查订阅是否在线</button>
+      </form>{% include "portal/check_result.html" with panel="probe" outcome=feedback.probe placeholder="尚未检查订阅" %}
+      {% else %}<p>此实例尚未配置个人订阅。</p>{% endif %}
+    </div></section>
+    <section class="module" id="status"><h2>日本服务器</h2><div class="desk-body">
+      <p>通过私有维护通道读取核心健康、内存和启动时间，连接可能需要几十秒。</p>
+      {% if private_admin %}
+      <form method="post" action="{% url 'owner' %}#status" data-panel="status" data-pending="正在连接日本服务器…">
+        {% csrf_token %}<button class="button" name="action" value="status">读取服务器状态</button>
+      </form>{% include "portal/check_result.html" with panel="status" outcome=feedback.status placeholder="尚未读取服务器状态" %}
+      {% else %}<p>当前账号或实例未启用私有维护通道。</p>{% endif %}
+      {% if console %}<p><a href="{{ console }}" target="_blank" rel="noreferrer">打开 Linode 控制台 ↗</a></p>{% endif %}
+    </div></section>
+    <section class="module" id="check"><h2>访客入口 · {% if local %}本机{% else %}日本{% endif %}</h2><div class="desk-body">
+      <p>与独立的访客内核建立连接，验证它返回的 TLS 证书。</p>
+      <form method="post" action="{% url 'owner' %}#check" data-panel="check" data-pending="正在验证访客入口…">
+        {% csrf_token %}<button class="button" name="action" value="check">检查访客内核</button>
+      </form>{% include "portal/check_result.html" with panel="check" outcome=feedback.check placeholder="尚未检查访客入口" %}
+    </div></section>
+    <section class="module" id="issue"><h2>{% if local %}本机测试通行证{% else %}公网临时通行证{% endif %}</h2><div class="desk-body">
+      <p>{% if local %}此工作台签发的链接仅本机可用。{% endif %}签发后即开始计时。</p>
+      {% if perms.portal.change_pass and plans %}
+      <form method="post" action="{% url 'owner' %}">
+        {% csrf_token %}<input type="hidden" name="issue_key" value="{{ issue_key }}">
+        <label for="guest-plan">套餐</label> <select id="guest-plan" name="plan" required>
+        {% for plan in plans %}<option value="{{ plan.pk }}">{{ plan.name }} · {{ plan.hours }} 小时 / {{ plan.gb }} GB</option>{% endfor %}</select>
+        <button class="button" name="action" value="issue">生成临时链接</button>
+      </form>{% endif %}
+      <p><a href="{% url 'admin:portal_pass_changelist' %}">通行证与用量</a> · <a href="{% url 'admin:portal_plan_changelist' %}">套餐与价格</a> · <a href="{% url 'admin:portal_inquiry_changelist' %}">回复留言</a></p>
+    </div></section>
+  </div>
+  {% if private_admin %}
+  <section class="module" id="maintenance"><h2>核心维护</h2><div class="desk-body">
+    <p>重启会中断个人节点的当前连接。更新仅应用服务器上已准备且可回滚的版本。</p>
+    <form method="post" action="{% url 'owner' %}#maintenance" data-panel="maintenance" data-pending="正在向日本服务器提交维护操作…">
+      {% csrf_token %}<label><input type="checkbox" name="confirm" value="yes" required> 我确认此操作可能中断当前连接。</label>
+      <div><button class="button" name="action" value="update">应用已验证更新</button>
+      <button class="button" name="action" value="restart">重启日本代理核心</button></div>
+    </form>{% include "portal/check_result.html" with panel="maintenance" outcome=feedback.maintenance placeholder="未提交维护操作" %}
+  </div></section>{% endif %}
+</div>{% endblock %}

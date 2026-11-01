@@ -1,0 +1,5 @@
+{% extends "portal/base.html" %}{% block content %}
+<p class="eyebrow">访问帮助</p><h1>给管理员留言</h1>
+<section><form method="post">{% csrf_token %}{{ form.as_p }}<button>提交留言</button></form>
+<p>请省略密码和订阅链接。{% if user.is_authenticated %}登录这个账号后可以在其他设备查看回复。{% else %}匿名留言可用当前浏览器回来查看回复；清除 Cookie 后将无法找回。{% endif %}</p></section>
+<h2>我的留言</h2>{% for item in items %}<section><small>{{ item.created|date:"Y-m-d H:i" }}</small><p>{{ item.question|linebreaksbr }}</p><p><strong>管理员回复</strong><br>{{ item.answer|default:"等待回复"|linebreaksbr }}</p></section>{% empty %}<p>暂时没有留言。</p>{% endfor %}<a href="/">返回首页</a>{% endblock %}

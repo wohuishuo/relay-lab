@@ -1,0 +1,8 @@
+[Unit]
+Description=Limit the independent guest user to web traffic
+After=ufw.service docker.service
+Before=relay-guest.service
+[Service]
+Type=oneshot
+ExecStart=/opt/relay-guest/guest-egress.sh
+RemainAfterExit=yes

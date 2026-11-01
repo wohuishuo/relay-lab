@@ -1,0 +1,13 @@
+# Insert before the existing catch-all. Keep owner subscription matchers in place.
+# Replace the example host and port with the HTTPS origin used at initialization.
+@relay_visitors path / /register/ /login/ /logout/ /apply/ /questions/ /static/portal.css /s/* /connect
+handle @relay_visitors {
+    request_body {
+        max_size 32KB
+    }
+    reverse_proxy unix//config/guest/edge.sock {
+        header_up Host guest.example.com:2087
+        header_up X-Forwarded-Proto https
+        header_up X-Relay-Peer {http.request.remote.host}
+    }
+}

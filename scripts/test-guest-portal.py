@@ -128,11 +128,17 @@ def main():
         from django.test import Client
         from django.utils import timezone
         from django.db import connections
-        from portal.models import Pass, Plan, TRIAL_BYTES
+        from portal.models import Inquiry, Pass, Plan, TRIAL_BYTES
         from django.contrib.auth import get_user_model
 
         stack.callback(connections.close_all)
         c = Client(enforce_csrf_checks=True, HTTP_HOST="127.0.0.1")
+        c.get("/questions/")
+        note = "guest isolation test"
+        assert c.post("/questions/", {"question": note, "csrfmiddlewaretoken":c.cookies["csrftoken"].value}).status_code == 302
+        Inquiry.objects.filter(question=note).update(answer="a private reply")
+        assert b"a private reply" in c.get("/questions/").content
+        assert b"a private reply" not in Client(HTTP_HOST="127.0.0.1").get("/questions/").content
         assert c.get("/owner/").status_code == 302
         assert c.post("/apply/").status_code == 403
         login_path = "/admin/login/?next=/owner/"
@@ -181,14 +187,33 @@ def main():
         )
         subscription = c.get(route)
         assert subscription["Referrer-Policy"] == "no-referrer"
+        assert subscription["profile-update-interval"] == "1"
+        assert subscription["Subscription-Userinfo"] == f"upload=0; download=0; total=10000000000; expire={int(grant.expires.timestamp())}"
         profile = json.loads(subscription.content)
         assert profile["proxies"][0]["tls"]
+        name = profile["proxies"][0]["name"]
+        assert "剩余 10 GB" in name and timezone.localtime(grant.expires).strftime("%m-%d %H:%M") in name
+        assert profile["proxy-groups"][0]["proxies"] == [name]
+        # The already-issued URL reflects new balances, including sub-GB amounts and the last minute.
+        short_expiry = timezone.now() + timedelta(seconds=45)
+        Pass.objects.filter(pk=grant.pk).update(expires=short_expiry, used=9_750_000_000, uploaded=250_000_000)
+        refreshed = c.get(route)
+        label = json.loads(refreshed.content)["proxies"][0]["name"]
+        assert "剩余 250 MB" in label and "不足1分钟" in label
+        assert refreshed["Subscription-Userinfo"] == f"upload=250000000; download=9500000000; total=10000000000; expire={int(short_expiry.timestamp())}"
+        Pass.objects.filter(pk=grant.pk).update(expires=grant.expires, used=0, uploaded=0)
         # The misspelled key is the actual v1.19.33 config tag. Trust only this lab CA.
         profile["tls"] = {"custom-certifactes": [cert.read_text()]}
-        c.get("/owner/")
+        workbench = c.get("/owner/")
+        assert b'id="branding"' in workbench.content and b'id="result-check"' in workbench.content
+        checked = c.post("/owner/", {"action":"check", "csrfmiddlewaretoken":c.cookies["csrftoken"].value}, HTTP_ACCEPT="application/json")
+        assert checked.json()["state"] == "ok" and "TLS" in checked.json()["detail"]
+        fallback = post("/owner/", {"action":"check"})
+        assert "本机访客入口可连接" in fallback.content.decode()
         first = c.session["issue_key"]
         result = post("/owner/", {"action": "issue", "issue_key": first, "plan": plan.pk})
         assert result.status_code == 302 and Pass.objects.filter(owner__isnull=True).count() == 1
+        assert b'href="/owner/"' in c.get(result.url).content
         post("/owner/", {"action": "issue", "issue_key": first, "plan": plan.pk})
         assert Pass.objects.count() == 2
         port = unused()

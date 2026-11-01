@@ -1,0 +1,9 @@
+[Unit]
+Description=Private Caddy socket for guest website
+[Socket]
+ListenStream=/var/lib/jp-proxy/subscription/runtime/guest/edge.sock
+SocketMode=0600
+ExecStartPost=/usr/bin/chown 10001:10001 /var/lib/jp-proxy/subscription/runtime/guest/edge.sock
+RemoveOnStop=true
+[Install]
+WantedBy=sockets.target

@@ -1,0 +1,29 @@
+[Unit]
+Description=RelayLab guest website and metered transport
+After=network-online.target relay-guest-egress.service
+Requires=relay-guest-egress.service
+[Service]
+User=relay-guest
+Group=relay-guest
+WorkingDirectory=/opt/relay-guest/app
+Environment=PYTHONPATH=/opt/relay-guest/libs:/opt/relay-guest/app
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/usr/bin/python3 /opt/relay-guest/app/scripts/guest-portal.py --state /var/lib/relay-guest serve --core /opt/relay-guest/mihomo
+Restart=on-failure
+RestartSec=4
+UMask=0077
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectHome=yes
+ProtectSystem=strict
+ReadWritePaths=/var/lib/relay-guest
+CapabilityBoundingSet=
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6 AF_NETLINK
+MemoryMax=196M
+CPUQuota=50%
+TasksMax=96
+LimitCORE=0
+StandardOutput=null
+StandardError=journal
+[Install]
+WantedBy=multi-user.target

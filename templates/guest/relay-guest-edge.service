@@ -1,0 +1,11 @@
+[Unit]
+Description=Forward verified Caddy requests to the local guest website
+After=relay-guest.service
+Requires=relay-guest.service
+[Service]
+ExecStart=/usr/lib/systemd/systemd-socket-proxyd 127.0.0.1:18766
+DynamicUser=yes
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectHome=yes
+ProtectSystem=strict

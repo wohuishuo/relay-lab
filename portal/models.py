@@ -11,6 +11,20 @@ TRIAL_BYTES = 10_000_000_000
 TRIAL_HOURS = 72
 
 
+class Inquiry(models.Model):
+    sender = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, on_delete=models.SET_NULL, verbose_name="提问人")
+    question = models.CharField("问题", max_length=600)
+    answer = models.TextField("管理员回复", blank=True, max_length=1500)
+    created = models.DateTimeField("收到时间", auto_now_add=True)
+
+    class Meta:
+        verbose_name = verbose_name_plural = "访客留言"
+        ordering = ("-created",)
+
+    def __str__(self):
+        return f"访客留言 #{self.pk}"
+
+
 class Plan(models.Model):
     name = models.CharField("套餐名称", max_length=64, unique=True)
     hours = models.PositiveIntegerField(
@@ -65,6 +79,30 @@ class Pass(models.Model):
 
     def __str__(self):
         return str(self.owner) if self.owner_id else f"临时通行证 {self.id.hex[:8]}"
+
+    @property
+    def remaining_data(self):
+        count = max(0, self.limit - self.used)
+        for scale, unit in ((10**9, "GB"), (10**6, "MB"), (10**3, "KB")):
+            if count >= scale:
+                value = f"{count / scale:.2f}".rstrip("0").rstrip(".")
+                return f"{value} {unit}"
+        return f"{count} B"
+
+    @property
+    def remaining_time(self):
+        if self.expires is None:
+            return "尚未起算"
+        seconds = (self.expires - timezone.now()).total_seconds()
+        if seconds <= 0:
+            return "已到期"
+        if seconds < 60:
+            return "不足1分钟"
+        hours, minutes = divmod(int(seconds // 60), 60)
+        if hours < 1:
+            return f"{minutes}分钟"
+        days, hours = divmod(hours, 24)
+        return f"{days}天{hours}小时" if days else f"{hours}小时{minutes}分钟"
 
     @property
     def available(self):

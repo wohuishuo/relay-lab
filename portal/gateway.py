@@ -11,6 +11,7 @@ from django.core.asgi import get_asgi_application
 
 django_app = get_asgi_application()
 from .models import Pass
+from .limits import BUDGETS, allow
 
 CHUNK = 32768
 upstream_tls = ssl.create_default_context(cafile=str(settings.STATE / "core-state" / "loopback.crt"))
@@ -31,6 +32,12 @@ async def application(scope, receive, send):
                 await send({"type": "http.response.start", "status": 404, "headers": []})
                 return await send({"type": "http.response.body", "body": b""})
             return await send({"type": "websocket.close", "code": 1008})
+        if scope["path"] in BUDGETS and (scope.get("method") == "POST" or scope["type"] == "websocket"):
+            if not allow(scope["path"], headers.get(b"x-relay-peer", b"unknown")):
+                if scope["type"] == "websocket":
+                    return await send({"type": "websocket.close", "code": 1008})
+                await send({"type": "http.response.start", "status": 429, "headers": [(b"content-type", b"text/plain; charset=utf-8")]})
+                return await send({"type": "http.response.body", "body": "请求过于频繁，请稍后再试。".encode()})
         scope = dict(scope, scheme="https" if scope["type"] == "http" else "wss")
     if scope["type"] == "http":
         return await django_app(scope, receive, send)

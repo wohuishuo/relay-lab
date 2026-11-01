@@ -1,0 +1,5 @@
+<div id="result-{{ panel }}" class="check-result" role="status" aria-live="polite" aria-atomic="true" data-state="{{ outcome.state|default:'idle' }}">
+  <strong data-summary>{{ outcome.summary|default:placeholder }}</strong>
+  <p data-detail>{{ outcome.detail }}</p>
+  <small data-stamp>{{ outcome.stamp }}</small>
+</div>

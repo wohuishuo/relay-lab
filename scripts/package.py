@@ -34,6 +34,8 @@ def main():
             files.append(file)
         elif rel.parts[:2] == ('portal','templates') and file.suffix == '.html':
             files.append(file)
+        elif rel.parts[:2] == ('templates','guest') and (file.suffix == '.socket' or file.name == 'Caddyfile.example'):
+            files.append(file)
         elif rel.parts[0] in ALLOWED_DIRS and (file.suffix in ALLOWED_EXT or file.name == 'Dockerfile.netem') and '__pycache__' not in rel.parts and 'raw' not in rel.parts:
             files.append(file)
     for file in files:

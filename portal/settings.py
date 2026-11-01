@@ -47,6 +47,7 @@ ROOT_URLCONF = "portal.views"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [ROOT / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
