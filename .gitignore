@@ -5,6 +5,9 @@ __pycache__/
 *.key
 *.pem
 *.age
+*.sqlite3*
+owner-login.txt
+guest-core.json
 state/
 private/
 dist/

@@ -1,0 +1,11 @@
+{% extends "portal/base.html" %}{% block content %}
+<p class="eyebrow">访客通行证</p><h1>临时网络访问</h1>
+{% if local %}<p class="notice">本机版 · 仅在这台电脑上使用。此处生成的链接无法发送给其他设备使用。</p>{% endif %}
+{% if not grant %}{% for plan in plans %}<section><h2>{{ plan.name }}</h2><div class="facts"><div><b>{{ plan.hours }} 小时</b><small>从管理员批准时起算</small></div><div><b>{{ plan.gb }} GB</b><small>上传与下载合计</small></div><div><b>{% if plan.price %}¥{{ plan.price }}{% else %}免费{% endif %}</b><small>人工审批</small></div></div>
+{% if not user.is_authenticated %}<a class="button" href="/register/">注册并申请</a> <a href="/login/">已有账号 · 登录</a>
+{% else %}<form method="post" action="/apply/">{% csrf_token %}<button name="plan" value="{{ plan.pk }}">申请此套餐</button></form>{% endif %}</section>{% empty %}<p>当前暂无开放申请的套餐。</p>{% endfor %}
+{% else %}<section><h2>{{ grant.title }}</h2><p><strong>{{ grant.display_status }}</strong> · 已计费 {{ grant.used }} / {{ grant.limit }} 字节{% if grant.expires %} · 到期时间 {{ grant.expires|date:"Y-m-d H:i T" }}{% endif %}</p>
+{% if link %}<label for="subscription">个人订阅链接 · 复制到 Clash 的订阅页面</label><input id="subscription" readonly value="{{ link }}" autocomplete="off">{% endif %}
+ </section>{% endif %}
+{% if user.is_staff %}<section><h2>所有者工作台</h2><p>申请列表可批量批准、查看用量或撤销。运维页显示管理连接与生产节点的操作入口。</p><a class="button" href="/admin/portal/pass/">处理申请</a> <a href="/owner/">节点运维</a></section>{% endif %}
+{% if user.is_authenticated %}<form method="post" action="/logout/">{% csrf_token %}<button class="quiet">退出 {{ user.username }}</button></form>{% endif %}{% endblock %}

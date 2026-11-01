@@ -92,15 +92,8 @@ def main():
         shell(output, title(p), '<article class="article">' + content + pager + '</article>', p)
     results = json.loads((ROOT / 'reports/directional.json').read_text())['results']
     bench_json = json.dumps(results).replace('<', '\\u003c')
-    homepage = '''<div class="hero"><img src="docs/assets/banner.svg" alt="让每一次连接，都有据可查。理解协议、设计实验、构建可靠的个人节点。"></div>
-<p class="intro">从一次握手开始，走进协议、DNS 与可靠性的内部。用可运行的实验理解现象，用清晰的证据决定下一步。</p>
-<div class="actions"><a class="button" href="docs/training/README.html">开始学习 →</a><a class="button secondary" href="docs/quickstart.html">部署一个新节点</a><a class="button secondary" href="docs/evidence.html">查看验证记录</a></div>
-<div class="status"><span class="dot"></span>本地实验已完成 · 生产环境保持不变 · 真实线路根因待验证</div>
-<div class="stats"><div class="stat"><strong>17</strong><span>从概念到实践的课程</span></div><div class="stat"><strong>9</strong><span>逐项验收的协议入口</span></div><div class="stat"><strong>150</strong><span>双向传输校验样本</span></div></div>
-<div class="section-title"><h2>选择你的第一条路径</h2><span>READ → EXPERIMENT → EXPLAIN</span></div><div class="cards">
-<a class="card" href="docs/training/01-system.html"><small>01 / UNDERSTAND</small><h3>看懂一次连接</h3><p>应用、核心、协议与订阅，究竟各自负责什么？</p></a>
-<a class="card" href="docs/training/13-performance.html"><small>02 / INVESTIGATE</small><h3>解释上下行差异</h3><p>下载 1 Mbps、上传却很快。把猜测变成可证伪的实验。</p></a>
-<a class="card" href="docs/training/15-reliability.html"><small>03 / OPERATE</small><h3>让节点持续可靠</h3><p>资源趋势、恢复演练与错误预算，比定时重启更重要。</p></a></div>
+    homepage = '''<h1>RelayLab 文档</h1>
+<div class="actions"><a class="button" href="docs/quickstart.html">安装节点</a><a class="button secondary" href="docs/guest-portal.html">访客网站与管理</a><a class="button secondary" href="docs/training/README.html">协议手册</a></div>
 <div class="section-title"><h2>数据如何走到目的地</h2><span>四个边界，一次请求</span></div><div class="flow"><div><b>01 客户端</b><small>接管 · 规则 · 选择</small></div><div><b>02 加密通道 →</b><small>TCP / QUIC · 认证</small></div><div><b>03 代理节点 →</b><small>监听 · 检查 · 转发</small></div><div><b>04 目标服务</b><small>应用响应 · 返回数据</small></div></div>
 <div class="section-title"><h2>改变一个条件，观察两个方向</h2><span>本地受控实验 · 中位数 Mbps</span></div><section class="chart" aria-label="方向性实验交互图表"><div class="tabs"><button data-scenario="rtt80" aria-pressed="true">额外 80 ms RTT</button><button data-scenario="download-loss" aria-pressed="false">服务端出口丢包</button><button data-scenario="upload-loss" aria-pressed="false">客户端出口丢包</button><button data-scenario="download-cap" aria-pressed="false">下载方向限速</button></div><div id="bars" aria-live="polite"></div><p class="chart-note">每方向 3 次 × 2 MiB；图表按当前场景缩放。随机丢包设定 1%，下载限速设定 2 Mbps。短流与 VM 调度存在波动，不能作为公网协议排名。</p></section>
 <div class="notice">实验能证明某种机制可以产生现象，不能仅凭相似曲线认定真实线路的根因。所有原始样本、测量限制和未完成事项都在证据页中。</div>'''

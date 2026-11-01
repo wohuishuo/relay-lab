@@ -1,0 +1,11 @@
+{% extends "portal/base.html" %}{% block content %}<p class="eyebrow">所有者工作台</p><h1>节点运维</h1><section><h2>日本个人节点</h2>
+<p>{{ result|default:"点击检查会通过当前代理下载订阅并校验 HTTPS，仅显示结果。" }}</p>
+{% if probe %}<form method="post">{% csrf_token %}<button name="action" value="probe">检查订阅是否在线</button></form>{% endif %}
+{% if console %}<p><a href="{{ console }}" target="_blank" rel="noreferrer">打开 Linode 控制台 · 状态、主机关机与重启 ↗</a></p>{% endif %}
+<p>关闭网页或结束维护会话后，Docker 服务仍由服务器运行。重启主机会中断现有连接。</p>
+</section><section><h2>核心维护</h2>
+{% if private_admin %}<form method="post">{% csrf_token %}<button name="action" value="status">读取服务器状态</button></form>
+<form method="post">{% csrf_token %}<p><label><input style="width:auto" type="checkbox" name="confirm" value="yes" required> 我确认此操作可能中断当前连接。</label></p><button name="action" value="update">应用已验证更新</button> <button name="action" value="restart">重启日本代理核心</button></form>
+{% else %}<p>本实例未连接私有维护通道。</p>{% endif %}<p>更新使用事先准备并带回滚的版本。重启只针对个人代理核心。</p><a href="https://github.com/wohuishuo/relay-lab">打开 GitHub 版本与部署手册 ↗</a></section>
+<section><h2>直接签发</h2><p>为熟人新建一张独立通行证，签发即开始计时。</p><form method="post">{% csrf_token %}<input type="hidden" name="issue_key" value="{{ issue_key }}"><select name="plan" required>{% for plan in plans %}<option value="{{ plan.pk }}">{{ plan.name }} · {{ plan.hours }} 小时 / {{ plan.gb }} GB</option>{% endfor %}</select> <button name="action" value="issue">生成临时链接</button></form><p><a href="/admin/portal/plan/">管理套餐与展示价格</a></p></section>
+<section><h2>访客入口</h2><p>{{ guest_status }}</p><form method="post">{% csrf_token %}<button name="action" value="check">检查访客内核</button></form></section><a href="/">返回</a>{% endblock %}

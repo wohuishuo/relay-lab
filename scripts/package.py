@@ -8,11 +8,12 @@ import sys
 import zipfile
 
 ROOT = Path(__file__).resolve().parent.parent
-ALLOWED_DIRS = {'jp', 'scripts', 'tests', 'templates', 'docs', 'reports', 'lab', 'ci'}
+ALLOWED_DIRS = {'jp', 'scripts', 'tests', 'templates', 'docs', 'reports', 'lab', 'ci', 'portal'}
 ALLOWED_EXT = {'.py', '.sh', '.md', '.json', '.yaml', '.yml', '.service', '.timer', '.svg', '.css', '.js'}
 ROOT_FILES = {'README.md', 'LICENSE', 'SECURITY.md', 'THIRD_PARTY.md', '.gitignore', '.gitattributes',
               'install.sh', 'requirements-docs.txt', 'compose.local.yaml', 'compose.prod.yaml',
-              'compose.subscription.yaml', 'compose.bench.yaml', 'compose.failover.yaml', 'versions.lock.json'}
+              'compose.subscription.yaml', 'compose.bench.yaml', 'compose.failover.yaml', 'versions.lock.json',
+              'README.zh-CN.md','README.ru.md','requirements-portal.txt'}
 
 
 def main():
@@ -30,6 +31,8 @@ def main():
             continue
         rel = file.relative_to(ROOT)
         if file.name in ROOT_FILES and len(rel.parts) == 1:
+            files.append(file)
+        elif rel.parts[:2] == ('portal','templates') and file.suffix == '.html':
             files.append(file)
         elif rel.parts[0] in ALLOWED_DIRS and (file.suffix in ALLOWED_EXT or file.name == 'Dockerfile.netem') and '__pycache__' not in rel.parts and 'raw' not in rel.parts:
             files.append(file)

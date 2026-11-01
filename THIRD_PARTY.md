@@ -4,7 +4,8 @@ RelayLab 只编排上游核心，不自行实现代理协议、密码算法或 T
 
 | 依赖 | 固定基线 | 上游 |
 | --- | --- | --- |
-| Mihomo | 1.19.31；回退测试 1.19.30 | [MetaCubeX/mihomo](https://github.com/MetaCubeX/mihomo/tree/v1.19.31) |
+| Mihomo | 1.19.33；历史测试保留各自的版本 | [MetaCubeX/mihomo](https://github.com/MetaCubeX/mihomo/tree/v1.19.33) |
+| Django、Uvicorn、websockets、WhiteNoise | 访客网站可选依赖见 [requirements-portal.txt](requirements-portal.txt) | [Django](https://www.djangoproject.com/)、[Uvicorn](https://github.com/encode/uvicorn)、[websockets](https://github.com/python-websockets/websockets)、[WhiteNoise](https://github.com/evansd/whitenoise) |
 | Caddy | 2.11.4-alpine | [caddyserver/caddy](https://github.com/caddyserver/caddy) |
 | Python Docker | 3.12.10-slim-bookworm | [docker-library/python](https://github.com/docker-library/python) |
 | lego | 5.4.1 | [go-acme/lego](https://github.com/go-acme/lego) |

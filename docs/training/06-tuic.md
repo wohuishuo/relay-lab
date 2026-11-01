@@ -8,7 +8,7 @@ TUIC v5 基于 QUIC，以用户身份进行认证并承载 TCP 连接和 UDP 关
 
 ## 不要混淆两个 UDP
 
-外层 QUIC 一定由 UDP 承载；内层用户请求可能是 TCP，也可能是 UDP。`native` 描述内层 UDP 如何转发，不能解释成“所有应用请求都不用确认”。数据报尺寸、PMTU 和 QUIC 的数据报能力会影响大 UDP 包；小 DNS 查询成功不代表所有游戏/视频 UDP 负载都成功。
+外层 QUIC 一定由 UDP 承载；内层用户请求可能是 TCP，也可能是 UDP。`native` 描述内层 UDP 如何转发，不能解释成“所有应用请求都不用确认”。数据报尺寸、PMTU 和 QUIC 的数据报能力会影响大 UDP 包；小 DNS 查询成功不代表所有实时音视频 UDP 负载都成功。
 
 固定版本实现：[TUIC outbound](https://github.com/MetaCubeX/mihomo/blob/v1.19.31/adapter/outbound/tuic.go)。配置字段参考[官方 TUIC 文档](https://wiki.metacubex.one/config/proxies/tuic/)，新增字段仍需版本核对。
 
