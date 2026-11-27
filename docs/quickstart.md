@@ -7,7 +7,7 @@
 安装 Git、Python 3.12、OpenSSL、CA 证书，以及支持 `docker compose up --wait` 的 Docker Engine 和 Compose 插件。配置域名的 A 记录指向服务器 IPv4，在 Cloudflare 选择「仅 DNS」。准备该区域的 DNS 编辑和区域读取令牌。确认可以从云控制台恢复 SSH 登录。默认入口需要放行 **TCP 443 和 UDP 443**，SSH 仅对管理来源开放。[Docker 安装说明](https://docs.docker.com/engine/install/ubuntu/) · [lego 所需的 DNS 权限](https://go-acme.github.io/lego/dns/cloudflare/)
 
 ```bash
-sudo git clone https://github.com/wohuishuo/relay-lab.git /opt/relay-lab
+sudo git clone https://github.com/wohuishuo/personal-proxy-setup.git /opt/relay-lab
 cd /opt/relay-lab
 sudo install -d -m 700 /var/lib/relay-lab
 sudo install -m 600 templates/settings.example.json /var/lib/relay-lab/settings.json

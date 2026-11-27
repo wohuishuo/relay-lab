@@ -12,7 +12,7 @@ from markdown.extensions.toc import slugify_unicode
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / 'site'
-REPO = 'https://github.com/wohuishuo/relay-lab'
+REPO = 'https://github.com/wohuishuo/personal-proxy-setup'
 
 
 def relative(source, target):
