@@ -1,6 +1,8 @@
 # 个人代理部署
 
-用 Docker Compose 在 Ubuntu VPS 上运行 Mihomo。默认提供两个入口：VLESS REALITY 走 TCP 443，Hysteria2 走 UDP 443。可以在客户端逐个选择，也可以配置自动切换。
+用 Docker Compose 在 Ubuntu VPS 上运行 Mihomo。默认启用 VLESS REALITY（TCP 443）和 Hysteria2（UDP 443）。另可启用 AnyTLS、TUIC v5、Trojan、Shadowsocks，以及 VLESS 的 XHTTP、WebSocket 和 gRPC 传输。
+
+九种入口全部启用时，服务端使用 **7 个公网端口号**：TCP 使用 443、8388、8443、9443、10443、11443、12443，UDP 使用 443、8388、8443。历史部署还使用过 Shadowsocks + ShadowTLS 和经 Hysteria2 连接的 gRPC。[逐项端口与部署记录](docs/ports.md)
 
 [English](README.md) · [Русский](README.ru.md)
 

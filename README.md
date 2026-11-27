@@ -1,6 +1,8 @@
 # Personal Proxy Setup
 
-Run a personal proxy on an Ubuntu VPS with Docker Compose and Mihomo. The default installation offers two ways to reach the same server: VLESS REALITY over TCP 443 and Hysteria2 over UDP 443.
+Run Mihomo on an Ubuntu VPS with Docker Compose. VLESS REALITY (TCP 443) and Hysteria2 (UDP 443) are enabled by default. Optional entries are AnyTLS, TUIC v5, Trojan, Shadowsocks, and VLESS over XHTTP, WebSocket or gRPC.
+
+Enabling all nine entries uses **seven public port numbers**: TCP 443, 8388, 8443, 9443, 10443, 11443 and 12443, plus UDP 443, 8388 and 8443. An earlier deployment also used Shadowsocks with ShadowTLS and gRPC over Hysteria2. [Port mappings and deployment notes](docs/ports.md)
 
 [简体中文](README.zh-CN.md) · [Русский](README.ru.md)
 
