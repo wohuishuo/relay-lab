@@ -11,7 +11,7 @@
 | `anytls` | AnyTLS / TLS | TCP 8443 → 18443 | 给支持 AnyTLS 的客户端增加一条密码认证的 TLS 入口 |
 | `tuic` | TUIC v5 / QUIC | UDP 8443 → 18443 | 支持原生 UDP 转发。需要客户端支持 v5、UDP 可达 |
 | `trojan` | Trojan / TLS | TCP 9443 → 19443 | 可复用客户端的 Trojan 支持，使用密码与域名证书 |
-| `ss` | Shadowsocks AEAD | TCP、UDP 8388 → 18388 | 不依赖域名证书或额外插件。两端需使用相同的 `chacha20-ietf-poly1305` 和密码 |
+| `ss` | Shadowsocks（SS，AEAD） | TCP、UDP 8388 → 18388 | 不依赖域名证书或额外插件。两端需使用相同的 `chacha20-ietf-poly1305` 和密码 |
 | `xhttp` | VLESS / XHTTP / TLS | TCP 10443 → 20443 | 适配支持 XHTTP 的客户端。两端须匹配路径和 `packet-up` 模式 |
 | `ws` | VLESS / WebSocket / TLS | TCP 11443 → 21443 | 适配 WebSocket 客户端或支持 Upgrade 的反向代理。默认路径为 `/proxy-ws` |
 | `grpc` | VLESS / gRPC / TLS | TCP 12443 → 22443 | 适配 gRPC 客户端和 HTTP/2 转发环境。服务名为 `proxygrpc` |

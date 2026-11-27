@@ -1,6 +1,6 @@
 # Развёртывание личного прокси
 
-Mihomo запускается на VPS с Ubuntu через Docker Compose. По умолчанию включены VLESS REALITY (TCP 443) и Hysteria2 (UDP 443). Дополнительно можно включить AnyTLS, TUIC v5, Trojan, Shadowsocks и VLESS через XHTTP, WebSocket или gRPC.
+Mihomo запускается на VPS с Ubuntu через Docker Compose. По умолчанию включены VLESS REALITY (TCP 443) и Hysteria2 (UDP 443). Дополнительно можно включить AnyTLS, TUIC v5, Trojan, Shadowsocks (SS, TCP/UDP 8388) и VLESS через XHTTP, WebSocket или gRPC.
 
 Все девять вариантов подключения используют **семь номеров портов**: TCP 443, 8388, 8443, 9443, 10443, 11443 и 12443, а также UDP 443, 8388 и 8443. В одном из прежних развёртываний использовались также Shadowsocks с ShadowTLS и gRPC через Hysteria2. [Таблица портов и сведения о развёртывании](docs/ports.md)
 
