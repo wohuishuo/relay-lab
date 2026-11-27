@@ -71,8 +71,8 @@ def install_steps(settings, state, email, credentials):
     write_private(state / 'client.yaml', bundle(clients))
     write_private(state / 'renewal.json', {'domain': settings['domain'], 'email': email,
                                          'credentials': str(credentials), 'lego': tools_dir + '/lego'})
-    service = '[Unit]\nDescription=RelayLab certificate renewal\nAfter=docker.service network-online.target\nWants=network-online.target\n\n[Service]\nType=oneshot\nUMask=0077\nExecStart=/usr/bin/python3 /opt/relay-lab/scripts/renew.py\n'
-    timer = '[Unit]\nDescription=Check RelayLab certificate twice daily\n\n[Timer]\nOnCalendar=*-*-* 00,12:00:00\nRandomizedDelaySec=30m\nPersistent=true\n\n[Install]\nWantedBy=timers.target\n'
+    service = '[Unit]\nDescription=personal proxy certificate renewal\nAfter=docker.service network-online.target\nWants=network-online.target\n\n[Service]\nType=oneshot\nUMask=0077\nExecStart=/usr/bin/python3 /opt/relay-lab/scripts/renew.py\n'
+    timer = '[Unit]\nDescription=Check personal proxy certificate twice daily\n\n[Timer]\nOnCalendar=*-*-* 00,12:00:00\nRandomizedDelaySec=30m\nPersistent=true\n\n[Install]\nWantedBy=timers.target\n'
     write_private('/etc/systemd/system/relay-lab-renew.service', service)
     write_private('/etc/systemd/system/relay-lab-renew.timer', timer)
     run(['systemctl', 'daemon-reload'])

@@ -1,18 +1,27 @@
-# RelayLab
+# Personal Proxy Setup
+
+Run a personal proxy on an Ubuntu VPS with Docker Compose and Mihomo. The default installation offers two ways to reach the same server: VLESS REALITY over TCP 443 and Hysteria2 over UDP 443.
 
 [简体中文](README.zh-CN.md) · [Русский](README.ru.md)
 
-RelayLab runs a personal proxy on an Ubuntu VPS with Docker Compose and a pinned Mihomo core. A fresh installation starts with VLESS REALITY and Hysteria2. The optional guest website issues separate credentials with an expiry time and a shared upload/download allowance.
+## Install
 
-| I want to… | Start here |
+1. Prepare a fresh Ubuntu 24.04 amd64 server with Docker Engine, Compose, Git, Python 3.12 and OpenSSL. Point a Cloudflare DNS-only A record at the server. Allow TCP and UDP 443.
+2. Clone this repository into `/opt/relay-lab`. Follow the [installation guide](docs/quickstart.md) to copy the two settings files, fill in your domain and DNS credentials, and preview the plan.
+3. Apply the plan and import `/var/lib/relay-lab/client.yaml` into a Mihomo client. Select an entry in the `Relay` group and check the connection from your device.
+
+## How it works
+
+![A personal client connects to the VPS proxy. Guests use a separate gateway and proxy.](docs/assets/architecture.svg)
+
+The client selects an entry, the VPS authenticates it, and Mihomo forwards the request. Manual selection is the default. Export a `fallback` profile for ordered failover, or `url-test` to choose by latency. Both probe every 120 seconds. Existing connections may need to reconnect. [Client selection](docs/client-selection.md)
+
+| Guide (Chinese) | What it covers |
 | --- | --- |
-| Install on a new VPS | [Installation guide and prerequisites](docs/quickstart.md) |
-| Give a guest three days and 10 GB | [Guest website and owner dashboard](docs/guest-portal.md) |
-| Update, back up or roll back a node | [Operations guide](docs/server-setup.md) |
-| Choose protocols or check a connection | [Ports](docs/ports.md) · [Connection repair](docs/entry-repair-20261101.md) · [Test results](docs/evidence.md) |
+| [Protocols and ports](docs/ports.md) | All nine entries, client requirements and when to use each |
+| [Architecture](docs/architecture.md) | Request routing, source files and optional services |
+| [Operations](docs/server-setup.md) | Deployment lifecycle, certificate renewal, backup and rollback |
+| [Guest access](docs/guest-portal.md) | Separate credentials, expiration and shared upload/download quota |
+| [Tests](docs/evidence.md) | Protocol checks, failover tests and the scope of the results |
 
-After configuring the new host, preview its installation plan with `sudo bash install.sh --settings /var/lib/relay-lab/settings.json`. The installation guide lists the separate apply step. On an existing node, use the operations guide.
-
-The personal core and the guest portal run separately. The portal uses Django accounts and a private guest Mihomo process. The owner approves requests or issues a pass directly. Prices can be displayed, and approval is manual.
-
-[Protocol handbook](docs/training/README.md) · [Pinned dependencies](versions.lock.json) · [Security](SECURITY.md) · [License](LICENSE)
+[Security](SECURITY.md) · [Dependencies](THIRD_PARTY.md) · [MIT license](LICENSE)

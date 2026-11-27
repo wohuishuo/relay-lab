@@ -1,5 +1,5 @@
 [Unit]
-Description=RelayLab guest website and metered transport
+Description=Personal proxy guest service
 After=network-online.target relay-guest-egress.service
 Requires=relay-guest-egress.service
 [Service]

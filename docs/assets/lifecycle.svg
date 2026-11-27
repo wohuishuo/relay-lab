@@ -1,0 +1,65 @@
+<svg width="519pt" height="306pt"
+ viewBox="0.00 0.00 519.06 305.56" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(17.28 288.28)">
+<polygon fill="#f6f8fa" stroke="transparent" points="-17.28,17.28 -17.28,-288.28 501.78,-288.28 501.78,17.28 -17.28,17.28"/>
+<g id="node1" class="node">
+<title>prep</title>
+<path fill="#ffffff" stroke="#9cb3bb" d="M355.5,-271C355.5,-271 250.5,-271 250.5,-271 244.5,-271 238.5,-265 238.5,-259 238.5,-259 238.5,-247 238.5,-247 238.5,-241 244.5,-235 250.5,-235 250.5,-235 355.5,-235 355.5,-235 361.5,-235 367.5,-241 367.5,-247 367.5,-247 367.5,-259 367.5,-259 367.5,-265 361.5,-271 355.5,-271"/>
+<text text-anchor="middle" x="303" y="-249.6" font-family="DejaVu Sans" font-size="13.00" fill="#172f3a">Prepare release</text>
+</g>
+<g id="node2" class="node">
+<title>validate</title>
+<path fill="#ffffff" stroke="#9cb3bb" d="M403.5,-200C403.5,-200 202.5,-200 202.5,-200 196.5,-200 190.5,-194 190.5,-188 190.5,-188 190.5,-176 190.5,-176 190.5,-170 196.5,-164 202.5,-164 202.5,-164 403.5,-164 403.5,-164 409.5,-164 415.5,-170 415.5,-176 415.5,-176 415.5,-188 415.5,-188 415.5,-194 409.5,-200 403.5,-200"/>
+<text text-anchor="middle" x="303" y="-178.6" font-family="DejaVu Sans" font-size="13.00" fill="#172f3a">Validate config and certificate</text>
+</g>
+<g id="edge1" class="edge">
+<title>prep&#45;&gt;validate</title>
+<path fill="none" stroke="#42636c" d="M303,-234.94C303,-226.63 303,-216.48 303,-207.37"/>
+<polygon fill="#42636c" stroke="#42636c" points="305.38,-207.14 303,-200.34 300.62,-207.14 305.38,-207.14"/>
+</g>
+<g id="node3" class="node">
+<title>start</title>
+<path fill="#ffffff" stroke="#9cb3bb" d="M286,-118C286,-118 120,-118 120,-118 114,-118 108,-112 108,-106 108,-106 108,-94 108,-94 108,-88 114,-82 120,-82 120,-82 286,-82 286,-82 292,-82 298,-88 298,-94 298,-94 298,-106 298,-106 298,-112 292,-118 286,-118"/>
+<text text-anchor="middle" x="203" y="-96.6" font-family="DejaVu Sans" font-size="13.00" fill="#172f3a">Start and check listeners</text>
+</g>
+<g id="edge2" class="edge">
+<title>validate&#45;&gt;start</title>
+<path fill="none" stroke="#42636c" d="M281.3,-163.64C266.26,-151.61 246.12,-135.5 230.04,-122.63"/>
+<polygon fill="#42636c" stroke="#42636c" points="231.11,-120.44 224.31,-118.05 228.14,-124.16 231.11,-120.44"/>
+<text text-anchor="middle" x="273.5" y="-138.2" font-family="DejaVu Sans" font-size="11.00" fill="#334e57"> Pass</text>
+</g>
+<g id="node5" class="node">
+<title>no</title>
+<path fill="#ffffff" stroke="#9cb3bb" d="M472.5,-118C472.5,-118 333.5,-118 333.5,-118 327.5,-118 321.5,-112 321.5,-106 321.5,-106 321.5,-94 321.5,-94 321.5,-88 327.5,-82 333.5,-82 333.5,-82 472.5,-82 472.5,-82 478.5,-82 484.5,-88 484.5,-94 484.5,-94 484.5,-106 484.5,-106 484.5,-112 478.5,-118 472.5,-118"/>
+<text text-anchor="middle" x="403" y="-96.6" font-family="DejaVu Sans" font-size="13.00" fill="#172f3a">Keep current release</text>
+</g>
+<g id="edge3" class="edge">
+<title>validate&#45;&gt;no</title>
+<path fill="none" stroke="#42636c" d="M324.7,-163.64C339.74,-151.61 359.88,-135.5 375.96,-122.63"/>
+<polygon fill="#42636c" stroke="#42636c" points="377.86,-124.16 381.69,-118.05 374.89,-120.44 377.86,-124.16"/>
+<text text-anchor="middle" x="370" y="-138.2" font-family="DejaVu Sans" font-size="11.00" fill="#334e57"> Fail</text>
+</g>
+<g id="node4" class="node">
+<title>record</title>
+<path fill="#dceeea" stroke="#9cb3bb" d="M164,-36C164,-36 12,-36 12,-36 6,-36 0,-30 0,-24 0,-24 0,-12 0,-12 0,-6 6,0 12,0 12,0 164,0 164,0 170,0 176,-6 176,-12 176,-12 176,-24 176,-24 176,-30 170,-36 164,-36"/>
+<text text-anchor="middle" x="88" y="-14.6" font-family="DejaVu Sans" font-size="13.00" fill="#172f3a">Record current release</text>
+</g>
+<g id="edge4" class="edge">
+<title>start&#45;&gt;record</title>
+<path fill="none" stroke="#42636c" d="M178.33,-81.84C160.75,-69.61 137,-53.09 118.27,-40.06"/>
+<polygon fill="#42636c" stroke="#42636c" points="119.57,-38.06 112.63,-36.13 116.85,-41.97 119.57,-38.06"/>
+<text text-anchor="middle" x="176.5" y="-56.2" font-family="DejaVu Sans" font-size="11.00" fill="#334e57"> Healthy</text>
+</g>
+<g id="node6" class="node">
+<title>prev</title>
+<path fill="#fae9df" stroke="#9cb3bb" d="M427.5,-36C427.5,-36 210.5,-36 210.5,-36 204.5,-36 198.5,-30 198.5,-24 198.5,-24 198.5,-12 198.5,-12 198.5,-6 204.5,0 210.5,0 210.5,0 427.5,0 427.5,0 433.5,0 439.5,-6 439.5,-12 439.5,-12 439.5,-24 439.5,-24 439.5,-30 433.5,-36 427.5,-36"/>
+<text text-anchor="middle" x="319" y="-14.6" font-family="DejaVu Sans" font-size="13.00" fill="#172f3a">Restore prior release if available</text>
+</g>
+<g id="edge5" class="edge">
+<title>start&#45;&gt;prev</title>
+<path fill="none" stroke="#42636c" d="M227.88,-81.84C245.62,-69.61 269.57,-53.09 288.47,-40.06"/>
+<polygon fill="#42636c" stroke="#42636c" points="289.91,-41.95 294.16,-36.13 287.21,-38.03 289.91,-41.95"/>
+<text text-anchor="middle" x="300.5" y="-56.2" font-family="DejaVu Sans" font-size="11.00" fill="#334e57"> Start failed</text>
+</g>
+</g>
+</svg>

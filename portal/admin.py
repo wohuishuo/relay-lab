@@ -3,8 +3,8 @@ from django.conf import settings
 from django.utils.html import format_html
 from .models import Inquiry, Pass, Plan
 
-admin.site.site_header = "RelayLab 管理"
-admin.site.site_title = "RelayLab"
+admin.site.site_header = "访客管理"
+admin.site.site_title = "访客管理"
 admin.site.index_title = "访客与权限"
 
 

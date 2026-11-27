@@ -1,55 +1,46 @@
-# 安装向导：先计划，再部署
+# 安装个人节点
 
-适用于**全新 Ubuntu 24.04 amd64**，初始预算 1 vCPU / 1 GB。现有生产主机不要运行本向导，按[维护手册](server-setup.md)管理 release。本次交付未对真实服务器执行安装或更新。
+适用于全新 Ubuntu 24.04 amd64 VPS。已有节点请按[更新与回滚](server-setup.md)操作。以下命令在服务器上运行。
 
-## 1. 准备前提
+## 1. 准备主机与域名
 
-- 源码经审查后放到 `/opt/relay-lab`，使用固定提交或 release，避免盲目运行远程脚本。
-- 按 [Docker 官方 Ubuntu 安装文档](https://docs.docker.com/engine/install/ubuntu/) 安装 Engine 和 Compose plugin；安装 Python 3.12+、OpenSSL、CA 根证书。
-- 域名 A 记录直指节点地址，Cloudflare DNS only；不添加尚未验证的 AAAA。
-- 云防火墙默认入站拒绝，SSH 限定管理来源；仅放行所选协议的[端口](ports.md)。验证控制台恢复和第二条 SSH 会话。
-- 外部 TLS 握手目标必须由未来目标主机验证兼容性。示例域名不能直接使用。
-
-向导不自动购买资源、安装 Docker、修改 SSH 或防火墙，因为这些涉及主机与管理通道的现有状态。“一键”负责准备完成后的串行部署，不代表跳过这些前提。
-
-## 2. 私有设置与 DNS token
+安装 Git、Python 3.12、OpenSSL、CA 证书，以及支持 `docker compose up --wait` 的 Docker Engine 和 Compose 插件。配置域名的 A 记录指向服务器 IPv4，在 Cloudflare 选择「仅 DNS」。准备该区域的 DNS 编辑和区域读取令牌。确认可以从云控制台恢复 SSH 登录。默认入口需要放行 **TCP 443 和 UDP 443**，SSH 仅对管理来源开放。[Docker 安装说明](https://docs.docker.com/engine/install/ubuntu/) · [lego 所需的 DNS 权限](https://go-acme.github.io/lego/dns/cloudflare/)
 
 ```bash
+sudo git clone https://github.com/wohuishuo/relay-lab.git /opt/relay-lab
+cd /opt/relay-lab
 sudo install -d -m 700 /var/lib/relay-lab
 sudo install -m 600 templates/settings.example.json /var/lib/relay-lab/settings.json
 sudo install -m 600 templates/cloudflare-credentials.example.json /var/lib/relay-lab/dns-credentials.json
+sudoedit /var/lib/relay-lab/settings.json /var/lib/relay-lab/dns-credentials.json
 ```
 
-用本机/服务器安全编辑器修改这两个文件。设置文件包含节点域名、REALITY 目标和协议清单；DNS 凭据文件只供 ACME 使用，不要贴到命令行、聊天或 Git。参考[证书课程](training/10-certificates.md)。
+| 设置 | 填写内容 |
+| --- | --- |
+| `server`、`domain` | 客户端连接地址、申请证书的域名。初次安装可填同一个节点域名 |
+| `reality_sni`、`reality_dest` | 从 VPS 可访问的 TLS 1.3 握手目标。分别填与目标证书匹配的域名和 `主机名:端口` |
+| `protocols` | 初次保留 `["reality", "hy2"]`。数组顺序也是普通备用配置的优先级 |
+| DNS 凭据文件 | 将模板里的占位值换成对应 Cloudflare API token，保留文件权限 600 |
 
-默认启用 `reality,hy2`；若要全部协议，在 settings 的 protocols 数组逐一填入端口表中的 ID，并提前放行必要端口。每个入口都要独立验收。
-
-## 3. 查看计划
+## 2. 预览并安装
 
 ```bash
 sudo bash install.sh --settings /var/lib/relay-lab/settings.json
 ```
 
-此步骤不拉镜像、不申请证书、不创建状态文件、不连接服务器。它验证参数，列出将使用的端口与阶段。发现 existing release 会拒绝，避免当成更新工具使用。
-
-## 4. 显式执行
-
-阅读 [Let's Encrypt 服务条款](https://letsencrypt.org/repository/) 后，在未来新主机本地执行：
+核对输出中的协议和端口。确认防火墙、控制台和 [Let's Encrypt 服务条款](https://letsencrypt.org/repository/) 后，填入自己的 ACME 联系邮箱并执行。
 
 ```bash
-sudo bash install.sh --settings /var/lib/relay-lab/settings.json --email owner@example.com --credentials /var/lib/relay-lab/dns-credentials.json --apply --firewall-ready --recovery-ready --accept-acme-tos
+read -r -p 'ACME 联系邮箱：' acme_email
+sudo bash install.sh --settings /var/lib/relay-lab/settings.json \
+  --email "$acme_email" --credentials /var/lib/relay-lab/dns-credentials.json \
+  --apply --firewall-ready --recovery-ready --accept-acme-tos
 ```
 
-先下载固定官方镜像和校验过的工具，再 ACME staging、正式证书、生成随机身份、校验与启动、私有客户端导出、启用续期定时器。任一步失败返回非零；不会打印 token、密码或订阅链接。若失败发生在部署之后的定时器设置阶段，核心可能已运行，但整个安装仍判失败；检查状态后使用维护流程，不要强行清空目录重跑。
+安装器校验工具，先用测试环境验证 DNS 授权，再申请正式证书、启动 Mihomo、导出配置并启用续期定时器。若提示已有部署，先查看[当前版本和恢复步骤](server-setup.md)。安装后期出错时，核心可能已经启动。
 
-输出客户端位于 `/var/lib/relay-lab/client.yaml`。通过安全通道传给自己的设备。向导不默认开放订阅端口；需要链接时再按[订阅教程](training/12-subscriptions.md)操作。
+## 3. 导入并验证
 
-## 5. 必须完成的验收
+通过私有文件传输获取 `/var/lib/relay-lab/client.yaml`，导入支持 Mihomo 的客户端，在 `Relay` 组分别选择 `reality` 和 `hy2`。通过代理访问 HTTPS，确认出口是自己的 VPS，再检查需要的 UDP 应用。生成配置的本地 HTTP/SOCKS 入口为 `127.0.0.1:17890`。
 
-从实际设备验证每个启用协议的正确认证、错误认证、TCP/UDP、TLS、出口、重启恢复和更新回滚。逐项记录应用与核心版本；模板见 [acceptance.md](acceptance.md)。容器健康检查成功不代表全部验收完成。
-
-## 6. 续期与恢复
-
-`relay-lab-renew.timer` 每天检查两次；证书变化才加载。查看 systemd 失败状态，设置证书到期与请求失败告警。需要加密备份时按[维护手册](server-setup.md)生成 age 身份，解密身份离线保存。
-
-已验证：向导无副作用计划、旧部署拒绝、缺少前提拒绝；其使用的配置、证书、容器与备份组件已本地测试。**未验证：在全新 Ubuntu 云主机执行整条向导、真实 DNS API/正式 ACME、主机重启。**
+默认手动选择入口。[开启自动切换](client-selection.md) · [查看测试和故障排查](evidence.md)

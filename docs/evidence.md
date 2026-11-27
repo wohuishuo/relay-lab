@@ -1,56 +1,33 @@
-# 验证记录与已知限制
+# 测试与故障排查
 
-实验执行于 2026-09-20 UTC（北京时间跨至 09-21），Windows Docker Desktop 的 Linux 容器环境。原始报告仅含实验数据，不包含真实服务器身份。当前 GitHub 项目是部署项目的脱敏副本，不包含生产状态。
-
-**2026-10-31 补充：**后续生产升级、外部连接和客户端切换证据见[稳定性维护](stability-20261031.md)与[手机连接跟进](mobile-connectivity-20261031.md)。下方容器实验与“本轮未执行”清单描述的是 9 月的范围。最新单元报告已更新为 41 项执行、无失败/错误，并记录 5 个跳过条目（含一个类级跳过）；不能把历史 Docker 验证当作本次重跑结果。
-
-## 本地已验证
-
-| 验证 | 结果 | 证据 |
+| 要验证什么 | 仓库中的结果 | 适用范围 |
 | --- | --- | --- |
-| 最新单元回归（10 月） | 41 项执行，无失败/错误；5 个跳过条目 | [unit-tests.json](../reports/unit-tests.json) |
-| 九协议 TCP/UDP 正确凭据 | 每入口通过 | [all-protocols-local.json](../reports/all-protocols-local.json) |
-| 九协议错误凭据 | TCP/UDP 均拒绝 | 同上 |
-| TLS 负例 / REALITY 错误公钥 | 按入口类型拒绝 | 同上 |
-| 目标网络隔离 | 客户端不能直连目标 IP | 同上 |
-| 共存、重启、证书替换 | 通过 | 同上 |
-| 服务端 1.19.30 / 1.19.31 切换 | 所有九入口逐项复测通过；客户端固定 1.19.31 | 同上 |
-| SS 不使用插件 | 正确 TCP/UDP 成功，错误密码与错误加密方法失败 | [ss-local.json](../reports/ss-local.json) |
-| 九协议短流基线 | 54 次传输与哈希校验通过 | [baseline.json](../reports/baseline.json) |
-| 四协议方向性实验 | 96 次传输与哈希校验通过 | [directional.json](../reports/directional.json) |
-| 客户端策略 | manual/fallback/url-test 转发、自动备用、全部故障不直连、恢复通过 | [client-policy-local.json](../reports/client-policy-local.json) |
-| HTTPS 订阅（9 月） | 真实本机 TLS、错误 CA/域名/路径拒绝、重启、链接轮换 | 9 月执行记录；10 月该 Docker 单元项未重跑 |
-| age 备份（9 月） | 加密解密往返、错误身份拒绝 | 9 月执行记录；10 月该单元类未重跑 |
+| 九种入口能否转发、拒绝错误凭据 | [隔离协议测试](../reports/all-protocols-local.json) | 本机容器网络，含 TCP、UDP、重启和恢复 |
+| 自动组能否切换和恢复 | [切换测试](../reports/client-policy-local.json) | 两个本地入口，包括全部不可用时的行为 |
+| 协议在不同网络条件下表现如何 | [短流基线](../reports/baseline.json) · [分方向测试](../reports/directional.json) | 固定大小传输，分别模拟延迟、丢包和限速。公网吞吐需在目标网络测量 |
+| 手机配置能否解析和转发 | [客户端记录](../reports/mobile-v33-20261031.json) | 维护电脑上的隔离客户端。蜂窝网络和手机系统接管仍需在设备上测试 |
 
-策略实验使用两个本地 SS 入口，以 2 秒健康检查周期缩短实验；生产生成配置默认 120 秒。实验有随机密码的内部管理 API 用于观测选择，未发布宿主端口；生产与导出配置不启用此 API。该实验验证客户端机制，不是跨地域高可用测试。
+报告对应各自记录的核心版本、环境和日期。全新云主机安装、DNS 授权、真实证书签发和防火墙恢复需要在目标 VPS 上验证。
 
-## 本轮没有完成或没有执行
+## 本地复测
 
-2026-09-21 文档更新：新增用户观察“校园 Wi-Fi 慢、SIM 下载较正常”，未收到对应原始样本，也未新增真实线路测速。补充 SS 方法/代际和校园策略机制，不把它们标成已完成的 AES/SS 2022 兼容性或性能测试。既有实验 JSON 保持原样。
-
-- 全新 Ubuntu 云主机安装向导端到端执行、真实 DNS API/ACME、云防火墙和整机重启。
-- 现有生产节点的连接、修改、重启、调参、负载测试或抓包。
-- 用户设备上每个版本的 Clash Verge Rev / Clash Mi 验收。
-- 真实路径慢速根因、SS 公网 TCP 失败的最终归因。
-- 多日稳定性、完整渗透测试、跨故障域容灾、99.9999% SLO。
-- GitHub Actions 云端执行：当前 OAuth 授权缺少 workflow 权限，[CI 模板](../ci/README.md)已保留但未启用。
-
-安装向导另有无副作用计划、既有部署拒绝、前提缺失拒绝、ACME/部署失败停止后续阶段、成功编排顺序测试。涉及云端操作的编排测试使用替身；不能据此声称真实新机安装已经通过。阅读站点通过桌面/手机浏览器交互与视觉检查，见 [site-check.json](../reports/site-check.json)。
-
-## 如何解释测量
-
-基线是虚拟网络的短流实验，2 MiB 可能主要受握手/调度影响，不是长时间容量测定。方向实验改变容器出口 qdisc，同时可能影响反向 ACK；netem 随机损失不是精确模拟现实运营商。
-
-qdisc 输出在传输前记录，不能拿其中 dropped 0 宣称没有丢包。原始 transfer 的错误类别、成功数、最小/最大/中位数分别保存；本次无传输失败，不能据此外推全天稳定。见[环境与限制](../reports/environment.json)。
-
-## 可复现入口
+在源码目录执行。组件测试使用 Python 3.12。协议和切换测试还需要 Docker Engine、Compose 和可下载的固定镜像。为每次实验选择新的状态目录。
 
 ```bash
-python3 scripts/run-tests.py
-python3 scripts/manage.py local-test --state /tmp/relay-full-new
-python3 scripts/test-failover-local.py --state /tmp/relay-policy-new
+python3 scripts/run-tests.py --report /tmp/proxy-unit-tests.json
+python3 scripts/manage.py local-test --state /tmp/proxy-protocols
+python3 scripts/test-failover-local.py --state /tmp/proxy-failover
 ```
 
-完整组件回归需先安装锁定工具，并设置 `JP_AGE`、`JP_AGE_KEYGEN`、`JP_LEGO` 的路径；设置 `JP_DOCKER_TEST=1` 启用 Docker 回归。缺少条件时测试显示 skipped，报告为 partial，不能转述为全量通过。
+组件测试输出会标出跳过项。设置 `JP_DOCKER_TEST=1` 可启用 Docker 测试；加密备份和 ACME 工具检查另需 `JP_AGE`、`JP_AGE_KEYGEN` 和 `JP_LEGO`。[测试入口](../scripts/run-tests.py) · [CI 模板](../ci/README.md)
 
-按[测量课程](training/14-measurement.md)运行 benchmark。不要把 `client-test.py` 指向正在工作的服务器，除非已安排实际验收窗口。
+## 从设备排查
+
+| 现象 | 先检查 |
+| --- | --- |
+| 所有入口都连不上 | 域名 A 记录、云防火墙、Docker 端口映射和 `manage.py status` |
+| REALITY 可用、HY2 失败 | UDP 443 是否放行，客户端是否支持 Hysteria2，证书域名是否匹配 |
+| 手选能通，自动组选错或一直失败 | 导入的配置类型、`Relay` 是否选了 `Auto`、探测地址是否能经各入口访问 |
+| 升级后设备连不上 | 比较当前版本的协议和凭据，查看 [恢复步骤](server-setup.md) |
+
+验收时先固定单个入口，从实际设备分别测试 HTTPS 与 UDP，核对出口，再测一次断线重连。桌面成功后，仍需在实际使用的手机和网络上复测。

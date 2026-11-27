@@ -1,0 +1,65 @@
+<svg width="350pt" height="306pt"
+ viewBox="0.00 0.00 350.06 305.56" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(17.28 288.28)">
+<polygon fill="#f6f8fa" stroke="transparent" points="-17.28,17.28 -17.28,-288.28 332.78,-288.28 332.78,17.28 -17.28,17.28"/>
+<g id="node1" class="node">
+<title>check</title>
+<path fill="#dceeea" stroke="#9cb3bb" d="M270.5,-271C270.5,-271 107.5,-271 107.5,-271 101.5,-271 95.5,-265 95.5,-259 95.5,-259 95.5,-247 95.5,-247 95.5,-241 101.5,-235 107.5,-235 107.5,-235 270.5,-235 270.5,-235 276.5,-235 282.5,-241 282.5,-247 282.5,-247 282.5,-259 282.5,-259 282.5,-265 276.5,-271 270.5,-271"/>
+<text text-anchor="middle" x="189" y="-249.6" font-family="DejaVu Sans" font-size="13.00" fill="#172f3a">Probe configured entries</text>
+</g>
+<g id="node2" class="node">
+<title>primary</title>
+<path fill="#ffffff" stroke="#9cb3bb" d="M250,-200C250,-200 128,-200 128,-200 122,-200 116,-194 116,-188 116,-188 116,-176 116,-176 116,-170 122,-164 128,-164 128,-164 250,-164 250,-164 256,-164 262,-170 262,-176 262,-176 262,-188 262,-188 262,-194 256,-200 250,-200"/>
+<text text-anchor="middle" x="189" y="-178.6" font-family="DejaVu Sans" font-size="13.00" fill="#172f3a">Primary responds?</text>
+</g>
+<g id="edge1" class="edge">
+<title>check&#45;&gt;primary</title>
+<path fill="none" stroke="#42636c" d="M189,-234.94C189,-226.63 189,-216.48 189,-207.37"/>
+<polygon fill="#42636c" stroke="#42636c" points="191.38,-207.14 189,-200.34 186.62,-207.14 191.38,-207.14"/>
+</g>
+<g id="node3" class="node">
+<title>backup</title>
+<path fill="#ffffff" stroke="#9cb3bb" d="M175.5,-118C175.5,-118 54.5,-118 54.5,-118 48.5,-118 42.5,-112 42.5,-106 42.5,-106 42.5,-94 42.5,-94 42.5,-88 48.5,-82 54.5,-82 54.5,-82 175.5,-82 175.5,-82 181.5,-82 187.5,-88 187.5,-94 187.5,-94 187.5,-106 187.5,-106 187.5,-112 181.5,-118 175.5,-118"/>
+<text text-anchor="middle" x="115" y="-96.6" font-family="DejaVu Sans" font-size="13.00" fill="#172f3a">Backup responds?</text>
+</g>
+<g id="edge3" class="edge">
+<title>primary&#45;&gt;backup</title>
+<path fill="none" stroke="#42636c" d="M172.94,-163.64C162.01,-151.82 147.43,-136.06 135.64,-123.31"/>
+<polygon fill="#42636c" stroke="#42636c" points="137.14,-121.43 130.77,-118.05 133.64,-124.66 137.14,-121.43"/>
+<text text-anchor="middle" x="166.5" y="-138.2" font-family="DejaVu Sans" font-size="11.00" fill="#334e57"> No</text>
+</g>
+<g id="node4" class="node">
+<title>one</title>
+<path fill="#ffffff" stroke="#9cb3bb" d="M303.5,-118C303.5,-118 222.5,-118 222.5,-118 216.5,-118 210.5,-112 210.5,-106 210.5,-106 210.5,-94 210.5,-94 210.5,-88 216.5,-82 222.5,-82 222.5,-82 303.5,-82 303.5,-82 309.5,-82 315.5,-88 315.5,-94 315.5,-94 315.5,-106 315.5,-106 315.5,-112 309.5,-118 303.5,-118"/>
+<text text-anchor="middle" x="263" y="-96.6" font-family="DejaVu Sans" font-size="13.00" fill="#172f3a">Use primary</text>
+</g>
+<g id="edge2" class="edge">
+<title>primary&#45;&gt;one</title>
+<path fill="none" stroke="#42636c" d="M205.06,-163.64C215.99,-151.82 230.57,-136.06 242.36,-123.31"/>
+<polygon fill="#42636c" stroke="#42636c" points="244.36,-124.66 247.23,-118.05 240.86,-121.43 244.36,-124.66"/>
+<text text-anchor="middle" x="242" y="-138.2" font-family="DejaVu Sans" font-size="11.00" fill="#334e57"> Yes</text>
+</g>
+<g id="node5" class="node">
+<title>two</title>
+<path fill="#ffffff" stroke="#9cb3bb" d="M90,-36C90,-36 12,-36 12,-36 6,-36 0,-30 0,-24 0,-24 0,-12 0,-12 0,-6 6,0 12,0 12,0 90,0 90,0 96,0 102,-6 102,-12 102,-12 102,-24 102,-24 102,-30 96,-36 90,-36"/>
+<text text-anchor="middle" x="51" y="-14.6" font-family="DejaVu Sans" font-size="13.00" fill="#172f3a">Use backup</text>
+</g>
+<g id="edge4" class="edge">
+<title>backup&#45;&gt;two</title>
+<path fill="none" stroke="#42636c" d="M101.11,-81.64C91.74,-69.92 79.28,-54.34 69.12,-41.65"/>
+<polygon fill="#42636c" stroke="#42636c" points="70.75,-39.87 64.64,-36.05 67.03,-42.85 70.75,-39.87"/>
+<text text-anchor="middle" x="98" y="-56.2" font-family="DejaVu Sans" font-size="11.00" fill="#334e57"> Yes</text>
+</g>
+<g id="node6" class="node">
+<title>fail</title>
+<path fill="#fae9df" stroke="#9cb3bb" d="M222.5,-36C222.5,-36 137.5,-36 137.5,-36 131.5,-36 125.5,-30 125.5,-24 125.5,-24 125.5,-12 125.5,-12 125.5,-6 131.5,0 137.5,0 137.5,0 222.5,0 222.5,0 228.5,0 234.5,-6 234.5,-12 234.5,-12 234.5,-24 234.5,-24 234.5,-30 228.5,-36 222.5,-36"/>
+<text text-anchor="middle" x="180" y="-14.6" font-family="DejaVu Sans" font-size="13.00" fill="#172f3a">Request fails</text>
+</g>
+<g id="edge5" class="edge">
+<title>backup&#45;&gt;fail</title>
+<path fill="none" stroke="#42636c" d="M129.1,-81.64C138.62,-69.92 151.28,-54.34 161.59,-41.65"/>
+<polygon fill="#42636c" stroke="#42636c" points="163.71,-42.83 166.15,-36.05 160.01,-39.83 163.71,-42.83"/>
+<text text-anchor="middle" x="161.5" y="-56.2" font-family="DejaVu Sans" font-size="11.00" fill="#334e57"> No</text>
+</g>
+</g>
+</svg>

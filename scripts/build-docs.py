@@ -26,12 +26,10 @@ def title(path):
 
 def main():
     pages = sorted((ROOT / 'docs').rglob('*.md')) + [ROOT / p for p in ('README.md', 'README.zh-CN.md', 'README.ru.md', 'SECURITY.md', 'THIRD_PARTY.md', 'ci/README.md')]
-    pages = [p for p in pages if 'plans' not in p.parts]
-    lessons = sorted((ROOT / 'docs/training').glob('[0-9]*.md'))
-    navigation = [ROOT / 'docs/training/README.md'] + lessons + [ROOT / ('docs/' + name + '.md') for name in ('quickstart','evidence','campus-network','ports','server-setup','references','glossary')]
-    for p in navigation:
-        if not p.exists():
-            raise ValueError('Missing navigation source: ' + p.name)
+    navigation = [ROOT / 'docs' / (name + '.md') for name in (
+        'quickstart', 'ports', 'client-selection', 'architecture', 'server-setup',
+        'guest-portal', 'guest-public', 'evidence', 'reading-site')]
+    navigation += [p for p in pages if p not in navigation]
     OUT.mkdir(exist_ok=True)
     shutil.copytree(ROOT / 'docs/assets', OUT / 'docs/assets', dirs_exist_ok=True)
     (OUT / 'reports').mkdir(exist_ok=True)
@@ -44,19 +42,17 @@ def main():
         css = relative(output, OUT / 'docs/assets/site.css')
         js = relative(output, OUT / 'docs/assets/site.js')
         home = relative(output, OUT / 'index.html')
-        links = ['<span class="section">LEARN / 学习路径</span>']
+        links = []
         for i, p in enumerate(navigation):
-            if i == 18:
-                links.append('<span class="section">BUILD / 工程手册</span>')
             text = title(p)
             href = relative(output, OUT / p.relative_to(ROOT).with_suffix('.html'))
             cls = 'active' if p == source else ''
             links.append(f'<a class="{cls}" data-page="{i}" href="{html.escape(href)}">{html.escape(text)}</a>')
-        edit = (f'<a href="{REPO}/blob/main/{source.relative_to(ROOT).as_posix()}">查看源文档 ↗</a>' if source else '<span>独立项目 · 不隶属于协议维护方</span>')
+        edit = (f'<a href="{REPO}/blob/main/{source.relative_to(ROOT).as_posix()}">查看源文档 ↗</a>' if source else '<span>个人代理部署</span>')
         output.parent.mkdir(parents=True, exist_ok=True)
-        output.write_text(f'''<!doctype html><html lang="{language}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="RelayLab 中文代理工程课程：协议、可重复实验与可靠性"><title>{html.escape(heading)} · RelayLab</title><link rel="stylesheet" href="{css}"></head><body>
-<a class="skip" href="#main">跳到正文</a><header><a class="brand" href="{home}"><span class="mark">R</span>RelayLab</a><span class="tagline">代理工程实验室</span><div class="tools"><a href="{REPO}">GitHub ↗</a><button class="icon" id="theme" aria-label="切换深浅主题">◐</button><button class="icon" id="menu" aria-label="打开目录" aria-expanded="false">目录</button></div></header>
-<div class="layout"><aside><label for="search">SEARCH THE HANDBOOK</label><input id="search" type="search" placeholder="搜索协议、DNS、性能…"><p class="empty" id="search-status" aria-live="polite"></p><nav aria-label="课程目录">{''.join(links)}</nav></aside><main id="main"><div class="crumb"><a href="{home}">实验室</a><span>/</span><span>{html.escape(heading)}</span></div>{body}<footer><span>RELAYLAB · 2026 / 本地证据，明确边界</span>{edit}</footer></main></div><script type="application/json" id="search-data">{search_json}</script><script src="{js}" defer></script></body></html>''', encoding='utf-8')
+        output.write_text(f'''<!doctype html><html lang="{language}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="个人代理的安装、配置与维护"><title>{html.escape(heading)} · 个人代理部署</title><link rel="stylesheet" href="{css}"></head><body>
+<a class="skip" href="#main">跳到正文</a><header><a class="brand" href="{home}">个人代理部署</a><div class="tools"><a href="{REPO}">GitHub ↗</a><button class="icon" id="theme" aria-label="切换深浅主题">◐</button><button class="icon" id="menu" aria-label="打开目录" aria-expanded="false">目录</button></div></header>
+<div class="layout"><aside><label for="search">搜索文档</label><input id="search" type="search" placeholder="搜索协议、DNS、性能…"><p class="empty" id="search-status" aria-live="polite"></p><nav aria-label="文档目录">{''.join(links)}</nav></aside><main id="main"><div class="crumb"><a href="{home}">首页</a><span>/</span><span>{html.escape(heading)}</span></div>{body}<footer>{edit}</footer></main></div><script type="application/json" id="search-data">{search_json}</script><script src="{js}" defer></script></body></html>''', encoding='utf-8')
     for p in pages:
         output = OUT / p.relative_to(ROOT).with_suffix('.html')
         toc_options = {'toc_depth': '2-3'}
@@ -83,21 +79,25 @@ def main():
                 value += '#' + parsed.fragment
             return attr + '="' + html.escape(value, quote=True) + '"'
         content = re.sub(r'(href|src)="([^"]+)"', rewrite, content)
-        pager = ''
-        if p in lessons:
-            i = lessons.index(p)
-            prev = lessons[i-1] if i else ROOT / 'docs/training/README.md'
-            nxt = lessons[i+1] if i+1 < len(lessons) else ROOT / 'docs/evidence.md'
-            pager = f'<div class="pager"><a href="{relative(output, OUT / prev.relative_to(ROOT).with_suffix(".html"))}">← {html.escape(title(prev))}</a><a href="{relative(output, OUT / nxt.relative_to(ROOT).with_suffix(".html"))}">{html.escape(title(nxt))} →</a></div>'
-        shell(output, title(p), '<article class="article">' + content + pager + '</article>', p)
-    results = json.loads((ROOT / 'reports/directional.json').read_text())['results']
-    bench_json = json.dumps(results).replace('<', '\\u003c')
-    homepage = '''<h1>RelayLab 文档</h1>
-<div class="actions"><a class="button" href="docs/quickstart.html">安装节点</a><a class="button secondary" href="docs/guest-portal.html">访客网站与管理</a><a class="button secondary" href="docs/training/README.html">协议手册</a></div>
-<div class="section-title"><h2>数据如何走到目的地</h2><span>四个边界，一次请求</span></div><div class="flow"><div><b>01 客户端</b><small>接管 · 规则 · 选择</small></div><div><b>02 加密通道 →</b><small>TCP / QUIC · 认证</small></div><div><b>03 代理节点 →</b><small>监听 · 检查 · 转发</small></div><div><b>04 目标服务</b><small>应用响应 · 返回数据</small></div></div>
-<div class="section-title"><h2>改变一个条件，观察两个方向</h2><span>本地受控实验 · 中位数 Mbps</span></div><section class="chart" aria-label="方向性实验交互图表"><div class="tabs"><button data-scenario="rtt80" aria-pressed="true">额外 80 ms RTT</button><button data-scenario="download-loss" aria-pressed="false">服务端出口丢包</button><button data-scenario="upload-loss" aria-pressed="false">客户端出口丢包</button><button data-scenario="download-cap" aria-pressed="false">下载方向限速</button></div><div id="bars" aria-live="polite"></div><p class="chart-note">每方向 3 次 × 2 MiB；图表按当前场景缩放。随机丢包设定 1%，下载限速设定 2 Mbps。短流与 VM 调度存在波动，不能作为公网协议排名。</p></section>
-<div class="notice">实验能证明某种机制可以产生现象，不能仅凭相似曲线认定真实线路的根因。所有原始样本、测量限制和未完成事项都在证据页中。</div>'''
-    shell(OUT / 'index.html', '学习与实验', homepage + '<script type="application/json" id="bench-data">' + bench_json + '</script>')
+        if p == ROOT / 'docs/evidence.md':
+            data = json.loads((ROOT / 'reports/directional.json').read_text())['results']
+            content += ('<section class="chart"><h2>本地吞吐测试</h2><div class="tabs">'
+                        '<button data-scenario="rtt80">额外 80 ms RTT</button>'
+                        '<button data-scenario="download-loss">下载丢包</button>'
+                        '<button data-scenario="upload-loss">上传丢包</button>'
+                        '<button data-scenario="download-cap">下载限速</button></div>'
+                        '<div id="bars" aria-live="polite"></div>'
+                        '<p>每个方向传输 3 次，每次 2 MiB，取吞吐量中位数。</p></section>'
+                        '<script type="application/json" id="bench-data">'
+                        + json.dumps(data).replace('<', '\\u003c') + '</script>')
+        shell(output, title(p), '<article class="article">' + content + '</article>', p)
+    # Both files live at the same depth, so all relative URLs stay valid.
+    shutil.copyfile(OUT / 'README.zh-CN.html', OUT / 'index.html')
+    # Remove earlier editions of this site's generated pages when rebuilding in place.
+    expected = {OUT / p.relative_to(ROOT).with_suffix('.html') for p in pages}
+    for old in (OUT / 'docs').rglob('*.html'):
+        if old not in expected and 'id="search-data"' in old.read_text(encoding='utf-8'):
+            old.unlink()
     print(f'Built {len(pages)+1} pages with local assets and validated relative links')
 
 
